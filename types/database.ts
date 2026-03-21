@@ -64,3 +64,67 @@ export type Difficulty = 'beginner' | 'intermediate' | 'advanced'
 export type Profile = Database['public']['Tables']['profiles']['Row']
 export type Lesson = Database['public']['Tables']['lessons']['Row']
 export type LessonProgress = Database['public']['Tables']['lesson_progress']['Row']
+
+// Achievement types
+export type AchievementRequirementType =
+  | 'first_lesson'
+  | 'streak_3'
+  | 'streak_7'
+  | 'streak_30'
+  | 'first_project'
+  | 'project_5'
+  | 'project_10'
+  | 'hackathon_winner'
+  | 'sponsor_winner'
+
+export interface Achievement {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  requirement_type: AchievementRequirementType;
+  requirement_value: number;
+  xp_bonus: number;
+  created_at: string;
+}
+
+export interface UserAchievement {
+  user_id: string;
+  achievement_id: string;
+  unlocked_at: string;
+}
+
+export interface AchievementWithUnlocked extends Achievement {
+  unlocked_at?: string;
+  is_unlocked: boolean;
+}
+
+// Combined types for profile page
+export interface ProfileWithStats extends Profile {
+  total_lessons_completed?: number;
+  total_projects_uploaded?: number;
+}
+
+export interface UserStats {
+  lessons_completed: number;
+  projects_uploaded: number;
+  current_streak: number;
+  total_xp: number;
+  current_rank: Rank;
+  current_level: number;
+  achievements_unlocked: number;
+  total_achievements: number;
+}
+
+export interface UpdateProfileInput {
+  username?: string;
+  avatar_url?: string;
+  bio?: string;
+}
+
+export interface UserProfileData {
+  profile: ProfileWithStats | null;
+  achievements: AchievementWithUnlocked[];
+  stats: UserStats | null;
+  isOwnProfile: boolean;
+}

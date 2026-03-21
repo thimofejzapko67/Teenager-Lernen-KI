@@ -25,3 +25,24 @@ export function getLevelFromXP(xp: number): number {
 export function getXPForLevel(level: number): number {
   return Math.pow(level - 1, 2) * 100;
 }
+
+export const clawGradientText = "bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent";
+
+export interface LevelProgress {
+  currentLevel: number;
+  nextLevelXP: number;
+  progressPercent: number;
+}
+
+export function getLevelProgress(currentXP: number): LevelProgress {
+  const currentLevel = Math.floor(Math.sqrt(currentXP / 100)) + 1;
+  const nextLevelXP = Math.pow(currentLevel, 2) * 100;
+  const currentLevelXP = Math.pow(currentLevel - 1, 2) * 100;
+  const progressPercent = ((currentXP - currentLevelXP) / (nextLevelXP - currentLevelXP)) * 100;
+
+  return {
+    currentLevel,
+    nextLevelXP,
+    progressPercent: Math.min(100, Math.max(0, progressPercent)),
+  };
+}
