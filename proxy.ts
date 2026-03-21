@@ -1,12 +1,12 @@
 import { createServerClient } from "@supabase/ssr"
 import { NextResponse, type NextRequest } from "next/server"
-import { updateSession } from "@/lib/supabase/middleware"
 
 export async function proxy(request: NextRequest) {
-  // Update session using Supabase middleware helper
-  const response = await updateSession(request)
+  // Create a response first
+  let response = NextResponse.next({
+    request,
+  })
 
-  // Get the user from the updated session
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -32,7 +32,7 @@ export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   // Define protected routes
-  const protectedRoutes = ["/dashboard", "/profile"]
+  const protectedRoutes = ["/dashboard", "/profile", "/settings", "/notifications", "/admin"]
   const isProtectedRoute = protectedRoutes.some((route) =>
     pathname.startsWith(route)
   )
