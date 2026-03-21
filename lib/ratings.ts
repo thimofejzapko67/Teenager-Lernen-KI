@@ -65,7 +65,7 @@ export async function rateProject(
       // Update project stats atomically
       const { data: project } = await supabase
         .from('projects')
-        .select('rating_count', 'rating_sum')
+        .select()
         .eq('id', projectId)
         .single();
 
@@ -76,8 +76,8 @@ export async function rateProject(
         };
       }
 
-      newSum = project.rating_sum - existingRating.rating + rating;
-      newCount = project.rating_count;
+      newSum = (project.rating_sum || 0) - existingRating.rating + rating;
+      newCount = project.rating_count || 0;
     } else {
       // Insert new rating
       const { error } = await supabase
@@ -99,7 +99,7 @@ export async function rateProject(
       // Update project stats atomically
       const { data: project } = await supabase
         .from('projects')
-        .select('rating_count', 'rating_sum')
+        .select()
         .eq('id', projectId)
         .single();
 
@@ -110,8 +110,8 @@ export async function rateProject(
         };
       }
 
-      newSum = project.rating_sum + rating;
-      newCount = project.rating_count + 1;
+      newSum = (project.rating_sum || 0) + rating;
+      newCount = (project.rating_count || 0) + 1;
     }
 
     // Update project with new stats
@@ -161,7 +161,7 @@ export async function getProjectRating(
 
     const { data, error } = await supabase
       .from('projects')
-      .select('rating_count, rating_sum')
+      .select()
       .eq('id', projectId)
       .maybeSingle();
 
@@ -171,14 +171,14 @@ export async function getProjectRating(
     }
 
     const average =
-      data.rating_count > 0
-        ? data.rating_sum / data.rating_count
+      (data.rating_count || 0) > 0
+        ? (data.rating_sum || 0) / (data.rating_count || 1)
         : 0;
 
     return {
       average: Math.round(average * 10) / 10,
-      count: data.rating_count,
-      sum: data.rating_sum,
+      count: data.rating_count || 0,
+      sum: data.rating_sum || 0,
     };
   } catch (error) {
     console.error('Error in getProjectRating:', error);

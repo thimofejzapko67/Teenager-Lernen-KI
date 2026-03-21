@@ -176,13 +176,13 @@ export async function DELETE(request: Request) {
     // Update project stats
     const { data: project } = await supabase
       .from('projects')
-      .select('rating_count', 'rating_sum')
+      .select()
       .eq('id', projectId)
       .single();
 
     if (project) {
-      const newSum = project.rating_sum - existingRating.rating;
-      const newCount = project.rating_count - 1;
+      const newSum = (project.rating_sum || 0) - existingRating.rating;
+      const newCount = (project.rating_count || 0) - 1;
 
       await supabase
         .from('projects')
