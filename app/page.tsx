@@ -1,22 +1,65 @@
-export default function HomePage() {
+import {
+  HeroSection,
+  FeaturesSection,
+  StatsSection,
+  HowItWorksSection,
+  FaqSection,
+  FinalCtaSection,
+  Footer,
+} from "@/components/home"
+import { Navbar } from "@/components/layout/navbar"
+import { getHomeStats } from "@/lib/home"
+import { Suspense } from "react"
+
+function StatsSectionSkeleton() {
   return (
-    <main className="min-h-screen flex items-center justify-center">
-      <div className="text-center space-y-6">
-        <h1 className="text-6xl font-display font-bold neon-text">
-          ClawAcademy
-        </h1>
-        <p className="text-xl text-muted-foreground">
-          KI-Entwicklung für Teenager
-        </p>
-        <div className="flex gap-4 justify-center">
-          <button className="cyber-button px-8 py-3 bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity">
-            Start Learning
-          </button>
-          <button className="cyber-button px-8 py-3 border border-primary text-primary hover:bg-primary/10 transition-colors">
-            Explore
-          </button>
+    <section className="py-16 md:py-24">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="text-center space-y-4">
+              <div className="inline-flex p-4 rounded-2xl bg-muted animate-pulse" />
+              <div className="h-12 w-24 mx-auto bg-muted animate-pulse rounded" />
+            </div>
+          ))}
         </div>
       </div>
+    </section>
+  )
+}
+
+async function CachedStatsSection() {
+  const stats = await getHomeStats()
+  return <StatsSection stats={stats} />
+}
+
+export default function HomePage() {
+  return (
+    <main className="min-h-screen">
+      <Navbar />
+
+      {/* Hero Section */}
+      <HeroSection />
+
+      {/* Features Section */}
+      <FeaturesSection />
+
+      {/* Stats Section - with Suspense for PPR */}
+      <Suspense fallback={<StatsSectionSkeleton />}>
+        <CachedStatsSection />
+      </Suspense>
+
+      {/* How It Works Section */}
+      <HowItWorksSection />
+
+      {/* FAQ Section */}
+      <FaqSection />
+
+      {/* Final CTA Section */}
+      <FinalCtaSection />
+
+      {/* Footer */}
+      <Footer />
     </main>
-  );
+  )
 }

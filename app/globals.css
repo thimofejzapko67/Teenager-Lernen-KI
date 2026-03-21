@@ -109,4 +109,95 @@
       linear-gradient(to bottom, oklch(0.25 0.05 285) 1px, transparent 1px);
     background-size: 40px 40px;
   }
+
+  .bg-gradient-radial {
+    background-image: radial-gradient(var(--tw-gradient-stops));
+  }
+}
+
+/* Highlight.js code block styling - GitHub Dark theme (cyberpunk edition) */
+.hljs {
+  background: oklch(0.15 0.02 285);
+  color: oklch(0.9 0.01 285);
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: oklch(0.5 0.02 285);
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  color: oklch(0.65 0.25 285);
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+  color: oklch(0.65 0.2 30);
+}
+
+.hljs-string,
+.hljs-doctag {
+  color: oklch(0.7 0.2 120);
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+  color: oklch(0.7 0.2 195);
+  font-weight: bold;
+}
+
+.hljs-type,
+.hljs-class .hljs-title {
+  color: oklch(0.65 0.2 270);
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  color: oklch(0.65 0.25 10);
+  font-weight: normal;
+}
+
+.hljs-regexp,
+.hljs-link {
+  color: oklch(0.7 0.2 150);
+}
+
+.hljs-symbol,
+.hljs-bullet {
+  color: oklch(0.7 0.2 195);
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+  color: oklch(0.65 0.2 30);
+}
+
+.hljs-meta {
+  color: oklch(0.5 0.02 285);
+}
+
+.hljs-deletion {
+  background: oklch(0.5 0.2 10);
+}
+
+.hljs-addition {
+  background: oklch(0.5 0.2 120);
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
 }

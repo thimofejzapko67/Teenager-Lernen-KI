@@ -34,6 +34,7 @@ export interface Database {
           xp_reward: number
           duration: number
           order_index: number
+          quiz_data: Json | null
           created_at: string
         }
         Insert: Omit<Database['public']['Tables']['lessons']['Row'], 'id' | 'created_at'>
@@ -50,7 +51,70 @@ export interface Database {
         Insert: Omit<Database['public']['Tables']['lesson_progress']['Row'], 'created_at'>
         Update: Partial<Database['public']['Tables']['lesson_progress']['Insert']>
       }
-      // More tables...
+      projects: {
+        Row: {
+          id: string
+          user_id: string
+          title: string
+          description: string
+          github_url: string | null
+          screenshot_url: string | null
+          tech_stack: string[]
+          rating_count: number
+          rating_sum: number
+          created_at: string
+        }
+        Insert: Omit<Database['public']['Tables']['projects']['Row'], 'id' | 'created_at'>
+        Update: Partial<Database['public']['Tables']['projects']['Insert']>
+      }
+      project_ratings: {
+        Row: {
+          user_id: string
+          project_id: string
+          rating: number
+          created_at: string
+        }
+        Insert: Omit<Database['public']['Tables']['project_ratings']['Row'], 'created_at'>
+        Update: Partial<Database['public']['Tables']['project_ratings']['Insert']>
+      }
+      achievements: {
+        Row: {
+          id: string
+          title: string
+          description: string
+          icon: string
+          requirement_type: AchievementRequirementType
+          requirement_value: number
+          xp_bonus: number
+          created_at: string
+        }
+        Insert: Omit<Database['public']['Tables']['achievements']['Row'], 'id' | 'created_at'>
+        Update: Partial<Database['public']['Tables']['achievements']['Insert']>
+      }
+      user_achievements: {
+        Row: {
+          user_id: string
+          achievement_id: string
+          unlocked_at: string
+        }
+        Insert: Database['public']['Tables']['user_achievements']['Row']
+        Update: Partial<Database['public']['Tables']['user_achievements']['Insert']>
+      }
+      quiz_attempts: {
+        Row: {
+          id: string
+          user_id: string
+          lesson_id: string
+          score: number
+          passed: boolean
+          xp_earned: number
+          answers: Json
+          completed_at: string
+          retry_available_at: string | null
+        }
+        Insert: Omit<Database['public']['Tables']['quiz_attempts']['Row'], 'id' | 'completed_at'>
+        Update: Partial<Database['public']['Tables']['quiz_attempts']['Insert']>
+      }
     }
   }
 }
@@ -64,6 +128,11 @@ export type Difficulty = 'beginner' | 'intermediate' | 'advanced'
 export type Profile = Database['public']['Tables']['profiles']['Row']
 export type Lesson = Database['public']['Tables']['lessons']['Row']
 export type LessonProgress = Database['public']['Tables']['lesson_progress']['Row']
+export type Project = Database['public']['Tables']['projects']['Row']
+export type ProjectRating = Database['public']['Tables']['project_ratings']['Row']
+export type Achievement = Database['public']['Tables']['achievements']['Row']
+export type UserAchievement = Database['public']['Tables']['user_achievements']['Row']
+export type QuizAttempt = Database['public']['Tables']['quiz_attempts']['Row']
 
 // Achievement types
 export type AchievementRequirementType =
@@ -76,23 +145,6 @@ export type AchievementRequirementType =
   | 'project_10'
   | 'hackathon_winner'
   | 'sponsor_winner'
-
-export interface Achievement {
-  id: string;
-  title: string;
-  description: string;
-  icon: string;
-  requirement_type: AchievementRequirementType;
-  requirement_value: number;
-  xp_bonus: number;
-  created_at: string;
-}
-
-export interface UserAchievement {
-  user_id: string;
-  achievement_id: string;
-  unlocked_at: string;
-}
 
 export interface AchievementWithUnlocked extends Achievement {
   unlocked_at?: string;
