@@ -1,0 +1,70 @@
+import { redirect } from 'next/navigation';
+import { createClient } from '@/lib/supabase/server';
+import { getNotifications, markAllAsRead } from '@/lib/notifications';
+import { NotificationItem } from '@/components/notifications/notification-item';
+import { Button } from '@/components/ui/button';
+import { Check, Bell, Trash2 } from 'lucide-react';
+
+export default async function NotificationsPage() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect('/auth');
+  }
+
+  const notifications = await getNotifications();
+
+  async function handleMarkAllRead() {
+    'use server';
+    await markAllAsRead();
+  }
+
+  return (
+    <div className="min-h-screen bg-background">
+        <div className="container mx-auto px-4 py-8 max-w-3xl">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h1 className="text-2xl font-bold mb-1">Notifications</h1>
+              <p className="text-sm text-muted-foreground">
+                Stay updated with your activity
+              </p>
+            </div>
+            {notifications.length > 0 && (
+              <form action={handleMarkAllRead}>
+                <Button type="submit" variant="outline" size="sm">
+                  <Check className="w-4 h-4 mr-2" />
+                  Mark all read
+                </Button>
+              </form>
+            )}
+          </div>
+
+          {/* Notifications */}
+          {notifications.length === 0 ? (
+            <div className="text-center py-16">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted flex items-center justify-center">
+                <Bell className="w-8 h-8 text-muted-foreground" />
+              </div>
+              <h3 className="text-lg font-semibold mb-2">No notifications</h3>
+              <p className="text-muted-foreground">
+                You're all caught up! We'll let you know when something happens.
+              </p>
+            </div>
+          ) : (
+            <div className="divide-y rounded-lg border">
+              {notifications.map((notification) => (
+                <NotificationItem
+                  key={notification.id}
+                  notification={notification}
+                  onMarkAsRead={async () => {}}
+                  onDelete={async () => {}}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+  );
+}
