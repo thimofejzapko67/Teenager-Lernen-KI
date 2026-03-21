@@ -1,4 +1,3 @@
-import { ProtectedRoute } from '@/components/auth/protected-route';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -121,8 +120,7 @@ function Trophy({ className }: { className?: string }) {
 
 export default function SponsorTiersPage() {
   return (
-    <ProtectedRoute>
-      <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background">
         <div className="container mx-auto px-4 py-12">
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-12">
@@ -240,6 +238,5 @@ export default function SponsorTiersPage() {
           </div>
         </div>
       </div>
-    </ProtectedRoute>
   );
 }

@@ -2,6 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server"
 import { unstable_cache } from "next/cache"
+import { createClient as createSupabaseClient } from "@supabase/supabase-js"
 
 export interface HomeStats {
   userCount: number
@@ -26,6 +27,18 @@ export interface Sponsor {
   website: string | null
 }
 
+// Create a public client for cached data (no cookies)
+function createPublicClient() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    return null
+  }
+
+  return createSupabaseClient(supabaseUrl, supabaseAnonKey)
+}
+
 /**
  * Get home page stats with caching
  * Cache for 5 minutes (300 seconds)
@@ -33,7 +46,16 @@ export interface Sponsor {
 export async function getHomeStats(): Promise<HomeStats> {
   const getCachedStats = unstable_cache(
     async () => {
-      const supabase = await createClient()
+      const supabase = createPublicClient()
+
+      if (!supabase) {
+        return {
+          userCount: 0,
+          lessonCount: 0,
+          projectCount: 0,
+          totalXpEarned: 0,
+        }
+      }
 
       // Get user count
       const { count: userCount } = await supabase
@@ -78,7 +100,9 @@ export async function getHomeStats(): Promise<HomeStats> {
 export async function getTestimonials(limit: number = 6): Promise<Testimonial[]> {
   const getCachedTestimonials = unstable_cache(
     async () => {
-      const supabase = await createClient()
+      const supabase = createPublicClient()
+
+      if (!supabase) return []
 
       const { data } = await supabase
         .from("testimonials")
@@ -121,7 +145,9 @@ export async function getTestimonials(limit: number = 6): Promise<Testimonial[]>
 export async function getSponsors(): Promise<Sponsor[]> {
   const getCachedSponsors = unstable_cache(
     async () => {
-      const supabase = await createClient()
+      const supabase = createPublicClient()
+
+      if (!supabase) return []
 
       const { data } = await supabase
         .from("sponsors")

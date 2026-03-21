@@ -1,25 +1,65 @@
-import { Suspense } from 'react';
-import { createClient } from '@/lib/supabase/server';
-import { ProtectedRoute } from '@/components/auth/protected-route';
+'use client';
+
+import { Suspense, useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { SponsorCard } from '@/components/sponsors/sponsor-card';
 import { SponsorFilters } from '@/components/sponsors/sponsor-filters';
 import { SponsorModal } from '@/components/sponsors/sponsor-modal';
-import { getSponsors, getSponsorIndustries } from '@/lib/sponsors';
-import { applyForSponsorship } from '@/lib/sponsors';
-import { toast } from 'sonner';
-import type { Sponsor } from '@/components/sponsors/sponsor-card';
+import type { Sponsor as SponsorType } from '@/components/sponsors/sponsor-card';
 
-async function SponsorsContent({
-  searchParams,
-}: {
-  searchParams: { tier?: string; industry?: string };
-}) {
-  const sponsors = await getSponsors({
-    tier: searchParams.tier as any,
-    industry: searchParams.industry,
-  });
+function SponsorsContent() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [sponsors, setSponsors] = useState<SponsorType[]>([]);
+  const [industries, setIndustries] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const industries = await getSponsorIndustries();
+  const tier = searchParams.get('tier') || 'all';
+  const industry = searchParams.get('industry') || 'all';
+
+  useEffect(() => {
+    async function fetchData() {
+      setIsLoading(true);
+      try {
+        const params = new URLSearchParams();
+        if (tier !== 'all') params.set('tier', tier);
+        if (industry !== 'all') params.set('industry', industry);
+
+        const response = await fetch(`/api/sponsors?${params.toString()}`);
+        if (response.ok) {
+          const data = await response.json();
+          setSponsors(data.sponsors || data || []);
+          setIndustries(data.industries || []);
+        }
+      } catch (error) {
+        console.error('Error fetching sponsors:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchData();
+  }, [tier, industry]);
+
+  const handleTierChange = (newTier: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (newTier === 'all') {
+      params.delete('tier');
+    } else {
+      params.set('tier', newTier);
+    }
+    router.push(`/sponsors?${params.toString()}`);
+  };
+
+  const handleIndustryChange = (newIndustry: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (newIndustry === 'all') {
+      params.delete('industry');
+    } else {
+      params.set('industry', newIndustry);
+    }
+    router.push(`/sponsors?${params.toString()}`);
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -34,28 +74,32 @@ async function SponsorsContent({
 
         {/* Filters */}
         <SponsorFilters
-          onTierChange={(tier: string) => {
-            // URL param update would happen via client component
-          }}
-          onIndustryChange={(industry: string) => {
-            // URL param update would happen via client component
-          }}
+          onTierChange={handleTierChange}
+          onIndustryChange={handleIndustryChange}
           industries={industries}
-          selectedTier={searchParams.tier || 'all'}
-          selectedIndustry={searchParams.industry || 'all'}
+          selectedTier={tier}
+          selectedIndustry={industry}
         />
 
         {/* Sponsors Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-          {sponsors.map((sponsor) => (
-            <SponsorCard
-              key={sponsor.id}
-              sponsor={sponsor as Sponsor}
-            />
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="space-y-6 mt-6">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="h-48 rounded-lg bg-muted animate-pulse" />
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+            {sponsors.map((sponsor) => (
+              <SponsorCard
+                key={sponsor.id}
+                sponsor={sponsor as SponsorType}
+              />
+            ))}
+          </div>
+        )}
 
-        {sponsors.length === 0 && (
+        {!isLoading && sponsors.length === 0 && (
           <div className="text-center py-12">
             <p className="text-muted-foreground">No sponsors found matching your criteria.</p>
           </div>
@@ -65,30 +109,20 @@ async function SponsorsContent({
   );
 }
 
-export default function SponsorsPage({
-  searchParams,
-}: {
-  searchParams: { tier?: string; industry?: string };
-}) {
+export default function SponsorsPage() {
   return (
-    <ProtectedRoute>
-      <Suspense fallback={<SponsorsLoading />}>
-        <SponsorsContent searchParams={searchParams} />
-      </Suspense>
-    </ProtectedRoute>
-  );
-}
-
-function SponsorsLoading() {
-  return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8">
-        <div className="space-y-6">
-          {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className="h-48 rounded-lg bg-muted animate-pulse" />
-          ))}
+    <Suspense fallback={
+      <div className="min-h-screen bg-background">
+        <div className="container mx-auto px-4 py-8">
+          <div className="space-y-6">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="h-48 rounded-lg bg-muted animate-pulse" />
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    }>
+      <SponsorsContent />
+    </Suspense>
   );
 }

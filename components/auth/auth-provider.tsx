@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react"
 import { User } from "@supabase/supabase-js"
-import { createClient } from "@/lib/supabase/server"
+import { createBrowserClient } from "@/lib/supabase/browser"
 import { User as AuthUser } from "@supabase/auth-js"
 
 interface AuthContextType {
@@ -29,7 +29,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     async function loadUser() {
       try {
-        const supabase = await createClient()
+        const supabase = createBrowserClient()
         const {
           data: { user },
         } = await supabase.auth.getUser()
@@ -63,7 +63,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     // Reload user after sign in
-    const supabase = await createClient()
+    const supabase = createBrowserClient()
     const {
       data: { user },
     } = await supabase.auth.getUser()
@@ -84,7 +84,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     // Reload user after sign up
-    const supabase = await createClient()
+    const supabase = createBrowserClient()
     const {
       data: { user },
     } = await supabase.auth.getUser()
