@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import { Menu, X, Home, BookOpen, Trophy, User } from "lucide-react"
 import { useState } from "react"
