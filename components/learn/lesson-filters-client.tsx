@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect, useTransition } from "react";
-import { Search, Filter } from "lucide-react";
+import { Search, Filter, X } from "lucide-react";
 import type { LessonFilters, LessonSort } from "@/types/lessons";
 import {
   CATEGORY_LABELS,
@@ -35,7 +35,6 @@ export function LessonFiltersClient({
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
 
-  // Get current filters from URL
   const categoryFilter = (searchParams.get("category") as LessonCategory | null) || undefined;
   const difficultyFilter = (searchParams.get("difficulty") as Difficulty | null) || undefined;
   const searchFilter = searchParams.get("search") || undefined;
@@ -51,12 +50,10 @@ export function LessonFiltersClient({
 
   const [searchInput, setSearchInput] = useState(filters.search || "");
 
-  // Update search input when URL changes
   useEffect(() => {
     setSearchInput(filters.search || "");
   }, [filters.search]);
 
-  // Debounced search
   useEffect(() => {
     const timer = setTimeout(() => {
       if (searchInput !== filters.search) {
@@ -128,96 +125,96 @@ export function LessonFiltersClient({
     !!filters.search;
 
   return (
-    <div className="space-y-4">
-      {/* Search Bar */}
-      <div className="relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-        <Input
-          type="search"
-          placeholder="Lektionen durchsuchen..."
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
-          className="pl-9 bg-card/50 border-border/50"
-        />
+    <div className="space-y-4 mb-8">
+      {/* Search + Filters in glass card */}
+      <div className="glass-card rounded-2xl p-5 space-y-4">
+        {/* Search Bar */}
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Input
+            type="search"
+            placeholder="Lektionen durchsuchen..."
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            className="pl-9 bg-background/50 border-border/50 rounded-xl"
+          />
+        </div>
+
+        {/* Filters Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <Select
+            value={filters.category || "all"}
+            onValueChange={(value) =>
+              updateFilters({
+                ...filters,
+                category: value as LessonCategory | "all",
+              })
+            }
+          >
+            <SelectTrigger className="bg-background/50 border-border/50 rounded-xl">
+              <SelectValue placeholder="Kategorie" />
+            </SelectTrigger>
+            <SelectContent>
+              {categories.map(([value, label]) => (
+                <SelectItem key={value} value={value}>
+                  {label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+
+          <Select
+            value={filters.difficulty || "all"}
+            onValueChange={(value) =>
+              updateFilters({
+                ...filters,
+                difficulty: value as Difficulty | "all",
+              })
+            }
+          >
+            <SelectTrigger className="bg-background/50 border-border/50 rounded-xl">
+              <SelectValue placeholder="Schwierigkeit" />
+            </SelectTrigger>
+            <SelectContent>
+              {difficulties.map(([value, label]) => (
+                <SelectItem key={value} value={value}>
+                  {label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+
+          <Select value={sort} onValueChange={updateSort}>
+            <SelectTrigger className="bg-background/50 border-border/50 rounded-xl">
+              <SelectValue placeholder="Sortierung" />
+            </SelectTrigger>
+            <SelectContent>
+              {sorts.map(([value, label]) => (
+                <SelectItem key={value} value={value}>
+                  {label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
       </div>
 
-      {/* Filters Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        {/* Category Filter */}
-        <Select
-          value={filters.category || "all"}
-          onValueChange={(value) =>
-            updateFilters({
-              ...filters,
-              category: value as LessonCategory | "all",
-            })
-          }
-        >
-          <SelectTrigger className="bg-card/50 border-border/50">
-            <SelectValue placeholder="Kategorie" />
-          </SelectTrigger>
-          <SelectContent>
-            {categories.map(([value, label]) => (
-              <SelectItem key={value} value={value}>
-                {label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-
-        {/* Difficulty Filter */}
-        <Select
-          value={filters.difficulty || "all"}
-          onValueChange={(value) =>
-            updateFilters({
-              ...filters,
-              difficulty: value as Difficulty | "all",
-            })
-          }
-        >
-          <SelectTrigger className="bg-card/50 border-border/50">
-            <SelectValue placeholder="Schwierigkeit" />
-          </SelectTrigger>
-          <SelectContent>
-            {difficulties.map(([value, label]) => (
-              <SelectItem key={value} value={value}>
-                {label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-
-        {/* Sort */}
-        <Select value={sort} onValueChange={updateSort}>
-          <SelectTrigger className="bg-card/50 border-border/50">
-            <SelectValue placeholder="Sortierung" />
-          </SelectTrigger>
-          <SelectContent>
-            {sorts.map(([value, label]) => (
-              <SelectItem key={value} value={value}>
-                {label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-
-      {/* Active Filters & Results Count */}
+      {/* Results count & reset */}
       <div className="flex items-center justify-between text-sm">
         <span className="text-muted-foreground">
           {totalCount} {totalCount === 1 ? "Lektion" : "Lektionen"} gefunden
         </span>
-        {hasActiveFilters ? (
+        {hasActiveFilters && (
           <Button
             variant="ghost"
             size="sm"
             onClick={resetFilters}
-            className="text-muted-foreground hover:text-foreground"
+            className="text-muted-foreground hover:text-foreground rounded-xl gap-2"
           >
-            <Filter className="h-4 w-4 mr-2" />
+            <X className="h-3 w-3" />
             Filter zurücksetzen
           </Button>
-        ) : null}
+        )}
       </div>
     </div>
   );

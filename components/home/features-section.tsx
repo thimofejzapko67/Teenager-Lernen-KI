@@ -1,110 +1,113 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
+import { motion } from "framer-motion"
+import { useInView } from "framer-motion"
 import { useRef } from "react"
-import { Code, Gamepad2, Trophy, Users, Rocket, ShieldCheck } from "lucide-react"
+import { Code, Gamepad2, Trophy, Users, Rocket, Shield } from "lucide-react"
 
 const features = [
   {
     icon: Code,
-    number: "01",
     title: "Interaktives Coding",
-    description: "Python, JavaScript, KI-APIs — durch echte Challenges, nicht langweilige Videos.",
+    description: "Lerne Python, JavaScript und KI-Tools durch echte Challenges, nicht langweilige Videos.",
+    gradient: "from-blue-500 to-cyan-500",
+    accent: "border-blue-500/20 hover:border-blue-500/50",
+    glow: "group-hover:shadow-blue-500/10",
   },
   {
     icon: Gamepad2,
-    number: "02",
     title: "Gamified Learning",
-    description: "XP sammeln, leveln, Badges freischalten, Rangliste climben.",
+    description: "Sammle XP, level auf, schalte Badges frei und klettere im Leaderboard.",
+    gradient: "from-purple-500 to-pink-500",
+    accent: "border-purple-500/20 hover:border-purple-500/50",
+    glow: "group-hover:shadow-purple-500/10",
   },
   {
     icon: Trophy,
-    number: "03",
-    title: "Gesponsert werden",
-    description: "Die besten Entwickler werden von echten Tech-Companies entdeckt und mentored.",
+    title: "Werde Gesponsert",
+    description: "Die besten Entwickler werden von Tech-Companies gesponsert und persönlich mentored.",
+    gradient: "from-amber-500 to-orange-500",
+    accent: "border-amber-500/20 hover:border-amber-500/50",
+    glow: "group-hover:shadow-amber-500/10",
   },
   {
     icon: Users,
-    number: "04",
     title: "Community",
-    description: "Baue mit anderen Teenagern, teile Projekte, finde dein Team.",
+    description: "Lerne mit anderen Teenagern, teile deine Projekte und finde dein Team.",
+    gradient: "from-green-500 to-emerald-500",
+    accent: "border-green-500/20 hover:border-green-500/50",
+    glow: "group-hover:shadow-green-500/10",
   },
   {
     icon: Rocket,
-    number: "05",
     title: "Echte Projekte",
-    description: "KI-Apps, Tools und Games — für dein Portfolio und deine Karriere.",
+    description: "Baue echte KI-Apps, Games und Tools für dein Portfolio.",
+    gradient: "from-red-500 to-pink-500",
+    accent: "border-red-500/20 hover:border-red-500/50",
+    glow: "group-hover:shadow-red-500/10",
   },
   {
-    icon: ShieldCheck,
-    number: "06",
-    title: "Sicher & kostenlos",
-    description: "Keine versteckten Kosten. DSGVO-konform. Für alle Teenager.",
+    icon: Shield,
+    title: "Sicher & Geschützt",
+    description: "Deine Daten sind sicher. Wir halten uns an alle Datenschutzregeln.",
+    gradient: "from-indigo-500 to-blue-500",
+    accent: "border-indigo-500/20 hover:border-indigo-500/50",
+    glow: "group-hover:shadow-indigo-500/10",
   },
 ]
 
 export function FeaturesSection() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.15 })
+  const isInView = useInView(ref, { once: true, amount: 0.2 })
 
   return (
     <section ref={ref} className="py-24 md:py-32 relative">
-      {/* Subtle top rule */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+      <div className="container mx-auto px-4">
+        <div className="space-y-16">
+          {/* Section header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.5 }}
+            className="text-center max-w-2xl mx-auto space-y-4"
+          >
+            <h2 className="text-3xl md:text-5xl font-display font-bold">
+              Warum <span className="text-primary">Codelift</span>?
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              Die KI-Lernplattform, die Spaß macht und dich fit macht für die Zukunft.
+            </p>
+          </motion.div>
 
-      <div className="container mx-auto px-4 max-w-7xl">
-        {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55 }}
-          className="mb-16 md:mb-20 max-w-3xl"
-        >
-          <span className="section-label mb-5 inline-flex">Platform</span>
-          <h2 className="text-4xl md:text-6xl font-display font-extrabold leading-tight mt-4">
-            Warum{" "}
-            <span className="text-primary">Codelift?</span>
-          </h2>
-          <p className="mt-4 text-muted-foreground text-lg max-w-xl">
-            Eine Plattform, die Lernen in ein Spiel verwandelt — und aus Spielern Sponsorship-Kandidaten macht.
-          </p>
-        </motion.div>
+          {/* Features grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {features.map((feature, index) => {
+              const Icon = feature.icon
+              return (
+                <motion.div
+                  key={feature.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  transition={{ duration: 0.5, delay: index * 0.08 }}
+                  className="group relative"
+                >
+                  <div className={`h-full bg-card/60 border ${feature.accent} rounded-2xl p-6 transition-all duration-300 hover:shadow-xl ${feature.glow} hover:-translate-y-1 backdrop-blur-sm`}>
+                    {/* Top accent bar */}
+                    <div className={`absolute top-0 left-6 right-6 h-px bg-gradient-to-r ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full`} />
 
-        {/* Features grid — 2 col desktop, editorial style */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
-          {features.map((f, i) => {
-            const Icon = f.icon
-            return (
-              <motion.div
-                key={f.number}
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : {}}
-                transition={{ duration: 0.4, delay: i * 0.07 }}
-                className="group bg-card hover:bg-muted/40 transition-colors duration-200 p-8 relative overflow-hidden"
-              >
-                {/* Number watermark */}
-                <span className="absolute -top-2 -right-2 text-8xl font-display font-extrabold text-border/40 select-none leading-none">
-                  {f.number}
-                </span>
+                    {/* Icon container */}
+                    <div className={`inline-flex p-3 rounded-xl bg-gradient-to-br ${feature.gradient} mb-5 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                      <Icon className="w-6 h-6 text-white" />
+                    </div>
 
-                {/* Icon */}
-                <div className="relative mb-6">
-                  <div className="w-10 h-10 border border-primary/30 flex items-center justify-center rounded-sm bg-primary/5 group-hover:bg-primary/10 transition-colors">
-                    <Icon className="w-5 h-5 text-primary" />
+                    {/* Content */}
+                    <h3 className="text-lg font-semibold mb-2 group-hover:text-foreground transition-colors">{feature.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
                   </div>
-                </div>
-
-                {/* Content */}
-                <h3 className="text-lg font-display font-bold mb-2 group-hover:text-primary transition-colors duration-200">
-                  {f.title}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{f.description}</p>
-
-                {/* Bottom lime line on hover */}
-                <div className="absolute bottom-0 left-0 right-0 h-px bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-              </motion.div>
-            )
-          })}
+                </motion.div>
+              )
+            })}
+          </div>
         </div>
       </div>
     </section>

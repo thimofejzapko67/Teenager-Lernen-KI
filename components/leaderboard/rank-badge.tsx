@@ -8,43 +8,43 @@ interface RankBadgeProps {
 
 const rankConfig: Record<
   Rank,
-  { label: string; bgClass: string; textClass: string; borderClass: string }
+  { label: string; gradient: string; textClass: string; borderClass: string }
 > = {
   novice: {
     label: "Novice",
-    bgClass: "bg-gray-500/20",
+    gradient: "from-gray-500/20 to-gray-600/20",
     textClass: "text-gray-400",
-    borderClass: "border-gray-500/50",
+    borderClass: "border-gray-500/30",
   },
   coder: {
     label: "Coder",
-    bgClass: "bg-cyan-500/20",
+    gradient: "from-cyan-500/20 to-sky-500/20",
     textClass: "text-cyan-400",
-    borderClass: "border-cyan-500/50",
+    borderClass: "border-cyan-500/30",
   },
   developer: {
     label: "Developer",
-    bgClass: "bg-green-500/20",
+    gradient: "from-green-500/20 to-emerald-500/20",
     textClass: "text-green-400",
-    borderClass: "border-green-500/50",
+    borderClass: "border-green-500/30",
   },
   architect: {
     label: "Architect",
-    bgClass: "bg-purple-500/20",
+    gradient: "from-purple-500/20 to-violet-500/20",
     textClass: "text-purple-400",
-    borderClass: "border-purple-500/50",
+    borderClass: "border-purple-500/30",
   },
   master: {
     label: "Master",
-    bgClass: "bg-yellow-500/20",
+    gradient: "from-yellow-500/20 to-amber-500/20",
     textClass: "text-yellow-400",
-    borderClass: "border-yellow-500/50",
+    borderClass: "border-yellow-500/30",
   },
   legend: {
     label: "Legend",
-    bgClass: "bg-red-500/20",
+    gradient: "from-red-500/20 to-pink-500/20",
     textClass: "text-red-400",
-    borderClass: "border-red-500/50",
+    borderClass: "border-red-500/30",
   },
 };
 
@@ -54,8 +54,8 @@ export function RankBadge({ rank, className }: RankBadgeProps) {
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wide",
-        config.bgClass,
+        "inline-flex items-center rounded-lg border px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wide",
+        `bg-gradient-to-r ${config.gradient}`,
         config.textClass,
         config.borderClass,
         className

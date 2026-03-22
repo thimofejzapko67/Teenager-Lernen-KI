@@ -50,10 +50,10 @@ function Pagination({ currentPage, totalPages, onPageChange, isLoading }: Pagina
         disabled={currentPage === 1 || isLoading}
         className={cn(
           "p-2 rounded-lg transition-colors",
-          "hover:bg-accent/10",
+          "hover:bg-primary/10 hover:text-primary",
           "disabled:opacity-50 disabled:cursor-not-allowed"
         )}
-        aria-label="Previous page"
+        aria-label="Vorherige Seite"
       >
         <ChevronLeft className="w-5 h-5" />
       </button>
@@ -64,11 +64,11 @@ function Pagination({ currentPage, totalPages, onPageChange, isLoading }: Pagina
           onClick={() => typeof page === "number" && onPageChange(page)}
           disabled={page === "..." || isLoading}
           className={cn(
-            "min-w-[2.5rem] h-10 px-3 rounded-lg text-sm font-medium transition-colors",
+            "min-w-[2.5rem] h-10 px-3 rounded-lg text-sm font-medium transition-all duration-200",
             "focus:outline-none focus:ring-2 focus:ring-primary/50",
             page === currentPage
-              ? "bg-primary text-primary-foreground neon-border"
-              : "hover:bg-accent/10 text-muted-foreground hover:text-foreground",
+              ? "bg-gradient-to-r from-primary to-violet-600 text-white shadow-lg shadow-primary/30"
+              : "hover:bg-muted/50 text-muted-foreground hover:text-foreground",
             (page === "...") && "cursor-default"
           )}
         >
@@ -81,10 +81,10 @@ function Pagination({ currentPage, totalPages, onPageChange, isLoading }: Pagina
         disabled={currentPage === totalPages || isLoading}
         className={cn(
           "p-2 rounded-lg transition-colors",
-          "hover:bg-accent/10",
+          "hover:bg-primary/10 hover:text-primary",
           "disabled:opacity-50 disabled:cursor-not-allowed"
         )}
-        aria-label="Next page"
+        aria-label="Nächste Seite"
       >
         <ChevronRight className="w-5 h-5" />
       </button>
@@ -97,7 +97,6 @@ export function LeaderboardContent() {
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
 
-  // Get initial state from URL
   const initialPeriod = (searchParams.get("period") as LeaderboardPeriod) || "global";
   const initialPage = parseInt(searchParams.get("page") || "1", 10);
 
@@ -109,7 +108,6 @@ export function LeaderboardContent() {
 
   const totalPages = Math.ceil(total / 25);
 
-  // Fetch leaderboard data
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -118,7 +116,6 @@ export function LeaderboardContent() {
         setEntries(result.entries);
         setTotal(result.total);
       } catch (error) {
-        console.error("Failed to fetch leaderboard:", error);
         setEntries([]);
         setTotal(0);
       } finally {
@@ -129,7 +126,6 @@ export function LeaderboardContent() {
     fetchData();
   }, [period, page]);
 
-  // Update URL when state changes
   const updateURL = (newPeriod: LeaderboardPeriod, newPage: number) => {
     const params = new URLSearchParams();
     if (newPeriod !== "global") params.set("period", newPeriod);
@@ -183,8 +179,8 @@ export function LeaderboardContent() {
       {/* Results info */}
       {!isLoading && entries.length > 0 && (
         <div className="text-center text-sm text-muted-foreground">
-          Zeige {Math.min((page - 1) * 25 + 1, total)}-{Math.min(page * 25, total)} of{" "}
-          {total.toLocaleString()} Entwickler
+          Zeige {Math.min((page - 1) * 25 + 1, total)}–{Math.min(page * 25, total)} von{" "}
+          {total.toLocaleString("de-DE")} Entwicklern
         </div>
       )}
     </div>
