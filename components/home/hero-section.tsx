@@ -1,26 +1,57 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Sparkles, Zap, Terminal } from "lucide-react"
+import { ArrowRight, Sparkles, Zap, Send } from "lucide-react"
 import Link from "next/link"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
+import { useEffect, useState } from "react"
 
-const codeLines = [
-  { text: "# KI-Agent bauen", color: "text-emerald-400" },
-  { text: "import anthropic", color: "text-violet-400" },
-  { text: "", color: "" },
-  { text: "client = anthropic.Anthropic()", color: "text-sky-300" },
-  { text: "", color: "" },
-  { text: 'message = client.messages.create(', color: "text-foreground/80" },
-  { text: '  model="claude-opus-4-5",', color: "text-amber-300" },
-  { text: '  messages=[{"role": "user",', color: "text-foreground/80" },
-  { text: '    "content": "Hallo KI!"}])', color: "text-foreground/80" },
-  { text: "", color: "" },
-  { text: "print(message.content)", color: "text-sky-300" },
-  { text: "# → +50 XP verdient! 🎉", color: "text-emerald-400" },
+const PROMPTS = [
+  {
+    prompt: "Erkläre mir, wie eine REST API funktioniert",
+    response: "Eine REST API ist eine Schnittstelle, die HTTP-Methoden wie GET, POST, PUT und DELETE nutzt, um Daten zwischen Client und Server auszutauschen...",
+  },
+  {
+    prompt: "Schreib einen einfachen KI-Agenten in Python",
+    response: "Klar! Hier ist ein einfacher KI-Agent mit der Anthropic API. Er nimmt eine Nutzereingabe entgegen und antwortet intelligent...",
+  },
+  {
+    prompt: "Was ist der Unterschied zwischen iOS und Android?",
+    response: "iOS läuft ausschließlich auf Apple-Geräten und nutzt Swift/Objective-C. Android ist open-source und wird auf vielen Geräten verwendet...",
+  },
 ]
 
-function CodeTerminal() {
+function PromptDemo() {
+  const [promptIndex, setPromptIndex] = useState(0)
+  const [typedPrompt, setTypedPrompt] = useState("")
+  const [phase, setPhase] = useState<"typing" | "responding" | "pause">("typing")
+
+  const current = PROMPTS[promptIndex]
+
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>
+
+    if (phase === "typing") {
+      if (typedPrompt.length < current.prompt.length) {
+        timeout = setTimeout(() => {
+          setTypedPrompt(current.prompt.slice(0, typedPrompt.length + 1))
+        }, 38)
+      } else {
+        timeout = setTimeout(() => setPhase("responding"), 500)
+      }
+    } else if (phase === "responding") {
+      timeout = setTimeout(() => setPhase("pause"), 2800)
+    } else {
+      timeout = setTimeout(() => {
+        setTypedPrompt("")
+        setPhase("typing")
+        setPromptIndex((i) => (i + 1) % PROMPTS.length)
+      }, 1800)
+    }
+
+    return () => clearTimeout(timeout)
+  }, [phase, typedPrompt, current.prompt])
+
   return (
     <motion.div
       initial={{ opacity: 0, x: 40 }}
@@ -29,41 +60,79 @@ function CodeTerminal() {
       className="hidden lg:block relative"
     >
       <div className="absolute -inset-4 bg-primary/10 rounded-3xl blur-2xl" />
-      <div className="relative bg-card/90 border border-border/60 rounded-2xl overflow-hidden shadow-2xl shadow-primary/20 backdrop-blur-sm">
-        {/* Terminal header */}
-        <div className="flex items-center gap-2 px-4 py-3 border-b border-border/50 bg-muted/30">
+      <div className="relative bg-card/90 border border-border/60 rounded-2xl overflow-hidden shadow-2xl shadow-primary/20 backdrop-blur-sm flex flex-col">
+        {/* Chat header */}
+        <div className="flex items-center gap-3 px-4 py-3 border-b border-border/50 bg-muted/30">
           <div className="flex gap-1.5">
             <div className="w-3 h-3 rounded-full bg-red-500/80" />
             <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
             <div className="w-3 h-3 rounded-full bg-green-500/80" />
           </div>
-          <div className="flex items-center gap-2 ml-2">
-            <Terminal className="w-3.5 h-3.5 text-muted-foreground" />
-            <span className="text-xs text-muted-foreground font-mono">mein_erster_ki_agent.py</span>
+          <div className="flex items-center gap-2 ml-1">
+            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-primary to-violet-600 flex items-center justify-center">
+              <Sparkles className="w-3 h-3 text-white" />
+            </div>
+            <span className="text-xs font-medium text-foreground/80">Codelift AI</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
           </div>
         </div>
-        {/* Code content */}
-        <div className="p-5 font-mono text-sm leading-relaxed">
-          {codeLines.map((line, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6 + i * 0.08, duration: 0.3 }}
-              className="flex"
+
+        {/* Chat messages area */}
+        <div className="flex-1 p-4 space-y-4 min-h-[220px]">
+          <AnimatePresence mode="wait">
+            {phase !== "typing" && (
+              <motion.div
+                key={`response-${promptIndex}`}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4 }}
+                className="flex gap-3"
+              >
+                <div className="w-7 h-7 rounded-full bg-gradient-to-br from-primary to-violet-600 flex items-center justify-center shrink-0 mt-0.5">
+                  <Sparkles className="w-3.5 h-3.5 text-white" />
+                </div>
+                <div className="bg-muted/50 rounded-2xl rounded-tl-sm px-4 py-3 text-sm text-foreground/80 leading-relaxed max-w-[85%]">
+                  {phase === "responding" ? (
+                    <span>
+                      {current.response.slice(0, 60)}
+                      <motion.span
+                        animate={{ opacity: [1, 0] }}
+                        transition={{ duration: 0.5, repeat: Infinity }}
+                        className="inline-block w-0.5 h-3.5 bg-primary ml-0.5 align-middle"
+                      />
+                    </span>
+                  ) : (
+                    current.response
+                  )}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Prompt input */}
+        <div className="px-4 pb-4">
+          <div className="flex items-center gap-2 bg-background/60 border border-border/60 rounded-xl px-4 py-3">
+            <span className="flex-1 text-sm font-mono text-foreground/90 min-h-[20px]">
+              {typedPrompt}
+              <motion.span
+                animate={{ opacity: [1, 0] }}
+                transition={{ duration: 0.6, repeat: Infinity }}
+                className="inline-block w-0.5 h-4 bg-primary ml-0.5 align-middle"
+              />
+            </span>
+            <motion.button
+              animate={phase !== "typing" ? { scale: [1, 1.15, 1] } : {}}
+              transition={{ duration: 0.3 }}
+              className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center shrink-0"
             >
-              <span className="select-none text-muted-foreground/30 w-6 shrink-0 text-right mr-4 text-xs leading-relaxed">
-                {line.text !== "" ? i + 1 : ""}
-              </span>
-              <span className={line.color || "text-foreground/60"}>{line.text || "\u00A0"}</span>
-            </motion.div>
-          ))}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: [0, 1, 0] }}
-            transition={{ delay: 2, duration: 1, repeat: Infinity }}
-            className="inline-block w-2 h-4 bg-primary mt-1 ml-[1.5rem]"
-          />
+              <Send className="w-3.5 h-3.5 text-white" />
+            </motion.button>
+          </div>
+          <p className="text-[10px] text-muted-foreground/50 text-center mt-2">
+            +50 XP für jede beantwortete Lektion
+          </p>
         </div>
       </div>
     </motion.div>
@@ -176,8 +245,8 @@ export function HeroSection() {
             </motion.div>
           </div>
 
-          {/* Right: Code terminal */}
-          <CodeTerminal />
+          {/* Right: Prompt demo */}
+          <PromptDemo />
         </div>
       </div>
 
