@@ -9,88 +9,88 @@ import {
   Check,
   Mail,
 } from 'lucide-react';
-import { cn, clawGradientText } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
 const tiers = [
   {
     id: 'platinum',
     name: 'Platinum',
-    description: 'Premium sponsorship for maximum visibility and impact',
+    description: 'Premium-Sponsoring für maximale Sichtbarkeit und Wirkung',
     color: 'from-cyan-400 to-blue-600',
     bgColor: 'bg-cyan-400/10',
     borderColor: 'border-cyan-400/30',
     textColor: 'text-cyan-400',
     price: '€5,000+',
     features: [
-      'Top placement in sponsors marketplace',
-      'Exclusive featured spot on homepage',
-      'Direct access to top 10 leaderboard performers',
-      'Branded challenges and hackathons',
-      'Quarterly talent pipeline reports',
-      'Priority matching with qualified candidates',
-      'Company profile with video content',
-      'Unlimited job postings',
-      'Dedicated account manager',
-      'Annual sponsorship event',
+      'Topplatzierung im Sponsoren-Marktplatz',
+      'Exklusiver Featured-Spot auf der Startseite',
+      'Direktzugang zu den Top-10-Entwicklern',
+      'Gebrandete Challenges und Hackathons',
+      'Quartalsberichte zur Talent-Pipeline',
+      'Priorisiertes Matching mit Kandidaten',
+      'Unternehmensprofil mit Video-Content',
+      'Unbegrenzte Stellenanzeigen',
+      'Persönlicher Account Manager',
+      'Jährliches Sponsorship-Event',
     ],
     icon: Award,
   },
   {
     id: 'gold',
     name: 'Gold',
-    description: 'Enhanced visibility and access to top talent',
+    description: 'Erhöhte Sichtbarkeit und Zugang zu Top-Talenten',
     color: 'from-yellow-500 to-yellow-700',
     bgColor: 'bg-yellow-500/10',
     borderColor: 'border-yellow-500/30',
     textColor: 'text-yellow-400',
     price: '€2,500+',
     features: [
-      'Featured in sponsors marketplace',
-      'Placement in homepage rotation',
-      'Access to top 50 leaderboard performers',
-      'Branded challenge opportunities',
-      'Monthly talent insights',
-      'Priority candidate matching',
-      'Enhanced company profile',
-      'Up to 5 job postings per month',
-      'Email support',
+      'Featured im Sponsoren-Marktplatz',
+      'Platzierung in der Startseiten-Rotation',
+      'Zugang zu den Top-50-Entwicklern',
+      'Gebrandete Challenge-Möglichkeiten',
+      'Monatliche Talent-Insights',
+      'Priorisiertes Kandidaten-Matching',
+      'Erweitertes Unternehmensprofil',
+      'Bis zu 5 Stellenanzeigen pro Monat',
+      'E-Mail-Support',
     ],
     icon: Trophy,
   },
   {
     id: 'silver',
     name: 'Silver',
-    description: 'Great value for growing companies',
+    description: 'Gutes Preis-Leistungs-Verhältnis für wachsende Unternehmen',
     color: 'from-slate-300 to-slate-500',
     bgColor: 'bg-slate-300/10',
     borderColor: 'border-slate-300/30',
     textColor: 'text-slate-300',
     price: '€1,000+',
     features: [
-      'Listed in sponsors marketplace',
-      'Basic company profile',
-      'Access to leaderboard performers',
-      'Standard candidate matching',
-      'Monthly newsletter feature',
-      '2 job postings per month',
+      'Gelistet im Sponsoren-Marktplatz',
+      'Basis-Unternehmensprofil',
+      'Zugang zu Ranglisten-Talenten',
+      'Standard-Kandidaten-Matching',
+      'Feature im monatlichen Newsletter',
+      '2 Stellenanzeigen pro Monat',
     ],
     icon: Building2,
   },
   {
     id: 'bronze',
     name: 'Bronze',
-    description: 'Get started with sponsorships',
+    description: 'Einstieg ins Sponsoring-Programm',
     color: 'from-orange-700 to-orange-900',
     bgColor: 'bg-orange-700/10',
     borderColor: 'border-orange-700/30',
     textColor: 'text-orange-400',
     price: '€250+',
     features: [
-      'Basic listing in sponsors marketplace',
-      'Simple company profile',
-      'Access to candidate search',
-      'Community recognition',
+      'Basis-Listung im Sponsoren-Marktplatz',
+      'Einfaches Unternehmensprofil',
+      'Zugang zur Kandidatensuche',
+      'Community-Anerkennung',
     ],
     icon: Users,
   },
@@ -121,44 +121,49 @@ function Trophy({ className }: { className?: string }) {
 export default function SponsorTiersPage() {
   return (
     <div className="min-h-screen bg-background">
-        <div className="container mx-auto px-4 py-12">
-          {/* Header */}
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <h1 className="text-4xl font-bold mb-4">
-              <span className={clawGradientText}>Sponsorship Tiers</span>
-            </h1>
-            <p className="text-xl text-muted-foreground">
-              Choose the sponsorship level that fits your company's goals
-            </p>
+      <div className="relative border-b border-border/50 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/8 via-transparent to-secondary/5" />
+        <div className="absolute inset-0 bg-grid-pattern opacity-[0.04]" />
+        <div className="container mx-auto px-4 py-10 relative z-10 text-center max-w-3xl">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-medium text-primary uppercase tracking-wider mb-4">
+            Für Unternehmen
           </div>
-
+          <h1 className="text-4xl md:text-5xl font-display font-bold mb-3">
+            Sponsorship-Pakete
+          </h1>
+          <p className="text-xl text-muted-foreground">
+            Wähle das Paket, das zu deinen Unternehmenszielen passt.
+          </p>
+        </div>
+      </div>
+        <div className="container mx-auto px-4 py-12">
           {/* Benefits Overview */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             <div className="glass-card p-6 rounded-xl text-center">
               <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
                 <Users className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="font-semibold mb-2">Access Top Talent</h3>
+              <h3 className="font-semibold mb-2">Top-Talente finden</h3>
               <p className="text-sm text-muted-foreground">
-                Connect with the most skilled young developers in the AI space
+                Vernetze dich mit den besten jungen KI-Entwicklern
               </p>
             </div>
             <div className="glass-card p-6 rounded-xl text-center">
               <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
                 <Rocket className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="font-semibold mb-2">Build Your Brand</h3>
+              <h3 className="font-semibold mb-2">Marke stärken</h3>
               <p className="text-sm text-muted-foreground">
-                Establish your company as a leader in supporting tech education
+                Positioniere dein Unternehmen als Tech-Bildungs-Pioneer
               </p>
             </div>
             <div className="glass-card p-6 rounded-xl text-center">
               <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
                 <DollarSign className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="font-semibold mb-2">Flexible Investment</h3>
+              <h3 className="font-semibold mb-2">Flexibles Investment</h3>
               <p className="text-sm text-muted-foreground">
-                Choose a tier that matches your budget and hiring needs
+                Passende Pakete für jedes Budget und jeden Bedarf
               </p>
             </div>
           </div>
@@ -211,7 +216,7 @@ export default function SponsorTiersPage() {
 
                   {/* CTA */}
                   <Button className="w-full" variant={tier.id === 'platinum' ? 'default' : 'outline'}>
-                    Get Started
+                    Jetzt starten
                   </Button>
                 </div>
               );
@@ -221,17 +226,17 @@ export default function SponsorTiersPage() {
           {/* CTA Section */}
           <div className="mt-16 text-center">
             <div className="max-w-2xl mx-auto p-8 rounded-2xl bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 border border-primary/30">
-              <h2 className="text-2xl font-bold mb-4">Ready to become a sponsor?</h2>
+              <h2 className="text-2xl font-display font-bold mb-4">Bereit, Sponsor zu werden?</h2>
               <p className="text-muted-foreground mb-6">
-                Contact us to discuss custom sponsorship opportunities and find the perfect fit for your company.
+                Kontaktiere uns für individuelle Sponsoring-Möglichkeiten, die perfekt zu deinem Unternehmen passen.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Button size="lg" className="gap-2">
                   <Mail className="w-4 h-4" />
-                  Contact Sales
+                  Kontakt aufnehmen
                 </Button>
                 <Button size="lg" variant="outline" asChild>
-                  <Link href="/sponsors">View Sponsors</Link>
+                  <Link href="/sponsors">Sponsoren ansehen</Link>
                 </Button>
               </div>
             </div>

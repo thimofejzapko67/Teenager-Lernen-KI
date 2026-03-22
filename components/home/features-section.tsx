@@ -72,7 +72,7 @@ export function FeaturesSection() {
             className="text-center max-w-2xl mx-auto space-y-4"
           >
             <h2 className="text-3xl md:text-5xl font-display font-bold">
-              Warum <span className="text-primary">ClawAcademy</span>?
+              Warum <span className="text-primary">Codelift</span>?
             </h2>
             <p className="text-muted-foreground text-lg">
               Die KI-Lernplattform, die Spaß macht und dich fit macht für die Zukunft.

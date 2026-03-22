@@ -183,8 +183,8 @@ export function LeaderboardContent() {
       {/* Results info */}
       {!isLoading && entries.length > 0 && (
         <div className="text-center text-sm text-muted-foreground">
-          Showing {Math.min((page - 1) * 25 + 1, total)}-{Math.min(page * 25, total)} of{" "}
-          {total.toLocaleString()} developers
+          Zeige {Math.min((page - 1) * 25 + 1, total)}-{Math.min(page * 25, total)} of{" "}
+          {total.toLocaleString()} Entwickler
         </div>
       )}
     </div>

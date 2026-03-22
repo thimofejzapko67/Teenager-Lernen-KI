@@ -11,7 +11,7 @@ interface StatsOverviewProps {
 const STATS = [
   {
     key: "totalXP",
-    label: "Total XP",
+    label: "XP gesamt",
     icon: Trophy,
     color: "text-yellow-400",
     bgGradient: "from-yellow-500/20 to-amber-500/20",
@@ -19,7 +19,7 @@ const STATS = [
   },
   {
     key: "lessonsCompleted",
-    label: "Lessons Completed",
+    label: "Lektionen abgeschlossen",
     icon: BookOpen,
     color: "text-green-400",
     bgGradient: "from-green-500/20 to-emerald-500/20",
@@ -27,7 +27,7 @@ const STATS = [
   },
   {
     key: "projectsUploaded",
-    label: "Projects Uploaded",
+    label: "Projekte hochgeladen",
     icon: Upload,
     color: "text-cyan-400",
     bgGradient: "from-cyan-500/20 to-blue-500/20",
@@ -35,7 +35,7 @@ const STATS = [
   },
   {
     key: "currentLevel",
-    label: "Current Level",
+    label: "Aktuelles Level",
     icon: Target,
     color: "text-purple-400",
     bgGradient: "from-purple-500/20 to-pink-500/20",

@@ -24,11 +24,11 @@ const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://clawacademy.de";
 
 export const metadata: Metadata = {
   title: {
-    default: "ClawAcademy - Lerne KI-Entwicklung. Werde sponsored.",
-    template: "%s | ClawAcademy",
+    default: "Codelift – Code dich nach oben. Werde gesponsert.",
+    template: "%s | Codelift",
   },
   description:
-    "Die KI-Lernplattform für Teenager (13-19 Jahre). Lerne programmieren, baue KI-Apps, spiele Challenges und werde von Tech-Companies sponsored. Kostenlos.",
+    "Die KI-Lernplattform für Teenager (13–19 Jahre). Lerne programmieren, baue KI-Apps, löse Challenges und werde von Tech-Companies gesponsert. Kostenlos.",
   keywords: [
     "KI lernen",
     "AI für Teenager",
@@ -39,10 +39,11 @@ export const metadata: Metadata = {
     "Coding für Jugendliche",
     "Tech Ausbildung",
     "Sponsorship Programm",
+    "Codelift",
   ],
-  authors: [{ name: "ClawAcademy", url: baseUrl }],
-  creator: "ClawAcademy",
-  publisher: "ClawAcademy",
+  authors: [{ name: "Codelift", url: baseUrl }],
+  creator: "Codelift",
+  publisher: "Codelift",
   robots: {
     index: true,
     follow: true,
@@ -58,28 +59,28 @@ export const metadata: Metadata = {
     type: "website",
     locale: "de_DE",
     url: baseUrl,
-    title: "ClawAcademy - Lerne KI-Entwicklung. Werde sponsored.",
+    title: "Codelift - Lerne KI-Entwicklung. Werde sponsored.",
     description:
       "Die KI-Lernplattform für Teenager. Lerne programmieren, baue KI-Apps und werde sponsored.",
-    siteName: "ClawAcademy",
+    siteName: "Codelift",
     images: [
       {
         url: `${baseUrl}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: "ClawAcademy - KI-Lernen für Teenager",
+        alt: "Codelift - KI-Lernen für Teenager",
       },
       {
         url: `${baseUrl}/og-image-square.png`,
         width: 1200,
         height: 1200,
-        alt: "ClawAcademy Logo",
+        alt: "Codelift Logo",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ClawAcademy - Lerne KI-Entwicklung. Werde sponsored.",
+    title: "Codelift - Lerne KI-Entwicklung. Werde sponsored.",
     description:
       "Die KI-Lernplattform für Teenager. Lerne programmieren, baue KI-Apps und werde sponsored.",
     images: [`${baseUrl}/og-image.png`],

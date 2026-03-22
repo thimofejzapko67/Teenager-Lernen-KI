@@ -2,21 +2,28 @@ import { Suspense } from "react";
 import { LeaderboardContent } from "./leaderboard-content";
 
 export const metadata = {
-  title: "Leaderboard - ClawAcademy",
-  description: "See the top developers on ClawAcademy. Compete, climb ranks, become a Legend.",
+  title: "Rangliste – Codelift",
+  description: "Die besten Entwickler auf Codelift. Kämpfe um den ersten Platz, steige auf und werde zur Legende.",
 };
 
 export default function LeaderboardPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-background via-background to-muted/20">
-      <div className="container mx-auto px-4 py-8 max-w-6xl">
+    <main className="min-h-screen relative">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-background to-background pointer-events-none" />
+      <div className="absolute inset-0 bg-grid-pattern opacity-[0.04] pointer-events-none" />
+
+      <div className="container mx-auto px-4 py-12 max-w-5xl relative z-10">
         {/* Header */}
-        <div className="mb-8 text-center space-y-2">
-          <h1 className="text-4xl md:text-5xl font-display font-bold neon-text">
-            Leaderboard
+        <div className="mb-10 text-center space-y-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-xs font-medium text-amber-400 uppercase tracking-wider mb-2">
+            🏆 Wöchentlich aktualisiert
+          </div>
+          <h1 className="text-4xl md:text-6xl font-display font-bold neon-text">
+            Rangliste
           </h1>
-          <p className="text-muted-foreground">
-            Compete with the best. Climb the ranks. Become a Legend.
+          <p className="text-muted-foreground text-lg max-w-md mx-auto">
+            Kämpfe um den ersten Platz. Steige auf. Werde zur Legende.
           </p>
         </div>
 

@@ -7,8 +7,8 @@ import { ChevronDown } from "lucide-react"
 
 const faqs = [
   {
-    question: "Ist ClawAcademy wirklich kostenlos?",
-    answer: "Ja! ClawAcademy ist 100% kostenlos für alle Teenager zwischen 13–19 Jahren. Es gibt keine versteckten Kosten, keine Abo-Gebühren und keine Kreditkarte ist erforderlich. Unser Ziel ist es, jedem Zugang zu KI-Bildung zu geben.",
+    question: "Ist Codelift wirklich kostenlos?",
+    answer: "Ja! Codelift ist 100% kostenlos für alle Teenager zwischen 13–19 Jahren. Es gibt keine versteckten Kosten, keine Abo-Gebühren und keine Kreditkarte ist erforderlich. Unser Ziel ist es, jedem Zugang zu KI-Bildung zu geben.",
   },
   {
     question: "Was brauche ich, um loszulegen?",
@@ -16,19 +16,19 @@ const faqs = [
   },
   {
     question: "Wie funktioniert das Sponsor-Programm?",
-    answer: "Top-Entwickler auf ClawAcademy werden von unseren Partner-Companies gesponsert. Das bedeutet: kostenlose Kurse, Hardware-Support und Mentorship von Profis. Qualifiziert sind alle, die bestimmte XP-Meilensteine erreichen und Projekte in ihrem Portfolio haben.",
+    answer: "Top-Entwickler auf Codelift werden von unseren Partner-Companies gesponsert. Das bedeutet: kostenlose Kurse, Hardware-Support und Mentorship von Profis. Qualifiziert sind alle, die bestimmte XP-Meilensteine erreichen und Projekte in ihrem Portfolio haben.",
   },
   {
-    question: "Kann ich ClawAcademy auch nutzen, wenn ich noch nie programmiert habe?",
+    question: "Kann ich Codelift auch nutzen, wenn ich noch nie programmiert habe?",
     answer: "Absolut! Unsere Anfänger-Kurse setzen keine Vorkenntnisse voraus. Du startest mit den Basics und arbeitest dich Schritt für Schritt nach oben. Unsere Community hilft dir bei Fragen.",
   },
   {
-    question: "Welche Sprachen lernt man bei ClawAcademy?",
+    question: "Welche Sprachen lernt man bei Codelift?",
     answer: "Wir fokussieren auf die wichtigsten Sprachen für KI-Entwicklung: Python für Machine Learning und Data Science, JavaScript für Web-Apps, und SQL für Datenbanken. Dazu kommen KI-Tools wie ChatGPT, Claude und GitHub Copilot.",
   },
   {
     question: "Gibt es Altersbeschränkungen?",
-    answer: "ClawAcademy ist für Teenager zwischen 13–19 Jahren gemacht. Nutzer unter 16 benötigen die Zustimmung ihrer Eltern. Diese wird bei der Registrierung abgefragt. Nach 19 Jahren kannst du als Mentor bleiben!",
+    answer: "Codelift ist für Teenager zwischen 13–19 Jahren gemacht. Nutzer unter 16 benötigen die Zustimmung ihrer Eltern. Diese wird bei der Registrierung abgefragt. Nach 19 Jahren kannst du als Mentor bleiben!",
   },
   {
     question: "Wie viel Zeit sollte ich investieren?",
@@ -36,7 +36,7 @@ const faqs = [
   },
   {
     question: "Kann ich Projekte in mein Portfolio aufnehmen?",
-    answer: "Ja! Alle Projekte, die du auf ClawAcademy baust, gehören dir. Du kannst den Code herunterladen, auf GitHub zeigen und in Bewerbungen vorstellen. Viele unserer Alumni haben mit ClawAcademy-Projekten Jobs bekommen.",
+    answer: "Ja! Alle Projekte, die du auf Codelift baust, gehören dir. Du kannst den Code herunterladen, auf GitHub zeigen und in Bewerbungen vorstellen. Viele unserer Alumni haben mit Codelift-Projekten Jobs bekommen.",
   },
 ]
 

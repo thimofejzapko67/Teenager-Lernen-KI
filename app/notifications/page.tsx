@@ -23,33 +23,31 @@ export default async function NotificationsPage() {
   return (
     <div className="min-h-screen bg-background">
         <div className="container mx-auto px-4 py-8 max-w-3xl">
-          {/* Header */}
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h1 className="text-2xl font-bold mb-1">Notifications</h1>
+              <h1 className="text-2xl font-display font-bold mb-1">Benachrichtigungen</h1>
               <p className="text-sm text-muted-foreground">
-                Stay updated with your activity
+                Bleib über deine Aktivitäten auf dem Laufenden.
               </p>
             </div>
             {notifications.length > 0 && (
               <form action={handleMarkAllRead}>
                 <Button type="submit" variant="outline" size="sm">
                   <Check className="w-4 h-4 mr-2" />
-                  Mark all read
+                  Alle gelesen
                 </Button>
               </form>
             )}
           </div>
 
-          {/* Notifications */}
           {notifications.length === 0 ? (
             <div className="text-center py-16">
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted flex items-center justify-center">
                 <Bell className="w-8 h-8 text-muted-foreground" />
               </div>
-              <h3 className="text-lg font-semibold mb-2">No notifications</h3>
+              <h3 className="text-lg font-semibold mb-2">Keine Benachrichtigungen</h3>
               <p className="text-muted-foreground">
-                You're all caught up! We'll let you know when something happens.
+                Alles erledigt! Wir informieren dich, wenn etwas passiert.
               </p>
             </div>
           ) : (

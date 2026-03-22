@@ -78,19 +78,25 @@ export default async function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="border-b border-border/50 bg-card/50 backdrop-blur-sm">
-        <div className="mx-auto max-w-7xl px-4 py-6 md:px-8">
+      <div className="relative border-b border-border/50 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/8 via-transparent to-secondary/5" />
+        <div className="absolute inset-0 bg-grid-pattern opacity-[0.04]" />
+        <div className="mx-auto max-w-7xl px-4 py-7 md:px-8 relative z-10">
           <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-display font-bold">
-                Welcome back, <span className="text-primary">{profile.username}</span>
+            <div className="space-y-1">
+              <p className="text-sm text-muted-foreground">Willkommen zurück,</p>
+              <h1 className="text-2xl md:text-3xl font-display font-bold">
+                <span className="text-primary">{profile.username}</span> 👋
               </h1>
-              <p className="mt-1 text-muted-foreground">
-                Ready to level up your AI skills today?
+              <p className="text-sm text-muted-foreground">
+                Bereit, heute aufzusteigen?
               </p>
             </div>
-            <div className="hidden sm:block">
-              <span className="text-4xl">🎮</span>
+            <div className="hidden sm:flex flex-col items-end gap-1">
+              <div className="flex items-center gap-2 bg-primary/10 border border-primary/20 px-3 py-1.5 rounded-full">
+                <span className="text-xs text-primary font-medium">Level {profile.level}</span>
+              </div>
+              <span className="text-xs text-muted-foreground">{profile.xp.toLocaleString("de-DE")} XP gesamt</span>
             </div>
           </div>
         </div>

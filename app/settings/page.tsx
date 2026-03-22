@@ -21,13 +21,17 @@ export default async function SettingsPage() {
   return (
     <ProtectedRoute>
       <div className="min-h-screen bg-background">
-        <div className="container mx-auto px-4 py-8 max-w-4xl">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-2">Settings</h1>
+        <div className="relative border-b border-border/50 overflow-hidden mb-8">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/8 via-transparent to-secondary/5" />
+          <div className="absolute inset-0 bg-grid-pattern opacity-[0.04]" />
+          <div className="container mx-auto px-4 py-10 max-w-4xl relative z-10">
+            <h1 className="text-3xl font-display font-bold mb-1">Einstellungen</h1>
             <p className="text-muted-foreground">
-              Manage your account settings and preferences
+              Verwalte dein Konto und deine Präferenzen.
             </p>
           </div>
+        </div>
+        <div className="container mx-auto px-4 max-w-4xl pb-12">
 
           <SettingsTabs
             initialData={{

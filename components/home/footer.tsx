@@ -56,7 +56,7 @@ export function Footer() {
                   <span className="text-white font-bold text-sm font-display">C</span>
                 </div>
                 <h3 className="text-xl font-display font-bold bg-gradient-to-r from-primary via-violet-400 to-secondary bg-clip-text text-transparent">
-                  ClawAcademy
+                  Codelift
                 </h3>
               </Link>
               <p className="text-muted-foreground max-w-xs">
@@ -139,7 +139,7 @@ export function Footer() {
         <div className="border-t border-border py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
             <p className="flex items-center gap-1">
-              © {currentYear} ClawAcademy. Made with{" "}
+              © {currentYear} Codelift. Made with{" "}
               <Heart className="w-4 h-4 text-red-500 fill-red-500" /> for teens.
             </p>
             <p className="flex items-center gap-2">

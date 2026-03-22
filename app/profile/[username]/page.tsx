@@ -23,16 +23,16 @@ export async function generateMetadata({ params }: ProfilePageProps): Promise<Me
 
   if (!data.profile) {
     return {
-      title: 'Profile Not Found - ClawAcademy',
+      title: 'Profil nicht gefunden – Codelift',
     };
   }
 
   return {
-    title: `${data.profile.username} - ClawAcademy Profile`,
-    description: `View ${data.profile.username}'s profile on ClawAcademy. Rank: ${data.profile.rank}, Level: ${data.profile.level}, XP: ${data.profile.xp}`,
+    title: `${data.profile.username} – Codelift Profil`,
+    description: `${data.profile.username}'s Profil auf Codelift. Rang: ${data.profile.rank}, Level: ${data.profile.level}, XP: ${data.profile.xp}`,
     openGraph: {
-      title: `${data.profile.username} - ClawAcademy`,
-      description: `Rank: ${data.profile.rank} | Level: ${data.profile.level} | ${data.profile.xp} XP`,
+      title: `${data.profile.username} – Codelift`,
+      description: `Rang: ${data.profile.rank} | Level: ${data.profile.level} | ${data.profile.xp} XP`,
       images: data.profile.avatar_url ? [data.profile.avatar_url] : [],
     },
   };
@@ -90,8 +90,12 @@ async function ProfileContent({ username }: { username: string }) {
   }
 
   const content = (
+    <div className="min-h-screen bg-background">
+      <div className="relative border-b border-border/50 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/8 via-transparent to-secondary/5" />
+        <div className="absolute inset-0 bg-grid-pattern opacity-[0.04]" />
+      </div>
     <div className="container mx-auto px-4 py-8 max-w-6xl space-y-6">
-      {/* Profile Header */}
       <ProfileHeader
         profile={data.profile}
         isOwnProfile={data.isOwnProfile}
@@ -102,11 +106,9 @@ async function ProfileContent({ username }: { username: string }) {
         }}
       />
 
-      {/* Stats Section */}
       <StatsSection stats={data.stats} />
-
-      {/* Achievements Section */}
       <AchievementsSection achievements={data.achievements} />
+    </div>
     </div>
   );
 

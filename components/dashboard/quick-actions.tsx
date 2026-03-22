@@ -4,24 +4,24 @@ import { BookOpen, Upload, Trophy, Zap } from "lucide-react";
 
 const QUICK_ACTIONS = [
   {
-    label: "Start Lesson",
+    label: "Lektion starten",
     icon: BookOpen,
     href: "/learn",
-    description: "Continue your learning journey",
+    description: "Lerne weiter und steige auf",
     gradient: "from-primary to-purple-700",
   },
   {
-    label: "Upload Project",
+    label: "Projekt hochladen",
     icon: Upload,
     href: "/projects/upload",
-    description: "Share your work with the community",
+    description: "Teile deine Arbeit mit der Community",
     gradient: "from-cyan-500 to-blue-600",
   },
   {
-    label: "Leaderboard",
+    label: "Rangliste",
     icon: Trophy,
     href: "/leaderboard",
-    description: "See top performers",
+    description: "Sieh die besten Entwickler",
     gradient: "from-amber-500 to-orange-600",
   },
 ] as const;
@@ -32,7 +32,7 @@ export function QuickActions() {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Zap className="h-5 w-5 text-yellow-400" />
-          Quick Actions
+          Schnellzugriff
         </CardTitle>
       </CardHeader>
       <CardContent className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

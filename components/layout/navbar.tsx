@@ -54,7 +54,7 @@ export function Navbar() {
               <span className="text-white font-bold text-sm">C</span>
             </div>
             <span className="bg-gradient-to-r from-primary via-violet-400 to-secondary bg-clip-text text-transparent">
-              ClawAcademy
+              Codelift
             </span>
           </Link>
 

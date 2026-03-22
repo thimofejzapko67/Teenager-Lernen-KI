@@ -28,14 +28,14 @@ export function StreakDisplay({ currentStreak }: StreakDisplayProps) {
             <span className="text-3xl font-display font-bold text-orange-400">
               {currentStreak}
             </span>
-            <span className="text-lg text-muted-foreground">day streak</span>
+            <span className="text-lg text-muted-foreground">Tage-Streak</span>
           </div>
           <p className="text-sm text-muted-foreground">
             {currentStreak === 0
-              ? "Start learning today to build your streak!"
+              ? "Starte heute und baue deinen Streak auf!"
               : currentStreak === 1
-                ? "Day 1 - Keep it going!"
-                : `Day ${currentStreak} - You're on fire!`}
+                ? "Tag 1 – Weiter so!"
+                : `Day ${currentStreak} - Du bist im Flow!`}
           </p>
         </div>
 
@@ -45,7 +45,7 @@ export function StreakDisplay({ currentStreak }: StreakDisplayProps) {
               <span className="text-sm font-semibold text-green-400">+{bonusXP} XP</span>
             </div>
             <span className="text-xs text-muted-foreground">
-              {currentStreak >= 7 ? "7-day bonus" : "3-day bonus"}
+              {currentStreak >= 7 ? "7-Tage-Bonus" : "3-Tage-Bonus"}
             </span>
           </div>
         )}

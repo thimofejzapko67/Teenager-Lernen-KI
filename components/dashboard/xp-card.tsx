@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
+import { Fortschritt } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import type { Rank } from "@/types/database";
 
@@ -90,7 +90,7 @@ export function XPCard({ rank, level, currentXP, xpToNextLevel }: XPCardProps) {
       <CardContent className="space-y-4">
         <div className="space-y-3">
           <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">Progress</span>
+            <span className="text-muted-foreground">Fortschritt</span>
             <span className="font-semibold">
               {currentXP.toLocaleString()} / {xpToNextLevel.toLocaleString()} XP
             </span>
@@ -105,7 +105,7 @@ export function XPCard({ rank, level, currentXP, xpToNextLevel }: XPCardProps) {
           </div>
           {xpRemaining > 0 && (
             <p className="text-right text-xs text-muted-foreground">
-              +{xpRemaining.toLocaleString()} XP to next level ⚡
+              +{xpRemaining.toLocaleString()} XP bis Level-Up ⚡
             </p>
           )}
         </div>

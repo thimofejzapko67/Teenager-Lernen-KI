@@ -10,7 +10,7 @@ import type { LessonFilters as LessonFiltersType, LessonSort } from "@/types/les
 export const revalidate = 300; // ISR every 5 minutes
 
 export const metadata: Metadata = {
-  title: "Lektionen - ClawAcademy",
+  title: "Lektionen - Codelift",
   description:
     "Entdecke KI-Kurse, Web-Entwicklung, App-Bau und mehr. Verdiene XP und level auf!",
 };
@@ -110,7 +110,7 @@ export default function LessonsPage({ searchParams }: LessonsPageProps) {
               <Sparkles className="h-6 w-6 text-primary" />
             </div>
             <span className="text-sm font-medium text-primary uppercase tracking-wider">
-              ClawAcademy
+              Codelift
             </span>
           </div>
           <h1 className="text-4xl md:text-5xl font-display font-bold mb-4 neon-text">
