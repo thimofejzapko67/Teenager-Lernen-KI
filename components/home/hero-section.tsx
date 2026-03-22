@@ -117,7 +117,9 @@ export function HeroSection() {
                 title="Gamified"
                 description="Sammle XP und level auf"
                 className="md:row-span-2"
-              />
+              >
+                <></>
+              </BentoGridItem>
               <BentoGridItem
                 title="Werde Gesponsort"
                 description="Tech-Companies sponsor die besten"
