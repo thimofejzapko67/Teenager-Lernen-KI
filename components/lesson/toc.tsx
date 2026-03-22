@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button"
 
 interface TOCItem {
   id: string
-  title: string
+  text: string
+  level: number
   active?: boolean
 }
 
@@ -27,9 +28,10 @@ export function TOC({ items, onItemClick }: TOCProps) {
               key={item.id}
               variant={item.active ? "primary" : "ghost"}
               className="w-full justify-start"
+              style={{ paddingLeft: `${item.level * 0.5}rem` }}
               onClick={() => onItemClick?.(item.id)}
             >
-              {item.title}
+              {item.text}
             </Button>
           ))}
         </nav>
@@ -38,7 +40,7 @@ export function TOC({ items, onItemClick }: TOCProps) {
   )
 }
 
-export function DesktopTOC({ items, onItemClick }: TOCProps) {
+export function DesktopTOC({ items, onItemClick, activeId }: TOCProps & { activeId?: string }) {
   return (
     <Card>
       <CardHeader>
@@ -50,13 +52,14 @@ export function DesktopTOC({ items, onItemClick }: TOCProps) {
             <button
               key={item.id}
               className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
-                item.active
+                item.active || item.id === activeId
                   ? "bg-primary text-primary-foreground font-semibold"
                   : "hover:bg-muted"
               }`}
+              style={{ paddingLeft: `${(item.level + 1) * 0.75}rem` }}
               onClick={() => onItemClick?.(item.id)}
             >
-              {item.title}
+              {item.text}
             </button>
           ))}
         </nav>
