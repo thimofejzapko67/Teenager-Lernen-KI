@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Fortschritt } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import type { Rank } from "@/types/database";
 
