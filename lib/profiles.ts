@@ -2,57 +2,80 @@
 
 import { createClient } from '@/lib/supabase/server';
 import { revalidatePath } from 'next/cache';
+import { unstable_cache } from 'next/cache';
 import { Profile, UserStats, AchievementWithUnlocked, UpdateProfileInput, Rank } from '@/types/database';
 
 /**
- * Get profile by username
+ * Get profile by username (cached)
  */
 export async function getProfile(username: string): Promise<Profile | null> {
-  try {
-    const supabase = await createClient();
+  return getCachedProfile(username);
+}
 
-    const { data, error } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('username', username)
-      .single();
+const getCachedProfile = unstable_cache(
+  async (username: string) => {
+    try {
+      const supabase = await createClient();
 
-    if (error) {
-      console.error('Error fetching profile:', error);
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('username', username)
+        .single();
+
+      if (error) {
+        console.error('Error fetching profile:', error);
+        return null;
+      }
+
+      return data;
+    } catch (error) {
+      console.error('Error in getProfile:', error);
       return null;
     }
-
-    return data;
-  } catch (error) {
-    console.error('Error in getProfile:', error);
-    return null;
+  },
+  ['profile'],
+  {
+    revalidate: 300,
+    tags: ['profiles']
   }
-}
+);
 
 /**
- * Get profile by user ID
+ * Get profile by user ID (cached)
  */
 export async function getUserProfile(userId: string): Promise<Profile | null> {
-  try {
-    const supabase = await createClient();
+  return getCachedUserProfile(userId);
+}
 
-    const { data, error } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('id', userId)
-      .single();
+const getCachedUserProfile = unstable_cache(
+  async (userId: string) => {
+    try {
+      const supabase = await createClient();
 
-    if (error) {
-      console.error('Error fetching user profile:', error);
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', userId)
+        .single();
+
+      if (error) {
+        console.error('Error fetching user profile:', error);
+        return null;
+      }
+
+      return data;
+    } catch (error) {
+      console.error('Error in getUserProfile:', error);
       return null;
     }
-
-    return data;
-  } catch (error) {
-    console.error('Error in getUserProfile:', error);
-    return null;
+  },
+  ['user-profile'],
+  {
+    revalidate: 300,
+    tags: ['user-profiles']
   }
-}
+);
 
 /**
  * Update profile
