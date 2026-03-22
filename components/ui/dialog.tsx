@@ -23,6 +23,10 @@ function Dialog({ open, onOpenChange, children, ...props }: React.ComponentProps
   )
 }
 
+function DialogTrigger({ asChild, ...props }: React.ComponentProps<"button"> & { asChild?: boolean }) {
+  return <button {...props} />
+}
+
 function DialogContent({ className, ...props }: React.ComponentProps<"div">) {
   const context = React.useContext(DialogContext)
   if (!context || !context.open) return null
@@ -50,4 +54,4 @@ function DialogFooter({ className, ...props }: React.HTMLAttributes<HTMLDivEleme
   return <div className={cn("flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 mt-4", className)} {...props} />
 }
 
-export { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter }
+export { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter }

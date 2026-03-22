@@ -6,4 +6,20 @@ const Select = React.forwardRef<HTMLSelectElement, React.SelectHTMLAttributes<HT
 ))
 Select.displayName = "Select"
 
-export { Select }
+function SelectTrigger({ asChild, ...props }: React.ComponentProps<"button">) {
+  return <button {...props} />
+}
+
+function SelectValue({ ...props }: React.ComponentProps<"span">) {
+  return <span {...props} />
+}
+
+function SelectContent({ children }: { children: React.ReactNode }) {
+  return <div className="relative w-full">{children}</div>
+}
+
+function SelectItem({ children, ...props }: React.ComponentProps<"div">) {
+  return <div {...props}>{children}</div>
+}
+
+export { Select, SelectTrigger, SelectValue, SelectContent, SelectItem }
