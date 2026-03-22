@@ -91,7 +91,9 @@ export function FeaturesSection() {
                     colSpan={feature.colSpan}
                     rowSpan={feature.rowSpan}
                     className="hover:bg-muted/30 transition-colors"
-                  />
+                  >
+                    <></>
+                  </BentoGridItem>
                 </motion.div>
               )
             })}
