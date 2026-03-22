@@ -24,7 +24,7 @@ function PlatformCard({
   return (
     <Link
       href={`/learn/${platformKey}`}
-      className="group relative overflow-hidden rounded-3xl bg-card border border-border/60 hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-2"
+      className="group relative overflow-hidden rounded-sm bg-card border border-border/60 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1"
     >
       <div className={`absolute inset-0 bg-gradient-to-br ${platform.color} opacity-0 group-hover:opacity-15 transition-opacity duration-500`} />
 
