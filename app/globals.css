@@ -1,31 +1,52 @@
 @import "tailwindcss";
 
 /* ========================================
-   LIGHT MODE (Default)
-   - Natural, human-friendly colors
-   - No purple/pink gradients
+   MODERN CLEAN DESIGN
+   - Calm, professional colors
+   - Easy on the eyes
    ======================================== */
 @theme {
-  --color-primary: #2563EB; /* Natural blue */
+  /* Natural blue as primary */
+  --color-primary: #2563EB;
   --color-primary-foreground: #FFFFFF;
-  --color-secondary: #059669; /* Natural green */
+
+  /* Natural green as secondary */
+  --color-secondary: #059669;
   --color-secondary-foreground: #FFFFFF;
-  --color-accent: #0891B2; /* Natural cyan */
+
+  /* Cyan accent */
+  --color-accent: #0891B2;
   --color-accent-foreground: #FFFFFF;
-  --color-muted: #F8FAFC;
+
+  /* Neutral muted colors */
+  --color-muted: #F1F5F9;
   --color-muted-foreground: #64748B;
+
+  /* Standard destructive color */
   --color-destructive: #DC2626;
   --color-destructive-foreground: #FFFFFF;
+
+  /* Subtle borders */
   --color-border: #E2E8F0;
   --color-input: #E2E8F0;
   --color-ring: #2563EB;
+
+  /* Light mode backgrounds */
   --color-background: #FFFFFF;
   --color-foreground: #1E293B;
+
+  /* Cards */
   --color-card: #FFFFFF;
   --color-card-foreground: #1E293B;
+
+  /* Popovers */
   --color-popover: #FFFFFF;
   --color-popover-foreground: #1E293B;
+
+  /* Rounded corners */
   --radius: 0.5rem;
+
+  /* Fonts */
   --font-display: var(--font-display);
   --font-body: var(--font-body);
   --font-mono: var(--font-mono);
@@ -33,15 +54,15 @@
 
 /* ========================================
    DARK MODE
-   - Easy on the eyes, natural colors
-   - No purple/pink gradients
+   - Easy on the eyes
+   - Same color palette, adjusted for dark
    ======================================== */
 .dark {
-  --color-primary: #3B82F6; /* Softer blue for dark mode */
+  --color-primary: #3B82F6;
   --color-primary-foreground: #FFFFFF;
-  --color-secondary: #10B981; /* Natural green */
+  --color-secondary: #10B981;
   --color-secondary-foreground: #FFFFFF;
-  --color-accent: #06B6D4; /* Natural cyan */
+  --color-accent: #06B6D4;
   --color-accent-foreground: #FFFFFF;
   --color-muted: #1E293B;
   --color-muted-foreground: #94A3B8;
@@ -59,7 +80,7 @@
 }
 
 /* ========================================
-   Global Animations
+   Animations
    ======================================== */
 @keyframes glow {
   0%, 100% { opacity: 1; }
@@ -84,27 +105,6 @@
 @keyframes shimmer {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
-}
-
-/* Magic UI Animations */
-@keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(calc(-100% - var(--gap))); }
-}
-
-@keyframes marquee-vertical {
-  from { transform: translateY(0); }
-  to { transform: translateY(calc(-100% - var(--gap))); }
-}
-
-@keyframes meteor-effect {
-  from { transform: rotate(215deg) translateX(0); opacity: 1; }
-  to { transform: rotate(215deg) translateX(-500px); opacity: 0; }
 }
 
 /* ========================================
@@ -163,19 +163,6 @@
     letter-spacing: 0.05em;
     text-transform: uppercase;
     opacity: 0.1;
-  }
-
-  /* Style-specific overrides */
-  [data-style="experimental"] .glass-card {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  [data-style="youthful"] .glass-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.15);
   }
 }
 

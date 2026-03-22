@@ -12,7 +12,6 @@ const mainTopics = [
     title: "Free Tools",
     description: "KI-Tools für effizienteres Entwickeln",
     icon: "🛠️",
-    gradient: "from-primary to-accent",
     route: "/learn/free-tools",
     subtopics: [
       { title: "Cursor", description: "KI-gesteuerter Code Editor", xp: 50 },
@@ -26,7 +25,6 @@ const mainTopics = [
     title: "Web Development",
     description: "Websites & Web Apps bauen",
     icon: "💻",
-    gradient: "from-primary to-secondary",
     subtopics: [
       { title: "Frontend", description: "HTML, CSS, React, Next.js", xp: 150 },
       { title: "Backend", description: "Node.js, APIs, Databases", xp: 150 },
@@ -39,7 +37,6 @@ const mainTopics = [
     title: "App Development",
     description: "Mobile Apps entwickeln",
     icon: "📱",
-    gradient: "from-secondary to-accent",
     subtopics: [
       { title: "iOS", description: "Swift, SwiftUI", xp: 150 },
       { title: "Android", description: "Kotlin, Jetpack Compose", xp: 150 },
@@ -52,7 +49,6 @@ const mainTopics = [
     title: "Security",
     description: "Sichere Anwendungen bauen",
     icon: "🔒",
-    gradient: "from-orange-600 to-red-600",
     subtopics: [
       { title: "Authentication", description: "OAuth, JWT, Sessions", xp: 100 },
       { title: "Data Protection", description: "Verschlüsselung, Privacy", xp: 100 },
@@ -109,8 +105,6 @@ export function LearningPath() {
                 onClick={() => handleCardClick(topic.id)}
                 className="group relative h-48 rounded-2xl border-2 border-border/60 bg-card/40 backdrop-blur-sm hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1 overflow-hidden"
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${topic.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
-
                 <div className="relative p-6 flex flex-col items-center justify-center h-full text-center">
                   <span className="text-5xl mb-3">{topic.icon}</span>
                   <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
@@ -142,7 +136,7 @@ export function LearningPath() {
             </button>
 
             <div className="mb-8">
-              <div className={`inline-flex p-4 rounded-2xl bg-gradient-to-br ${selectedTopic?.gradient} mb-4`}>
+              <div className="inline-flex p-4 rounded-2xl bg-primary/10 mb-4">
                 <span className="text-6xl">{selectedTopic?.icon}</span>
               </div>
               <h2 className="text-4xl font-bold mb-2">{selectedTopic?.title}</h2>
@@ -160,8 +154,6 @@ export function LearningPath() {
                   onMouseLeave={() => setHoveredSubtopic(null)}
                   className="group relative p-6 rounded-xl border border-border/60 bg-card/40 backdrop-blur-sm hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-0.5 cursor-pointer overflow-hidden"
                 >
-                  <div className={`absolute inset-0 bg-gradient-to-r ${selectedTopic.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
-
                   <div className="relative flex items-center justify-between">
                     <div className="flex-1">
                       <h4 className="text-lg font-semibold mb-1 group-hover:text-primary transition-colors">

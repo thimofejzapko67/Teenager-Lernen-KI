@@ -6,7 +6,6 @@ import {
   DIFFICULTY_COLORS,
 } from "@/types/lessons";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 interface LessonCardProps {
@@ -53,42 +52,47 @@ export function LessonCard({ lesson }: LessonCardProps) {
     >
       <div
         className={cn(
-          "h-full bg-card/60 border rounded-2xl p-6 transition-all duration-300 backdrop-blur-sm relative overflow-hidden",
+          "h-full bg-card border-2 rounded-2xl p-6 transition-all duration-300 relative overflow-hidden",
           "hover:shadow-xl hover:-translate-y-1",
           accent
         )}
       >
-        {/* Top accent bar on hover */}
-        <div className={cn(
-          "absolute top-0 left-6 right-6 h-px bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full",
-          gradient
-        )} />
+        {/* Completion badge */}
+        {lesson.completed && (
+          <div className="absolute top-4 right-4">
+            <span className="flex items-center gap-1 text-sm text-emerald-500 font-semibold bg-emerald-500/10 px-3 py-1 rounded-full">
+              <CheckCircle2 className="h-4 w-4" />
+              Abgeschlossen
+            </span>
+          </div>
+        )}
 
-        {/* Category + completion */}
-        <div className="flex items-start justify-between gap-2 mb-4">
+        {/* Category badge */}
+        <div className="mb-4">
           <Badge
             variant="outline"
-            className={cn("text-xs", categoryColor)}
+            className={cn("text-xs font-medium", categoryColor)}
           >
             {CATEGORY_LABELS[lesson.category] ?? lesson.category}
           </Badge>
-          {lesson.completed && (
-            <span className="flex items-center gap-1 text-xs text-emerald-400 font-medium">
-              <CheckCircle2 className="h-3.5 w-3.5" />
-              Fertig
-            </span>
-          )}
         </div>
 
         {/* Title */}
-        <h3 className="font-semibold text-lg leading-tight group-hover:text-foreground transition-colors mb-3">
+        <h3 className="font-bold text-xl leading-tight group-hover:text-primary transition-colors mb-3 pr-20">
           {lesson.title}
         </h3>
 
-        {/* Difficulty */}
+        {/* Description preview */}
+        {lesson.description && (
+          <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
+            {lesson.description}
+          </p>
+        )}
+
+        {/* Difficulty badge */}
         <Badge
           variant="outline"
-          className={cn("text-xs w-fit mb-3", difficultyColor)}
+          className={cn("text-xs w-fit mb-4", difficultyColor)}
         >
           {lesson.difficulty === "beginner"
             ? "Anfänger"
@@ -99,16 +103,16 @@ export function LessonCard({ lesson }: LessonCardProps) {
 
         {/* Quiz score */}
         {lesson.quiz_score !== null && lesson.quiz_score !== undefined && lesson.completed && (
-          <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
-            <span>Quiz:</span>
+          <div className="flex items-center gap-2 text-sm mb-4 p-3 bg-muted/50 rounded-lg">
+            <span className="text-muted-foreground">Quiz-Ergebnis:</span>
             <span
               className={cn(
-                "font-semibold",
+                "font-bold text-lg",
                 lesson.quiz_score >= 80
-                  ? "text-emerald-400"
+                  ? "text-emerald-500"
                   : lesson.quiz_score >= 50
-                  ? "text-yellow-400"
-                  : "text-red-400"
+                  ? "text-yellow-500"
+                  : "text-red-500"
               )}
             >
               {lesson.quiz_score}%
@@ -117,16 +121,16 @@ export function LessonCard({ lesson }: LessonCardProps) {
         )}
 
         {/* Footer */}
-        <div className="flex items-center justify-between text-sm text-muted-foreground pt-3 border-t border-border/50 mt-auto">
-          <div className="flex items-center gap-1.5">
+        <div className="flex items-center justify-between text-sm pt-4 border-t border-border/50">
+          <div className="flex items-center gap-2 text-muted-foreground">
             <Clock className="h-4 w-4" />
-            <span>{lesson.duration} Min</span>
+            <span className="font-medium">{lesson.duration} Min</span>
           </div>
-          <div className="flex items-center gap-1.5">
-            <div className={cn("inline-flex p-1 rounded-md bg-gradient-to-br", gradient)}>
-              <Trophy className="h-3 w-3 text-white" />
+          <div className="flex items-center gap-2">
+            <div className={cn("inline-flex p-1.5 rounded-lg bg-gradient-to-br", gradient)}>
+              <Trophy className="h-4 w-4 text-white" />
             </div>
-            <span className="font-semibold text-foreground">+{lesson.xp_reward} XP</span>
+            <span className="font-bold text-primary text-lg">+{lesson.xp_reward} XP</span>
           </div>
         </div>
       </div>

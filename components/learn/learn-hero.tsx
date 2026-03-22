@@ -5,9 +5,9 @@ import { useRef } from "react"
 import { BookOpen, Code, Layers, Trophy, Sparkles } from "lucide-react"
 
 const highlights = [
-  { icon: Code, label: "Interaktiv", desc: "Echte Challenges", gradient: "from-blue-500 to-cyan-500" },
-  { icon: Layers, label: "6 Kategorien", desc: "Von KI bis Security", gradient: "from-primary to-accent" },
-  { icon: Trophy, label: "XP verdienen", desc: "Level aufsteigen", gradient: "from-amber-500 to-orange-500" },
+  { icon: Code, label: "Interaktiv", desc: "Echte Challenges", color: "text-blue-500 bg-blue-500/10" },
+  { icon: Layers, label: "6 Kategorien", desc: "Von KI bis Security", color: "text-primary bg-primary/10" },
+  { icon: Trophy, label: "XP verdienen", desc: "Level aufsteigen", color: "text-amber-500 bg-amber-500/10" },
 ]
 
 export function LearnHero() {
@@ -17,9 +17,7 @@ export function LearnHero() {
   return (
     <section ref={ref} className="relative overflow-hidden border-b border-border/50">
       {/* Background */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-[0.07]" />
-      <div className="absolute top-1/4 -left-48 w-[500px] h-[500px] bg-primary/15 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 -right-48 w-[400px] h-[400px] bg-secondary/10 rounded-full blur-3xl" />
+      <div className="absolute inset-0 bg-grid-pattern opacity-[0.05]" />
 
       <div className="container mx-auto px-4 py-16 md:py-24 relative z-10">
         <div className="max-w-3xl">
@@ -44,7 +42,7 @@ export function LearnHero() {
           >
             <span className="block text-foreground">Lerne.</span>
             <span className="block text-foreground">Baue.</span>
-            <span className="block bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent mt-1">
+            <span className="block text-primary mt-1">
               Werde besser.
             </span>
           </motion.h1>
@@ -56,7 +54,7 @@ export function LearnHero() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed mt-6"
           >
-            Meistere KI-Tools, baue echte Apps und werde gesponsert.
+            Meistere KI-Tools, baue echte Apps und werde gesponsort.
             Jede Lektion bringt dich näher zum Sponsorship.
           </motion.p>
 
@@ -75,10 +73,10 @@ export function LearnHero() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.35 + i * 0.1 }}
-                  className="flex items-center gap-3 bg-card/60 border border-border/50 rounded-xl px-4 py-3 backdrop-blur-sm"
+                  className="flex items-center gap-3 bg-card border border-border/50 rounded-xl px-5 py-4"
                 >
-                  <div className={`inline-flex p-2 rounded-lg bg-gradient-to-br ${h.gradient} shadow-lg`}>
-                    <Icon className="w-4 h-4 text-white" />
+                  <div className={`inline-flex p-2.5 rounded-lg ${h.color}`}>
+                    <Icon className="w-5 h-5" />
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-foreground">{h.label}</p>
