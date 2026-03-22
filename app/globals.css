@@ -1,37 +1,51 @@
 @import "tailwindcss";
 
 @theme {
-  /* Custom colors for ClawAcademy cyberpunk theme */
-  --color-primary: oklch(0.62 0.26 285);
-  --color-primary-foreground: oklch(0.98 0 0);
+  /* Modern Minimal Design Colors - Electric Blue Theme */
+  --color-primary: #0066FF;
+  --color-primary-foreground: #FFFFFF;
 
-  --color-secondary: oklch(0.68 0.22 195);
-  --color-secondary-foreground: oklch(0.2 0.05 285);
+  --color-secondary: #64748B;
+  --color-secondary-foreground: #FFFFFF;
 
-  --color-accent: oklch(0.65 0.25 10);
-  --color-accent-foreground: oklch(0.98 0 0);
+  --color-accent: #0EA5E9;
+  --color-accent-foreground: #FFFFFF;
 
-  --color-muted: oklch(0.22 0.04 285);
-  --color-muted-foreground: oklch(0.60 0.03 285);
+  --color-muted: #F1F5F9;
+  --color-muted-foreground: #64748B;
 
-  --color-destructive: oklch(0.5 0.2 10);
-  --color-destructive-foreground: oklch(0.98 0 0);
+  --color-destructive: #EF4444;
+  --color-destructive-foreground: #FFFFFF;
 
-  --color-border: oklch(0.27 0.04 285);
-  --color-input: oklch(0.22 0.04 285);
-  --color-ring: oklch(0.62 0.26 285);
+  --color-border: #E5E7EB;
+  --color-input: #E5E7EB;
+  --color-ring: #0066FF;
 
-  --color-background: oklch(0.12 0.02 285);
-  --color-foreground: oklch(0.95 0.01 285);
+  --color-background: #FFFFFF;
+  --color-foreground: #1A1A1A;
 
-  --color-card: oklch(0.16 0.025 285);
-  --color-card-foreground: oklch(0.95 0.01 285);
+  --color-card: #FFFFFF;
+  --color-card-foreground: #1A1A1A;
 
-  --color-popover: oklch(0.16 0.025 285);
-  --color-popover-foreground: oklch(0.95 0.01 285);
+  --color-popover: #FFFFFF;
+  --color-popover-foreground: #1A1A1A;
 
-  /* Radius */
-  --radius: 0.625rem;
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    --color-muted: #1E293B;
+    --color-muted-foreground: #94A3B8;
+    --color-border: #2A2A2A;
+    --color-input: #2A2A2A;
+    --color-background: #0A0A0A;
+    --color-foreground: #FAFAFA;
+    --color-card: #0A0A0A;
+    --color-card-foreground: #FAFAFA;
+    --color-popover: #0A0A0A;
+    --color-popover-foreground: #FAFAFA;
+  }
+
+  /* Radius - smaller for minimal look */
+  --radius: 0.25rem;
 
   /* Fonts */
   --font-display: var(--font-display);
@@ -150,6 +164,45 @@
 @keyframes shimmer {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
+}
+
+/* Magic UI Animations */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+@keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+  }
+}
+
+@keyframes meteor-effect {
+  from {
+    transform: rotate(215deg) translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: rotate(215deg) translateX(-500px);
+    opacity: 0;
+  }
 }
 
 /* Grid pattern for backgrounds */
