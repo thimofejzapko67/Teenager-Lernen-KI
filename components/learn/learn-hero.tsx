@@ -6,7 +6,7 @@ import { BookOpen, Code, Layers, Trophy, Sparkles } from "lucide-react"
 
 const highlights = [
   { icon: Code, label: "Interaktiv", desc: "Echte Challenges", gradient: "from-blue-500 to-cyan-500" },
-  { icon: Layers, label: "6 Kategorien", desc: "Von KI bis Security", gradient: "from-purple-500 to-pink-500" },
+  { icon: Layers, label: "6 Kategorien", desc: "Von KI bis Security", gradient: "from-primary to-accent" },
   { icon: Trophy, label: "XP verdienen", desc: "Level aufsteigen", gradient: "from-amber-500 to-orange-500" },
 ]
 
@@ -44,7 +44,7 @@ export function LearnHero() {
           >
             <span className="block text-foreground">Lerne.</span>
             <span className="block text-foreground">Baue.</span>
-            <span className="block bg-gradient-to-r from-primary via-violet-400 to-secondary bg-clip-text text-transparent mt-1">
+            <span className="block bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent mt-1">
               Werde besser.
             </span>
           </motion.h1>

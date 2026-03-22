@@ -66,7 +66,7 @@ function LessonNode({
                 isCompleted
                   ? "bg-gradient-to-br from-green-500 to-emerald-600 text-white shadow-lg shadow-green-500/30"
                   : isUnlocked
-                  ? "bg-gradient-to-br from-primary to-violet-600 text-white shadow-lg shadow-primary/30 hover:scale-110 cursor-pointer"
+                  ? "bg-gradient-to-br from-primary to-secondary text-white shadow-lg shadow-primary/30 hover:scale-110 cursor-pointer"
                   : "bg-surface border-2 border-border text-muted-foreground cursor-not-allowed opacity-60"
               }`}
             >
@@ -105,7 +105,7 @@ function LessonNode({
                 isCompleted
                   ? "bg-gradient-to-br from-green-500 to-emerald-600 text-white shadow-lg shadow-green-500/30"
                   : isUnlocked
-                  ? "bg-gradient-to-br from-primary to-violet-600 text-white shadow-lg shadow-primary/30 hover:scale-110 cursor-pointer"
+                  ? "bg-gradient-to-br from-primary to-secondary text-white shadow-lg shadow-primary/30 hover:scale-110 cursor-pointer"
                   : "bg-surface border-2 border-border text-muted-foreground cursor-not-allowed opacity-60"
               }`}
             >

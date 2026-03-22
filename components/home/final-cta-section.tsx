@@ -20,7 +20,7 @@ export function FinalCtaSection() {
   return (
     <section ref={ref} className="py-24 md:py-32 relative overflow-hidden">
       {/* Multi-layer background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-violet-500/8 to-secondary/15" />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-primary/8 to-secondary/15" />
       <div className="absolute inset-0 bg-grid-pattern opacity-[0.06]" />
 
       {/* Animated orbs */}
@@ -49,7 +49,7 @@ export function FinalCtaSection() {
           >
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight">
               Bereit,{" "}
-              <span className="bg-gradient-to-r from-primary via-violet-400 to-secondary bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent">
                 durchzustarten
               </span>
               ?

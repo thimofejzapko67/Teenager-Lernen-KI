@@ -17,9 +17,9 @@ const CATEGORY_CONFIG: Record<
   "ki-basics": {
     label: "AI Basics",
     emoji: "🤖",
-    bgClass: "bg-purple-500/20",
-    textClass: "text-purple-400",
-    borderClass: "border-purple-500/30",
+    bgClass: "bg-primary/20",
+    textClass: "text-primary",
+    borderClass: "border-primary/30",
   },
   "web-dev": {
     label: "Web Dev",
@@ -38,9 +38,9 @@ const CATEGORY_CONFIG: Record<
   "ai-agents": {
     label: "AI Agents",
     emoji: "🧠",
-    bgClass: "bg-pink-500/20",
-    textClass: "text-pink-400",
-    borderClass: "border-pink-500/30",
+    bgClass: "bg-accent/20",
+    textClass: "text-accent",
+    borderClass: "border-accent/30",
   },
   "agi-safety": {
     label: "AI Safety",
@@ -68,7 +68,7 @@ export function ContinueLearning({ lesson, progress }: ContinueLearningProps) {
           <p className="text-muted-foreground mb-4 max-w-xs">
             Begin your journey into AI development with our first lesson.
           </p>
-          <Button className="bg-gradient-to-r from-primary to-purple-700 hover:from-primary/90 hover:to-purple-700/90 shadow-lg shadow-primary/20">
+          <Button className="bg-gradient-to-r from-primary to-primary-700 hover:from-primary/90 hover:to-primary-700/90 shadow-lg shadow-primary/20">
             Browse Lessons
           </Button>
         </CardContent>
@@ -111,7 +111,7 @@ export function ContinueLearning({ lesson, progress }: ContinueLearningProps) {
           </div>
         </div>
 
-        <Button className="w-full bg-gradient-to-r from-primary to-purple-700 hover:from-primary/90 hover:to-purple-700/90 shadow-lg shadow-primary/20 group">
+        <Button className="w-full bg-gradient-to-r from-primary to-primary-700 hover:from-primary/90 hover:to-primary-700/90 shadow-lg shadow-primary/20 group">
           <Play className="mr-2 h-4 w-4 transition-transform group-hover:scale-110" />
           Continue Learning
         </Button>

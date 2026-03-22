@@ -6,15 +6,15 @@ import { Crown, Flame, Shield, Zap, Trophy, Target, TrendingUp, Users } from "lu
 
 const stats = [
   { icon: Crown, text: "Top 3 werden gesponsert", gradient: "from-amber-500 to-orange-500", bg: "bg-amber-500/10" },
-  { icon: Flame, text: "Echtzeit-Updates", gradient: "from-red-500 to-pink-500", bg: "bg-red-500/10" },
+  { icon: Flame, text: "Echtzeit-Updates", gradient: "from-red-500 to-accent", bg: "bg-red-500/10" },
   { icon: Shield, text: "Faires Cooldown-System", gradient: "from-indigo-500 to-blue-500", bg: "bg-indigo-500/10" },
-  { icon: Trophy, text: "Wöchentliche Awards", gradient: "from-violet-500 to-purple-500", bg: "bg-violet-500/10" },
+  { icon: Trophy, text: "Wöchentliche Awards", gradient: "from-primary to-primary", bg: "bg-primary/10" },
 ]
 
 const quickStats = [
   { icon: Users, value: "2.4K+", label: "Aktive Entwickler", color: "text-blue-400" },
   { icon: Target, value: "156K", label: "XP vergeben", color: "text-emerald-400" },
-  { icon: TrendingUp, value: "89%", label: "Weekly Active", color: "text-violet-400" },
+  { icon: TrendingUp, value: "89%", label: "Weekly Active", color: "text-primary" },
 ]
 
 export function LeaderboardHero() {
@@ -26,7 +26,7 @@ export function LeaderboardHero() {
       <div className="absolute inset-0 bg-grid-pattern opacity-[0.07]" />
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-primary/10 rounded-full blur-3xl" />
       <div className="absolute bottom-0 -right-32 w-[400px] h-[400px] bg-amber-500/8 rounded-full blur-3xl" />
-      <div className="absolute top-20 left-10 w-[300px] h-[300px] bg-violet-500/8 rounded-full blur-3xl" />
+      <div className="absolute top-20 left-10 w-[300px] h-[300px] bg-primary/8 rounded-full blur-3xl" />
       
       <div className="container mx-auto px-4 py-16 md:py-20 max-w-5xl relative z-10">
         <div className="text-center space-y-8">

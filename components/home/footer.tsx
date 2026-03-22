@@ -52,10 +52,10 @@ export function Footer() {
             {/* Brand column */}
             <div className="col-span-2 md:col-span-2 space-y-4">
               <Link href="/" className="inline-flex items-center gap-2.5 group">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-violet-600 flex items-center justify-center shadow-lg shadow-primary/20">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/20">
                   <span className="text-white font-bold text-sm font-display">C</span>
                 </div>
-                <h3 className="text-xl font-display font-bold bg-gradient-to-r from-primary via-violet-400 to-secondary bg-clip-text text-transparent">
+                <h3 className="text-xl font-display font-bold bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent">
                   Codelift
                 </h3>
               </Link>

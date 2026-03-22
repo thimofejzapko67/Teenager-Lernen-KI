@@ -43,7 +43,7 @@ export function LeaderboardTabs({
                 "focus:outline-none focus:ring-2 focus:ring-primary/50",
                 "disabled:opacity-50 disabled:cursor-not-allowed",
                 isActive
-                  ? "bg-gradient-to-r from-primary via-violet-600 to-purple-600 text-white shadow-lg shadow-primary/25"
+                  ? "bg-gradient-to-r from-primary via-secondary to-secondary text-white shadow-lg shadow-primary/25"
                   : "bg-card/60 border border-border/50 text-muted-foreground hover:text-foreground hover:border-primary/30 hover:bg-card/80"
               )}
             >
@@ -60,7 +60,7 @@ export function LeaderboardTabs({
               )}
               
               {!isActive && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-violet-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-secondary scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
               )}
             </motion.button>
           );

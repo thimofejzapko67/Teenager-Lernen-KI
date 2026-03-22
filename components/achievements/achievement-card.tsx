@@ -32,7 +32,7 @@ export function AchievementCard({
 
   const getRarityColor = (xpBonus: number) => {
     if (xpBonus >= 500) return 'from-yellow-400 via-orange-500 to-red-500';
-    if (xpBonus >= 200) return 'from-purple-400 via-pink-500 to-red-500';
+    if (xpBonus >= 200) return 'from-primary-400 via-accent to-red-500';
     if (xpBonus >= 100) return 'from-blue-400 via-cyan-500 to-teal-500';
     return 'from-gray-400 via-slate-500 to-zinc-600';
   };
@@ -50,7 +50,7 @@ export function AchievementCard({
           'relative flex items-center justify-center rounded-xl transition-all duration-300',
           sizeClasses[size],
           achievement.unlocked
-            ? `bg-gradient-to-br ${rarityGradient} shadow-lg shadow-purple-500/20 hover:scale-110 cursor-pointer`
+            ? `bg-gradient-to-br ${rarityGradient} shadow-lg shadow-primary/20 hover:scale-110 cursor-pointer`
             : 'bg-muted/50 border border-muted-foreground/20 cursor-not-allowed opacity-60'
         )}
       >

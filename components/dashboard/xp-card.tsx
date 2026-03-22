@@ -41,9 +41,9 @@ const RANK_CONFIG: Record<
     color: "#A855F7",
     label: "Architect",
     emoji: "🎯",
-    bgClass: "bg-purple-500/20",
-    textClass: "text-purple-400",
-    borderClass: "border-purple-500/30",
+    bgClass: "bg-primary/20",
+    textClass: "text-primary",
+    borderClass: "border-primary/30",
   },
   master: {
     color: "#F59E0B",

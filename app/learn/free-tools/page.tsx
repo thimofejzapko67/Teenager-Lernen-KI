@@ -36,11 +36,11 @@ export default function FreeToolsPage() {
   return (
     <main className="min-h-screen">
       <section className="relative overflow-hidden border-b border-border">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-violet-500/5" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5" />
         <div className="container mx-auto px-4 py-12 md:py-16 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-display font-bold mb-6">
-              <span className="bg-gradient-to-r from-primary via-violet-400 to-secondary bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent">
                 Kostenlose Tools
               </span>
             </h1>

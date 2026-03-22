@@ -31,7 +31,7 @@ export function SearchResults({ results, query }: SearchResultsProps) {
   const getResultTypeColor = (type: string) => {
     switch (type) {
       case 'lesson': return 'text-cyan-400';
-      case 'user': return 'text-purple-400';
+      case 'user': return 'text-primary';
       case 'project': return 'text-orange-400';
       default: return 'text-muted-foreground';
     }

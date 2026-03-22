@@ -108,7 +108,7 @@ export function SearchBar({ placeholder = 'Search...', className }: SearchBarPro
   const getResultTypeColor = (type: string) => {
     switch (type) {
       case 'lesson': return 'text-cyan-400';
-      case 'user': return 'text-purple-400';
+      case 'user': return 'text-primary';
       case 'project': return 'text-orange-400';
       default: return 'text-muted-foreground';
     }
@@ -219,7 +219,7 @@ export function SearchBar({ placeholder = 'Search...', className }: SearchBarPro
                       relevance: 0,
                     })}
                   >
-                    <User className="w-4 h-4 mr-2 text-purple-400" />
+                    <User className="w-4 h-4 mr-2 text-primary" />
                     Leaderboard
                   </Button>
                   <Button
@@ -233,7 +233,7 @@ export function SearchBar({ placeholder = 'Search...', className }: SearchBarPro
                       relevance: 0,
                     })}
                   >
-                    <Building2 className="w-4 h-4 mr-2 text-pink-400" />
+                    <Building2 className="w-4 h-4 mr-2 text-accent" />
                     Sponsors
                   </Button>
                 </div>

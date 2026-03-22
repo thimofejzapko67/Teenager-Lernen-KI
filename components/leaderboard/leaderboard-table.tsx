@@ -207,7 +207,7 @@ export function LeaderboardTable({ entries, isLoading, showTop3 = true }: Leader
                         className={cn(
                           "inline-flex items-center justify-center w-10 h-7 rounded-lg text-sm font-bold",
                           (entry.rank <= 10 || entry.is_current_user)
-                            ? "bg-gradient-to-br from-primary/20 to-violet-500/20 text-primary border border-primary/20"
+                            ? "bg-gradient-to-br from-primary/20 to-primary/20 text-primary border border-primary/20"
                             : "bg-muted/30 text-muted-foreground"
                         )}
                       >

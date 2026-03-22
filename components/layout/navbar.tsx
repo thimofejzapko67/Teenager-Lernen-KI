@@ -50,10 +50,10 @@ export function Navbar() {
             href="/"
             className="flex items-center gap-2.5 text-xl font-display font-bold group"
           >
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-violet-600 flex items-center justify-center shadow-lg shadow-primary/30 group-hover:shadow-primary/50 transition-shadow duration-300">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/30 group-hover:shadow-primary/50 transition-shadow duration-300">
               <span className="text-white font-bold text-sm">C</span>
             </div>
-            <span className="bg-gradient-to-r from-primary via-violet-400 to-secondary bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent">
               Codelift
             </span>
           </Link>
@@ -89,7 +89,7 @@ export function Navbar() {
               </Button>
             </Link>
             <Link href="/auth">
-              <Button size="sm" className="bg-gradient-to-r from-primary to-violet-600 text-white font-semibold shadow-lg shadow-primary/20">
+              <Button size="sm" className="bg-gradient-to-r from-primary to-secondary text-white font-semibold shadow-lg shadow-primary/20">
                 Jetzt starten
               </Button>
             </Link>
@@ -146,7 +146,7 @@ export function Navbar() {
                 <Link href="/auth" onClick={() => setIsOpen(false)}>
                   <Button
                     size="sm"
-                    className="w-full bg-gradient-to-r from-primary to-violet-600 text-white font-semibold"
+                    className="w-full bg-gradient-to-r from-primary to-secondary text-white font-semibold"
                   >
                     Jetzt starten
                   </Button>

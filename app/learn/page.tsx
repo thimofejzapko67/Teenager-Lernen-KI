@@ -87,7 +87,7 @@ export default function LearnPage() {
     <main className="min-h-screen">
       {/* Hero Section */}
       <section className="relative overflow-hidden border-b border-border/40">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-violet-500/5" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5" />
         <div className="container mx-auto px-4 py-20 md:py-28 relative z-10">
           <div className="max-w-4xl mx-auto text-center space-y-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-sm font-medium text-primary">
@@ -96,7 +96,7 @@ export default function LearnPage() {
             </div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-tight">
               Wähle deinen{" "}
-              <span className="bg-gradient-to-r from-primary via-violet-400 to-secondary bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent">
                 Lernpfad
               </span>
             </h1>
@@ -149,7 +149,7 @@ export default function LearnPage() {
         <div className="container mx-auto px-4 py-20 text-center relative z-10">
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
             Noch unsicher?{" "}
-            <span className="bg-gradient-to-r from-primary via-violet-400 to-secondary bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent">
               Starte mit Web Development
             </span>
           </h2>
@@ -159,7 +159,7 @@ export default function LearnPage() {
           </p>
           <Link
             href="/learn/web-dev"
-            className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-primary to-violet-600 text-white font-semibold rounded-2xl hover:shadow-2xl hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-1 text-lg"
+            className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-2xl hover:shadow-2xl hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-1 text-lg"
           >
             Web Development starten
             <ArrowRight className="w-5 h-5" />

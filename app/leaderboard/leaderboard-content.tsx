@@ -71,7 +71,7 @@ function Pagination({ currentPage, totalPages, onPageChange, isLoading }: Pagina
               "min-w-[2.5rem] h-10 px-3 rounded-lg text-sm font-medium transition-all duration-200",
               "focus:outline-none focus:ring-2 focus:ring-primary/50",
               page === currentPage
-                ? "bg-gradient-to-r from-primary to-violet-600 text-white shadow-lg shadow-primary/30 scale-105"
+                ? "bg-gradient-to-r from-primary to-secondary text-white shadow-lg shadow-primary/30 scale-105"
                 : "hover:bg-muted/50 text-muted-foreground hover:text-foreground",
               page === "..." && "cursor-default hover:bg-transparent"
             )}
@@ -216,8 +216,8 @@ export function LeaderboardContent() {
           className="glass-card rounded-2xl p-8 text-center border border-dashed"
         >
           <div className="flex justify-center mb-4">
-            <div className="p-4 rounded-full bg-violet-500/10">
-              <Sparkles className="w-8 h-8 text-violet-400" />
+            <div className="p-4 rounded-full bg-primary/10">
+              <Sparkles className="w-8 h-8 text-primary" />
             </div>
           </div>
           <h3 className="font-semibold text-lg mb-2">Noch keine Freunde hinzugefügt</h3>

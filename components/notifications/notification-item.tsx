@@ -28,7 +28,7 @@ export function NotificationItem({
       case 'streak':
         return <Flame className="w-4 h-4 text-orange-500" />;
       case 'sponsor':
-        return <Building2 className="w-4 h-4 text-purple-500" />;
+        return <Building2 className="w-4 h-4 text-primary" />;
       case 'mention':
       case 'reply':
         return <MessageCircle className="w-4 h-4 text-blue-500" />;

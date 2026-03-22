@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
-import { StyleSwitcher } from "@/components/layout/style-switcher";
+import { ThemeSwitcher } from "@/components/layout/theme-switcher";
 
 const geistMono = Geist_Mono({
   subsets: ["latin"],
@@ -111,7 +111,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="de" className="dark">
+    <html lang="de">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
@@ -121,7 +121,7 @@ export default function RootLayout({
       >
         <Navbar />
         {children}
-        <StyleSwitcher />
+        <ThemeSwitcher />
       </body>
     </html>
   );

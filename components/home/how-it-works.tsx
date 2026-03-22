@@ -11,11 +11,11 @@ const steps = [
     icon: UserPlus,
     title: "Registriere dich",
     description: "Erstelle deinen Account in unter 2 Minuten. Kostenlos und ohne Kreditkarte.",
-    color: "text-violet-400",
-    bgColor: "bg-violet-500/10",
-    borderColor: "border-violet-500/30",
-    gradientFrom: "from-violet-500",
-    gradientTo: "to-purple-600",
+    color: "text-primary",
+    bgColor: "bg-primary/10",
+    borderColor: "border-primary/30",
+    gradientFrom: "from-primary",
+    gradientTo: "to-secondary",
   },
   {
     number: "02",
@@ -74,7 +74,7 @@ export function HowItWorksSection() {
           {/* Steps */}
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto relative">
             {/* Connector lines */}
-            <div className="hidden md:block absolute top-20 left-[calc(33%+2rem)] right-[calc(33%+2rem)] h-px bg-gradient-to-r from-violet-500/40 via-cyan-500/40 to-amber-500/40" />
+            <div className="hidden md:block absolute top-20 left-[calc(33%+2rem)] right-[calc(33%+2rem)] h-px bg-gradient-to-r from-primary/40 via-cyan-500/40 to-amber-500/40" />
 
             {steps.map((step, index) => {
               const Icon = step.icon
@@ -116,7 +116,7 @@ export function HowItWorksSection() {
           >
             <a
               href="/auth"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-violet-600 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5"
             >
               Jetzt kostenlos starten
               <ArrowRight className="w-4 h-4" />

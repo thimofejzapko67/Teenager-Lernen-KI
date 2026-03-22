@@ -181,7 +181,7 @@ export function SignupForm({ onSuccess }: SignupFormProps) {
 
       <Button
         type="submit"
-        className="w-full bg-gradient-to-r from-primary to-purple-700 hover:from-primary/90 hover:to-purple-700/90 shadow-lg shadow-primary/40"
+        className="w-full bg-gradient-to-r from-primary to-primary-700 hover:from-primary/90 hover:to-primary-700/90 shadow-lg shadow-primary/40"
         disabled={isLoading}
       >
         {isLoading ? (

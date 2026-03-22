@@ -39,7 +39,7 @@ const BADGE_INFO: Record<string, { description: string; rarity: 'common' | 'rare
 const RARITY_COLORS = {
   common: 'bg-gray-500/20 border-gray-500/50 text-gray-300 hover:bg-gray-500/30',
   rare: 'bg-blue-500/20 border-blue-500/50 text-blue-300 hover:bg-blue-500/30',
-  epic: 'bg-purple-500/20 border-purple-500/50 text-purple-300 hover:bg-purple-500/30',
+  epic: 'bg-primary/20 border-primary/50 text-primary hover:bg-primary/30',
   legendary: 'bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border-yellow-500/50 text-yellow-300 hover:from-yellow-500/30 hover:to-orange-500/30',
 };
 

@@ -16,9 +16,9 @@ const CATEGORY_CONFIG: Record<
   "ki-basics": {
     label: "AI Basics",
     emoji: "🤖",
-    bgClass: "bg-purple-500/20",
-    textClass: "text-purple-400",
-    borderClass: "border-purple-500/30",
+    bgClass: "bg-primary/20",
+    textClass: "text-primary",
+    borderClass: "border-primary/30",
   },
   "web-dev": {
     label: "Web Dev",
@@ -37,9 +37,9 @@ const CATEGORY_CONFIG: Record<
   "ai-agents": {
     label: "AI Agents",
     emoji: "🧠",
-    bgClass: "bg-pink-500/20",
-    textClass: "text-pink-400",
-    borderClass: "border-pink-500/30",
+    bgClass: "bg-accent/20",
+    textClass: "text-accent",
+    borderClass: "border-accent/30",
   },
   "agi-safety": {
     label: "AI Safety",
@@ -138,7 +138,7 @@ export function RecommendedLessons({ lessons, userLevel }: RecommendedLessonsPro
               </div>
               <Button
                 size="sm"
-                className="shrink-0 bg-gradient-to-r from-primary to-purple-700 hover:from-primary/90 hover:to-purple-700/90 shadow-lg shadow-primary/20"
+                className="shrink-0 bg-gradient-to-r from-primary to-primary-700 hover:from-primary/90 hover:to-primary-700/90 shadow-lg shadow-primary/20"
               >
                 Start
               </Button>

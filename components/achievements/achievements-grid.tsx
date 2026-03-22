@@ -74,7 +74,7 @@ export function AchievementsGrid({
       {/* Epic */}
       {grouped.epic.length > 0 && (
         <div className="space-y-3">
-          <h3 className="text-sm font-semibold text-purple-500 flex items-center gap-2">
+          <h3 className="text-sm font-semibold text-primary flex items-center gap-2">
             <Trophy className="w-4 h-4" />
             Epic
           </h3>

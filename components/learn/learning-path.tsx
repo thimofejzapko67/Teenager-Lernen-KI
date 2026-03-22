@@ -12,7 +12,7 @@ const mainTopics = [
     title: "Free Tools",
     description: "KI-Tools für effizienteres Entwickeln",
     icon: "🛠️",
-    gradient: "from-blue-500 to-cyan-500",
+    gradient: "from-primary to-accent",
     route: "/learn/free-tools",
     subtopics: [
       { title: "Cursor", description: "KI-gesteuerter Code Editor", xp: 50 },
@@ -26,7 +26,7 @@ const mainTopics = [
     title: "Web Development",
     description: "Websites & Web Apps bauen",
     icon: "💻",
-    gradient: "from-purple-500 to-pink-500",
+    gradient: "from-primary to-secondary",
     subtopics: [
       { title: "Frontend", description: "HTML, CSS, React, Next.js", xp: 150 },
       { title: "Backend", description: "Node.js, APIs, Databases", xp: 150 },
@@ -39,7 +39,7 @@ const mainTopics = [
     title: "App Development",
     description: "Mobile Apps entwickeln",
     icon: "📱",
-    gradient: "from-green-500 to-emerald-500",
+    gradient: "from-secondary to-accent",
     subtopics: [
       { title: "iOS", description: "Swift, SwiftUI", xp: 150 },
       { title: "Android", description: "Kotlin, Jetpack Compose", xp: 150 },
@@ -52,7 +52,7 @@ const mainTopics = [
     title: "Security",
     description: "Sichere Anwendungen bauen",
     icon: "🔒",
-    gradient: "from-orange-500 to-red-500",
+    gradient: "from-orange-600 to-red-600",
     subtopics: [
       { title: "Authentication", description: "OAuth, JWT, Sessions", xp: 100 },
       { title: "Data Protection", description: "Verschlüsselung, Privacy", xp: 100 },

@@ -20,9 +20,9 @@ interface SkillStatsSectionProps {
 }
 
 const SKILL_CONFIG = [
-  { key: 'design' as const, label: 'Design', icon: Palette, color: 'from-pink-500 to-rose-500' },
+  { key: 'design' as const, label: 'Design', icon: Palette, color: 'from-accent to-destructive' },
   { key: 'development' as const, label: 'Development', icon: Code, color: 'from-blue-500 to-cyan-500' },
-  { key: 'ai_ml' as const, label: 'AI & ML', icon: Brain, color: 'from-purple-500 to-violet-500' },
+  { key: 'ai_ml' as const, label: 'AI & ML', icon: Brain, color: 'from-primary to-primary' },
   { key: 'security' as const, label: 'Security', icon: Shield, color: 'from-red-500 to-orange-500' },
   { key: 'mobile' as const, label: 'Mobile', icon: Smartphone, color: 'from-green-500 to-emerald-500' },
   { key: 'databases' as const, label: 'Databases', icon: Database, color: 'from-yellow-500 to-amber-500' },

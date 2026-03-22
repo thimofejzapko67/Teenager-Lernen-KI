@@ -37,9 +37,9 @@ const STATS = [
     key: "currentLevel",
     label: "Aktuelles Level",
     icon: Target,
-    color: "text-purple-400",
-    bgGradient: "from-purple-500/20 to-pink-500/20",
-    borderColor: "border-purple-500/30",
+    color: "text-primary",
+    bgGradient: "from-primary/20 to-accent/20",
+    borderColor: "border-primary/30",
   },
 ] as const;
 

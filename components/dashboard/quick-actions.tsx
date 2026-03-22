@@ -8,7 +8,7 @@ const QUICK_ACTIONS = [
     icon: BookOpen,
     href: "/learn",
     description: "Lerne weiter und steige auf",
-    gradient: "from-primary to-purple-700",
+    gradient: "from-primary to-primary-700",
   },
   {
     label: "Projekt hochladen",

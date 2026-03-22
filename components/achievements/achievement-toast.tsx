@@ -63,7 +63,7 @@ export function AchievementToastProvider() {
       {toasts.map((toast, index) => (
         <Toast
           key={index}
-          className="bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-cyan-500/20 border border-primary/50"
+          className="bg-gradient-to-r from-primary/20 via-accent/20 to-cyan-500/20 border border-primary/50"
         >
           <div className="flex items-start gap-3">
             <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 flex items-center justify-center">

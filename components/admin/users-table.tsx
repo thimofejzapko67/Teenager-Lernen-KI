@@ -71,7 +71,7 @@ export function UsersTable({ users, onBan, onUnban, onRoleChange }: UsersTablePr
   const getRankColor = (rank: string) => {
     switch (rank) {
       case 'legend': return 'text-yellow-500';
-      case 'master': return 'text-purple-500';
+      case 'master': return 'text-primary';
       case 'architect': return 'text-cyan-500';
       case 'developer': return 'text-green-500';
       case 'coder': return 'text-blue-500';

@@ -14,19 +14,19 @@ interface LessonCardProps {
 }
 
 const CATEGORY_GRADIENTS: Record<string, string> = {
-  "ki-basics": "from-violet-500 to-purple-600",
+  "ki-basics": "from-primary to-secondary",
   "web-dev": "from-blue-500 to-cyan-500",
   "mobile-dev": "from-green-500 to-emerald-500",
-  "ai-agents": "from-pink-500 to-rose-500",
+  "ai-agents": "from-accent to-destructive",
   "agi-safety": "from-amber-500 to-orange-500",
-  security: "from-red-500 to-pink-500",
+  security: "from-red-500 to-accent",
 };
 
 const CATEGORY_ACCENTS: Record<string, string> = {
-  "ki-basics": "border-violet-500/20 hover:border-violet-500/50 group-hover:shadow-violet-500/10",
+  "ki-basics": "border-primary/20 hover:border-primary/50 group-hover:shadow-primary/10",
   "web-dev": "border-blue-500/20 hover:border-blue-500/50 group-hover:shadow-blue-500/10",
   "mobile-dev": "border-green-500/20 hover:border-green-500/50 group-hover:shadow-green-500/10",
-  "ai-agents": "border-pink-500/20 hover:border-pink-500/50 group-hover:shadow-pink-500/10",
+  "ai-agents": "border-accent/20 hover:border-accent/50 group-hover:shadow-accent/10",
   "agi-safety": "border-amber-500/20 hover:border-amber-500/50 group-hover:shadow-amber-500/10",
   security: "border-red-500/20 hover:border-red-500/50 group-hover:shadow-red-500/10",
 };
@@ -43,7 +43,7 @@ const CATEGORY_LABELS: Record<string, string> = {
 export function LessonCard({ lesson }: LessonCardProps) {
   const categoryColor = CATEGORY_COLORS[lesson.category];
   const difficultyColor = DIFFICULTY_COLORS[lesson.difficulty];
-  const gradient = CATEGORY_GRADIENTS[lesson.category] || "from-primary to-violet-600";
+  const gradient = CATEGORY_GRADIENTS[lesson.category] || "from-primary to-secondary";
   const accent = CATEGORY_ACCENTS[lesson.category] || "border-border/50 hover:border-primary/50";
 
   return (

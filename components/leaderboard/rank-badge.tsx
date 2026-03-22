@@ -52,10 +52,10 @@ const rankConfig: Record<
   architect: {
     label: "Architect",
     icon: Crown,
-    gradient: "from-violet-500/20 to-purple-500/20",
-    textClass: "text-violet-400",
-    borderClass: "border-violet-500/30",
-    bgGlow: "shadow-violet-500/20",
+    gradient: "from-primary/20 to-primary/20",
+    textClass: "text-primary",
+    borderClass: "border-primary/30",
+    bgGlow: "shadow-primary/20",
     description: "Senior Level",
   },
   master: {
@@ -70,10 +70,10 @@ const rankConfig: Record<
   legend: {
     label: "Legend",
     icon: Zap,
-    gradient: "from-rose-500/20 to-pink-500/20",
+    gradient: "from-destructive/20 to-accent/20",
     textClass: "text-rose-400",
-    borderClass: "border-rose-500/30",
-    bgGlow: "shadow-rose-500/20",
+    borderClass: "border-destructive/30",
+    bgGlow: "shadow-destructive/20",
     description: "Elite Entwickler",
   },
 };

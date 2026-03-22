@@ -136,7 +136,7 @@ export function NotificationSettings({ initialData }: NotificationSettingsProps)
         <div className="flex items-start justify-between p-4 rounded-lg bg-muted/30 border border-border">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <Building2 className="w-4 h-4 text-purple-500" />
+              <Building2 className="w-4 h-4 text-primary" />
               <Label htmlFor="sponsor_updates" className="font-semibold">
                 Sponsor Updates
               </Label>

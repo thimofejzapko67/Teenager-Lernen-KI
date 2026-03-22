@@ -143,7 +143,7 @@ async function ProfileContent({ username }: { username: string }) {
           </Card>
           <Card className="glass-card">
             <CardContent className="p-4 text-center">
-              <Trophy className="w-6 h-6 mx-auto mb-2 text-purple-400" />
+              <Trophy className="w-6 h-6 mx-auto mb-2 text-primary" />
               <div className="text-2xl font-bold">{user.badges?.length || 0}</div>
               <div className="text-xs text-muted-foreground">Badges</div>
             </CardContent>

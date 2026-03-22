@@ -41,7 +41,7 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
   return (
     <main className="min-h-screen">
       <section className="relative overflow-hidden border-b border-border">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-violet-500/5" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5" />
         <div className="container mx-auto px-4 py-8 relative z-10">
           <Link
             href="/learn/free-tools"
@@ -142,7 +142,7 @@ export default async function ToolDetailPage({ params }: ToolPageProps) {
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-primary/10 to-violet-500/10 border border-primary/20 rounded-xl p-6">
+              <div className="bg-gradient-to-br from-primary/10 to-primary/10 border border-primary/20 rounded-xl p-6">
                 <h3 className="text-lg font-bold mb-2">Bereit zum Starten?</h3>
                 <p className="text-muted-foreground text-sm mb-4">
                   Folge der Schritt-für-Schritt Anleitung und beginne noch heute.

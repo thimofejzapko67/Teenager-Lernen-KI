@@ -279,7 +279,7 @@ export function QuizComponent({ quiz, onSubmit, onCancel }: QuizComponentProps) 
               "inline-flex items-center px-3 py-1 rounded-full text-xs font-medium",
               currentQuestion.type === QuizType.MULTIPLE_CHOICE
                 ? "bg-blue-500/20 text-blue-400 border border-blue-500/50"
-                : "bg-purple-500/20 text-purple-400 border border-purple-500/50"
+                : "bg-primary/20 text-primary border border-primary/50"
             )}
           >
             {currentQuestion.type === QuizType.MULTIPLE_CHOICE
