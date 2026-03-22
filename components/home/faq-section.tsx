@@ -8,35 +8,35 @@ import { ChevronDown } from "lucide-react"
 const faqs = [
   {
     question: "Ist ClawAcademy wirklich kostenlos?",
-    answer: "Ja! ClawAcademy ist 100% kostenlos fur alle Teenager zwischen 13-19 Jahren. Es gibt keine versteckten Kosten, keine Abo-gebuhren und keine Kreditkarte ist erforderlich. Unser Ziel ist es, jedem Zugang zu KI-Bildung zu geben.",
+    answer: "Ja! ClawAcademy ist 100% kostenlos für alle Teenager zwischen 13–19 Jahren. Es gibt keine versteckten Kosten, keine Abo-Gebühren und keine Kreditkarte ist erforderlich. Unser Ziel ist es, jedem Zugang zu KI-Bildung zu geben.",
   },
   {
     question: "Was brauche ich, um loszulegen?",
-    answer: "Du brauchst nur einen Computer mit Internetverbindung und Interesse an KI und Programmierung. Alle Lessons und Challenges laufen direkt im Browser. Fur fortgeschrittene Kurse empfehlen wir einen Code-Editor wie VS Code.",
+    answer: "Du brauchst nur einen Computer mit Internetverbindung und Interesse an KI und Programmierung. Alle Lektionen und Challenges laufen direkt im Browser. Für fortgeschrittene Kurse empfehlen wir einen Code-Editor wie VS Code.",
   },
   {
     question: "Wie funktioniert das Sponsor-Programm?",
-    answer: "Top-Entwickler auf ClawAcademy werden von unseren Partner-Companies gesponsort. Das bedeutet: kostenlose Kurse, Hardware-Support und Mentorship von Profis. Qualifiziert sind alle, die bestimmte XP-Meilensteine erreichen und Projekte in ihrem Portfolio haben.",
+    answer: "Top-Entwickler auf ClawAcademy werden von unseren Partner-Companies gesponsert. Das bedeutet: kostenlose Kurse, Hardware-Support und Mentorship von Profis. Qualifiziert sind alle, die bestimmte XP-Meilensteine erreichen und Projekte in ihrem Portfolio haben.",
   },
   {
     question: "Kann ich ClawAcademy auch nutzen, wenn ich noch nie programmiert habe?",
-    answer: "Absolut! Unsere Anfanger-Kurse setzen keine Vorkenntnisse voraus. Du startest mit den Basics und arbeitest dich Schritt fur Schritt nach oben. Unsere Community hilft dir bei Fragen.",
+    answer: "Absolut! Unsere Anfänger-Kurse setzen keine Vorkenntnisse voraus. Du startest mit den Basics und arbeitest dich Schritt für Schritt nach oben. Unsere Community hilft dir bei Fragen.",
   },
   {
     question: "Welche Sprachen lernt man bei ClawAcademy?",
-    answer: "Wir fokussieren auf die wichtigsten Sprachen fur KI-Entwicklung: Python fur Machine Learning und Data Science, JavaScript fur Web-Apps, und SQL fur Datenbanken. Dazu kommen KI-Tools wie ChatGPT, Claude und GitHub Copilot.",
+    answer: "Wir fokussieren auf die wichtigsten Sprachen für KI-Entwicklung: Python für Machine Learning und Data Science, JavaScript für Web-Apps, und SQL für Datenbanken. Dazu kommen KI-Tools wie ChatGPT, Claude und GitHub Copilot.",
   },
   {
-    question: "Gibt es Altersbeschrankungen?",
-    answer: "ClawAcademy ist fur Teenager zwischen 13-19 Jahren gemacht. Nutzer unter 16 benotigen die Zustimmung ihrer Eltern. Diese wird bei der Registrierung abgefragt. Nach 19 Jahren kannst du als Mentor bleiben!",
+    question: "Gibt es Altersbeschränkungen?",
+    answer: "ClawAcademy ist für Teenager zwischen 13–19 Jahren gemacht. Nutzer unter 16 benötigen die Zustimmung ihrer Eltern. Diese wird bei der Registrierung abgefragt. Nach 19 Jahren kannst du als Mentor bleiben!",
   },
   {
     question: "Wie viel Zeit sollte ich investieren?",
-    answer: "So viel oder wenig wie du willst. Einige Lessons sind in 10-15 Minuten erledigt. Fur Herausforderungen solltest du 30-60 Minuten einplanen. Es gibt keine Fristen - du lernst in deinem Tempo.",
+    answer: "So viel oder wenig wie du willst. Einige Lektionen sind in 10–15 Minuten erledigt. Für Herausforderungen solltest du 30–60 Minuten einplanen. Es gibt keine Fristen – du lernst in deinem Tempo.",
   },
   {
     question: "Kann ich Projekte in mein Portfolio aufnehmen?",
-    answer: "Ja! Alle Projekte, die du auf ClawAcademy baust, gehoren dir. Du kannst den Code downloaden, auf GitHub zeigen und in Bewerbungen zeigen. Viele unserer Alumni haben mit ClawAcademy-Projekten Jobs bekommen.",
+    answer: "Ja! Alle Projekte, die du auf ClawAcademy baust, gehören dir. Du kannst den Code herunterladen, auf GitHub zeigen und in Bewerbungen vorstellen. Viele unserer Alumni haben mit ClawAcademy-Projekten Jobs bekommen.",
   },
 ]
 
@@ -61,7 +61,7 @@ export function FaqSection() {
             className="text-center space-y-4"
           >
             <h2 className="text-3xl md:text-5xl font-display font-bold">
-              Haufige <span className="text-primary">Fragen</span>
+              Häufige <span className="text-primary">Fragen</span>
             </h2>
             <p className="text-muted-foreground text-lg">
               Alles, was du wissen musst.
@@ -116,7 +116,7 @@ export function FaqSection() {
             className="text-center pt-8"
           >
             <p className="text-muted-foreground mb-4">
-              Weitere Fragen?
+              Noch weitere Fragen?
             </p>
             <a
               href="mailto:support@clawacademy.de"

@@ -12,7 +12,7 @@ export const revalidate = 300; // ISR every 5 minutes
 export const metadata: Metadata = {
   title: "Lektionen - ClawAcademy",
   description:
-    "Entdecke KI-Kurse, Web-Entwicklung, App-Bau und mehr. Verdienne XP und level auf!",
+    "Entdecke KI-Kurse, Web-Entwicklung, App-Bau und mehr. Verdiene XP und level auf!",
 };
 
 interface LessonsPageProps {
@@ -23,53 +23,6 @@ interface LessonsPageProps {
     sort?: string;
     page?: string;
   };
-}
-
-async function LessonsList({
-  filters,
-  sort,
-  page,
-}: {
-  filters: LessonFiltersType;
-  sort: LessonSort;
-  page: number;
-}) {
-  const response = await getLessons(filters, sort, page);
-
-  if (response.lessons.length === 0) {
-    return (
-      <div className="text-center py-16">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
-          <BookOpen className="h-8 w-8 text-primary" />
-        </div>
-        <h3 className="text-xl font-semibold mb-2">Keine Lektionen gefunden</h3>
-        <p className="text-muted-foreground">
-          Versuche andere Filter oder Suchbegriffe.
-        </p>
-      </div>
-    );
-  }
-
-  return (
-    <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {response.lessons.map((lesson) => (
-          <LessonCard key={lesson.id} lesson={lesson} />
-        ))}
-      </div>
-
-      {/* Pagination could be added here */}
-      {response.total > response.page * response.pageSize && (
-        <div className="flex justify-center mt-8">
-          <button
-            className="cyber-button px-6 py-2 bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
-          >
-            Mehr laden
-          </button>
-        </div>
-      )}
-    </>
-  );
 }
 
 async function LessonsContent({
@@ -83,6 +36,23 @@ async function LessonsContent({
 }) {
   const response = await getLessons(filters, sort, page);
 
+  if (response.lessons.length === 0) {
+    return (
+      <>
+        <LessonFilters filters={filters} sort={sort} totalCount={0} />
+        <div className="text-center py-16">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+            <BookOpen className="h-8 w-8 text-primary" />
+          </div>
+          <h3 className="text-xl font-semibold mb-2">Keine Lektionen gefunden</h3>
+          <p className="text-muted-foreground">
+            Versuche andere Filter oder Suchbegriffe.
+          </p>
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <LessonFilters
@@ -90,9 +60,22 @@ async function LessonsContent({
         sort={sort}
         totalCount={response.total}
       />
-      <Suspense fallback={<LessonGridSkeleton />}>
-        <LessonsList filters={filters} sort={sort} page={page} />
-      </Suspense>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {response.lessons.map((lesson) => (
+          <LessonCard key={lesson.id} lesson={lesson} />
+        ))}
+      </div>
+
+      {response.total > response.page * response.pageSize && (
+        <div className="flex justify-center mt-8">
+          <a
+            href={`?page=${page + 1}${filters.category ? `&category=${filters.category}` : ""}${filters.difficulty ? `&difficulty=${filters.difficulty}` : ""}${filters.search ? `&search=${filters.search}` : ""}&sort=${sort}`}
+            className="cyber-button px-6 py-2 bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity inline-block"
+          >
+            Mehr laden
+          </a>
+        </div>
+      )}
     </>
   );
 }
@@ -134,15 +117,15 @@ export default function LessonsPage({ searchParams }: LessonsPageProps) {
             Lektionen
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl">
-            Meistere KI-Tools, baue Apps und werde sponsored. Jede Lektion
-            bringt dich closer zum Sponsorship.
+            Meistere KI-Tools, baue Apps und werde gesponsert. Jede Lektion
+            bringt dich näher zum Sponsorship.
           </p>
         </div>
       </section>
 
       {/* Filters & Lessons */}
       <section className="container py-8">
-        <Suspense fallback={<LessonGridSkeleton count={1} />}>
+        <Suspense fallback={<LessonGridSkeleton />}>
           <LessonsContent filters={filters} sort={sort} page={page} />
         </Suspense>
       </section>

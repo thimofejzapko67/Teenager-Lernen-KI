@@ -10,8 +10,8 @@ import { cn } from "@/lib/utils"
 
 const navLinks = [
   { href: "/", label: "Home", icon: Home },
-  { href: "/learn", label: "Lessons", icon: Code2 },
-  { href: "/leaderboard", label: "Leaderboard", icon: Trophy },
+  { href: "/learn", label: "Lektionen", icon: Code2 },
+  { href: "/leaderboard", label: "Rangliste", icon: Trophy },
 ]
 
 export function Navbar() {
@@ -30,26 +30,30 @@ export function Navbar() {
   return (
     <motion.nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
         scrolled
-          ? "bg-background/80 backdrop-blur-lg border-b border-border"
+          ? "bg-background/85 backdrop-blur-xl border-b border-border/60 shadow-lg shadow-black/20"
           : "bg-transparent"
       )}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
     >
+      {/* Subtle gradient line at top when scrolled */}
+      {scrolled && (
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+      )}
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16 md:h-20">
+        <div className="flex items-center justify-between h-16 md:h-18">
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 text-xl font-display font-bold"
+            className="flex items-center gap-2.5 text-xl font-display font-bold group"
           >
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-              <span className="text-white font-bold">C</span>
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-violet-600 flex items-center justify-center shadow-lg shadow-primary/30 group-hover:shadow-primary/50 transition-shadow duration-300">
+              <span className="text-white font-bold text-sm">C</span>
             </div>
-            <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary via-violet-400 to-secondary bg-clip-text text-transparent">
               ClawAcademy
             </span>
           </Link>
@@ -85,8 +89,8 @@ export function Navbar() {
               </Button>
             </Link>
             <Link href="/auth">
-              <Button size="sm" className="bg-gradient-to-r from-primary to-purple-700">
-                Start Learning
+              <Button size="sm" className="bg-gradient-to-r from-primary to-violet-600 text-white font-semibold shadow-lg shadow-primary/20">
+                Jetzt starten
               </Button>
             </Link>
           </div>
@@ -142,9 +146,9 @@ export function Navbar() {
                 <Link href="/auth" onClick={() => setIsOpen(false)}>
                   <Button
                     size="sm"
-                    className="w-full bg-gradient-to-r from-primary to-purple-700"
+                    className="w-full bg-gradient-to-r from-primary to-violet-600 text-white font-semibold"
                   >
-                    Start Learning
+                    Jetzt starten
                   </Button>
                 </Link>
               </div>

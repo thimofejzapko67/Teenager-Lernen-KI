@@ -15,7 +15,7 @@ interface QuizSectionProps {
   previousAttempts?: number;
 }
 
-type QuizState = "intro" | "in-progress" | "completed";
+type QuizState = "intro" | "in-progress" | "review" | "completed";
 
 interface QuizResults {
   score: number;
@@ -34,24 +34,22 @@ export function QuizSection({
 }: QuizSectionProps) {
   const [quizState, setQuizState] = useState<QuizState>("intro");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedAnswers, setSelectedAnswers] = useState<
-    Record<string, string>
-  >({});
+  const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string>>({});
+  const [answeredQuestions, setAnsweredQuestions] = useState<Set<string>>(new Set());
   const [showResults, setShowResults] = useState<QuizResults | null>(null);
   const [showConfetti, setShowConfetti] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const currentQuestion = quiz.questions[currentQuestionIndex];
   const progress = ((currentQuestionIndex + 1) / quiz.questions.length) * 100;
+  const isCurrentAnswered = answeredQuestions.has(currentQuestion?.id ?? "");
 
-  // Handle answer selection
+  // Handle answer selection — shows immediate feedback
   const handleSelectAnswer = (questionId: string, optionId: string) => {
-    if (quizState !== "in-progress") return;
+    if (quizState !== "in-progress" || answeredQuestions.has(questionId)) return;
 
-    setSelectedAnswers((prev) => ({
-      ...prev,
-      [questionId]: optionId,
-    }));
+    setSelectedAnswers((prev) => ({ ...prev, [questionId]: optionId }));
+    setAnsweredQuestions((prev) => new Set(prev).add(questionId));
   };
 
   // Navigate to next question
@@ -121,6 +119,7 @@ export function QuizSection({
     setQuizState("in-progress");
     setCurrentQuestionIndex(0);
     setSelectedAnswers({});
+    setAnsweredQuestions(new Set());
     setShowResults(null);
   };
 
@@ -129,6 +128,7 @@ export function QuizSection({
     setQuizState("in-progress");
     setCurrentQuestionIndex(0);
     setSelectedAnswers({});
+    setAnsweredQuestions(new Set());
     setShowResults(null);
   };
 
@@ -373,31 +373,41 @@ export function QuizSection({
         <div className="space-y-3">
           {currentQuestion.options?.map((option) => {
             const isSelected = selectedAnswers[currentQuestion.id] === option.id;
+            const isAnswered = isCurrentAnswered;
+            const isCorrect = option.correct;
+            const isWrongSelected = isSelected && !isCorrect;
+            const isCorrectUnselected = isAnswered && isCorrect && !isSelected;
 
             return (
               <button
                 key={option.id}
                 onClick={() => handleSelectAnswer(currentQuestion.id, option.id)}
+                disabled={isAnswered}
                 className={cn(
-                  "w-full text-left p-4 rounded-lg border transition-all",
-                  "hover:bg-primary/10 hover:border-primary/50",
-                  isSelected
-                    ? "bg-primary/20 border-primary"
-                    : "bg-card/50 border-border/50"
+                  "w-full text-left p-4 rounded-lg border transition-all duration-200",
+                  !isAnswered && "hover:bg-primary/10 hover:border-primary/50 cursor-pointer",
+                  isAnswered && "cursor-default",
+                  isSelected && !isAnswered && "bg-primary/20 border-primary",
+                  isSelected && isCorrect && "bg-green-500/20 border-green-500",
+                  isWrongSelected && "bg-red-500/20 border-red-500",
+                  isCorrectUnselected && "bg-green-500/10 border-green-500/50",
+                  !isSelected && !isCorrectUnselected && "bg-card/50 border-border/50"
                 )}
               >
                 <div className="flex items-start gap-3">
                   <div
                     className={cn(
-                      "w-5 h-5 rounded-full border-2 flex items-center justify-center mt-0.5",
-                      isSelected
-                        ? "border-primary bg-primary"
-                        : "border-border"
+                      "w-5 h-5 rounded-full border-2 flex items-center justify-center mt-0.5 shrink-0",
+                      isSelected && isCorrect && "border-green-500 bg-green-500",
+                      isWrongSelected && "border-red-500 bg-red-500",
+                      isCorrectUnselected && "border-green-500",
+                      !isSelected && !isCorrectUnselected && (isSelected ? "border-primary bg-primary" : "border-border")
                     )}
                   >
-                    {isSelected && (
-                      <div className="w-2.5 h-2.5 rounded-full bg-background" />
-                    )}
+                    {isSelected && isCorrect && <CheckCircle2 className="w-3 h-3 text-white" />}
+                    {isWrongSelected && <XCircle className="w-3 h-3 text-white" />}
+                    {isCorrectUnselected && <div className="w-2 h-2 rounded-full bg-green-500" />}
+                    {isSelected && !isAnswered && <div className="w-2.5 h-2.5 rounded-full bg-background" />}
                   </div>
                   <span className="flex-1">{option.text}</span>
                 </div>
@@ -405,6 +415,14 @@ export function QuizSection({
             );
           })}
         </div>
+
+        {/* Explanation after answering */}
+        {isCurrentAnswered && currentQuestion.explanation && (
+          <div className="bg-card/60 border border-border/60 rounded-lg p-4 text-sm text-muted-foreground">
+            <span className="font-semibold text-foreground">Erklärung: </span>
+            {currentQuestion.explanation}
+          </div>
+        )}
 
         {/* Navigation */}
         <div className="flex items-center justify-between pt-4">
@@ -417,29 +435,32 @@ export function QuizSection({
           </Button>
 
           <div className="flex gap-2">
-            {quiz.questions.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentQuestionIndex(index)}
-                className={cn(
-                  "w-8 h-8 rounded-full text-sm font-medium transition-colors",
-                  index === currentQuestionIndex
-                    ? "bg-primary text-primary-foreground"
-                    : selectedAnswers[quiz.questions[index].id]
-                    ? "bg-primary/30 text-primary"
-                    : "bg-card/50 text-muted-foreground hover:bg-card"
-                )}
-              >
-                {index + 1}
-              </button>
-            ))}
+            {quiz.questions.map((_, index) => {
+              const q = quiz.questions[index];
+              const isAnsweredQ = answeredQuestions.has(q.id);
+              const selectedOpt = q.options?.find(o => o.id === selectedAnswers[q.id]);
+              const isCorrectQ = selectedOpt?.correct;
+              return (
+                <button
+                  key={index}
+                  onClick={() => setCurrentQuestionIndex(index)}
+                  className={cn(
+                    "w-8 h-8 rounded-full text-sm font-medium transition-colors",
+                    index === currentQuestionIndex && !isAnsweredQ && "bg-primary text-primary-foreground",
+                    isAnsweredQ && isCorrectQ && "bg-green-500 text-white",
+                    isAnsweredQ && !isCorrectQ && "bg-red-500 text-white",
+                    !isAnsweredQ && index !== currentQuestionIndex && "bg-card/50 text-muted-foreground hover:bg-card"
+                  )}
+                >
+                  {index + 1}
+                </button>
+              );
+            })}
           </div>
 
           <Button
             onClick={handleNext}
-            disabled={
-              !selectedAnswers[currentQuestion.id] || isSubmitting
-            }
+            disabled={!isCurrentAnswered || isSubmitting}
           >
             {currentQuestionIndex === quiz.questions.length - 1
               ? isSubmitting

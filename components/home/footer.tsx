@@ -7,7 +7,7 @@ const footerLinks = {
   product: {
     title: "Produkt",
     links: [
-      { label: "Lessons", href: "/learn" },
+      { label: "Lektionen", href: "/learn" },
       { label: "Leaderboard", href: "/leaderboard" },
       { label: "Community", href: "/community" },
     ],
@@ -15,7 +15,7 @@ const footerLinks = {
   company: {
     title: "Unternehmen",
     links: [
-      { label: "Uber uns", href: "/about" },
+      { label: "Über uns", href: "/about" },
       { label: "Blog", href: "/blog" },
       { label: "Karriere", href: "/careers" },
       { label: "Kontakt", href: "/contact" },
@@ -42,20 +42,25 @@ export function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="border-t border-border bg-card/50">
+    <footer className="border-t border-border/60 bg-card/20 backdrop-blur-sm">
+      {/* Top gradient line */}
+      <div className="h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
       <div className="container mx-auto px-4">
         {/* Main footer content */}
         <div className="py-12 md:py-16">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12">
             {/* Brand column */}
             <div className="col-span-2 md:col-span-2 space-y-4">
-              <Link href="/" className="inline-block">
-                <h3 className="text-2xl font-display font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+              <Link href="/" className="inline-flex items-center gap-2.5 group">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-violet-600 flex items-center justify-center shadow-lg shadow-primary/20">
+                  <span className="text-white font-bold text-sm font-display">C</span>
+                </div>
+                <h3 className="text-xl font-display font-bold bg-gradient-to-r from-primary via-violet-400 to-secondary bg-clip-text text-transparent">
                   ClawAcademy
                 </h3>
               </Link>
               <p className="text-muted-foreground max-w-xs">
-                Die KI-Lernplattform fur Teenager. Lerne programmieren, baue KI-Apps, werde sponsored.
+                Die KI-Lernplattform für Teenager. Lerne programmieren, baue KI-Apps, werde gesponsert.
               </p>
               {/* Social links */}
               <div className="flex gap-3">
@@ -139,7 +144,7 @@ export function Footer() {
             </p>
             <p className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              System operational
+              Alle Systeme aktiv
             </p>
           </div>
         </div>

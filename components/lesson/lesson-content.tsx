@@ -113,9 +113,11 @@ export function LessonContent({ content, title }: LessonContentProps) {
 
   const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
 
-  // Generate unique ID for code blocks
+  const codeBlockIndex = { current: 0 };
+
+  // Generate stable unique ID for code blocks based on content + position
   const generateCodeId = (code: string, index: number) => {
-    return `code-${index}-${code.slice(0, 10).replace(/[^a-zA-Z0-9]/g, "")}`;
+    return `code-${index}-${code.slice(0, 20).replace(/[^a-zA-Z0-9]/g, "")}`;
   };
 
   return (
@@ -155,7 +157,7 @@ export function LessonContent({ content, title }: LessonContentProps) {
               const match = /language-(\w+)/.exec(className || "");
               const language = match ? match[1] : "";
               const codeContent = String(children).replace(/\n$/, "");
-              const codeId = generateCodeId(codeContent, Math.random());
+              const codeId = generateCodeId(codeContent, codeBlockIndex.current++);
 
               return (
                 <div className="relative group">
@@ -230,40 +232,6 @@ export function LessonContent({ content, title }: LessonContentProps) {
         </ReactMarkdown>
       </div>
 
-      {/* Table of Contents (inline for mobile, sidebar for desktop) */}
-      {headings.length > 0 && (
-        <div className="hidden lg:block fixed right-4 top-1/2 -translate-y-1/2 w-64 max-h-[calc(100vh-200px)] overflow-y-auto">
-          <div className="glass-card rounded-lg p-4 space-y-2">
-            <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3">
-              Inhalt
-            </h4>
-            <nav className="space-y-1">
-              {headings.map((heading) => (
-                <a
-                  key={heading.id}
-                  href={`#${heading.id}`}
-                  className={cn(
-                    "block text-sm py-1 px-2 rounded transition-colors",
-                    "hover:bg-primary/10 hover:text-primary",
-                    activeHeading === heading.id
-                      ? "bg-primary/20 text-primary font-medium"
-                      : "text-muted-foreground",
-                    heading.level === 3 && "pl-6 text-xs"
-                  )}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document
-                      .getElementById(heading.id)
-                      ?.scrollIntoView({ behavior: "smooth", block: "start" });
-                  }}
-                >
-                  {heading.text}
-                </a>
-              ))}
-            </nav>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

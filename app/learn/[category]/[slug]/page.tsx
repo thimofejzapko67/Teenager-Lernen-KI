@@ -7,6 +7,7 @@ import { LessonHeader } from "@/components/lesson/lesson-header";
 import { LessonContent } from "@/components/lesson/lesson-content";
 import { QuizSection } from "@/components/lesson/quiz-section";
 import { DesktopTOC, TOC } from "@/components/lesson/toc";
+import { ScrollProgress } from "@/components/lesson/scroll-progress";
 import { completeLesson } from "@/lib/lessons";
 
 interface LessonPageProps {
@@ -56,12 +57,16 @@ async function LessonContentWrapper({
 
   const quiz = await getLessonQuiz(lesson.id);
 
+  const headings = extractHeadings(lesson.content);
+
   return (
     <div className="lg:flex lg:gap-8">
       {/* Main Content */}
       <article className="flex-1 min-w-0">
         <div className="space-y-8">
           <LessonHeader lesson={lesson} />
+          {/* Mobile TOC */}
+          <TOC items={headings} />
           <LessonContent content={lesson.content} title={lesson.title} />
 
           {/* Quiz Section */}
@@ -76,12 +81,6 @@ async function LessonContentWrapper({
               <QuizSection
                 quiz={quiz}
                 lessonId={lesson.id}
-                onComplete={async (passed, score, xpAwarded) => {
-                  "use server";
-                  // In a real app, we'd get userId from session
-                  const mockUserId = "user-1";
-                  await completeLesson(mockUserId, lesson.id, score);
-                }}
               />
             </section>
           )}
@@ -89,10 +88,7 @@ async function LessonContentWrapper({
       </article>
 
       {/* Desktop Sidebar TOC */}
-      <DesktopTOC
-        items={extractHeadings(lesson.content)}
-        activeId=""
-      />
+      <DesktopTOC items={headings} activeId="" />
     </div>
   );
 }
@@ -148,6 +144,7 @@ function LessonLoadingSkeleton() {
 export default function LessonPage({ params }: LessonPageProps) {
   return (
     <main className="min-h-screen pb-16">
+      <ScrollProgress />
       {/* Hero gradient */}
       <div className="absolute inset-0 h-48 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
 

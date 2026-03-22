@@ -58,28 +58,28 @@ export function StatsSection({ stats }: StatsSectionProps) {
   const statItems: StatItem[] = [
     {
       icon: Users,
-      label: "Active Learners",
+      label: "Aktive Lernende",
       value: stats.userCount || 1200,
       suffix: "+",
       gradient: "from-purple-500 to-purple-700",
     },
     {
       icon: BookOpen,
-      label: "Interactive Lessons",
+      label: "Interaktive Lektionen",
       value: stats.lessonCount || 50,
       suffix: "+",
       gradient: "from-cyan-500 to-cyan-700",
     },
     {
       icon: FolderOpen,
-      label: "Projects Built",
+      label: "Projekte gebaut",
       value: stats.projectCount || 350,
       suffix: "+",
       gradient: "from-pink-500 to-pink-700",
     },
     {
       icon: Zap,
-      label: "Total XP Earned",
+      label: "XP insgesamt",
       value: Math.floor((stats.totalXpEarned || 50000) / 1000),
       suffix: "K+",
       gradient: "from-amber-500 to-amber-700",
@@ -115,7 +115,7 @@ export function StatsSection({ stats }: StatsSectionProps) {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
         >
           {statItems.map((stat) => {
             const Icon = stat.icon
@@ -123,17 +123,17 @@ export function StatsSection({ stats }: StatsSectionProps) {
               <motion.div
                 key={stat.label}
                 variants={itemVariants}
-                className="text-center space-y-4"
+                className="text-center space-y-4 bg-card/40 border border-border/50 rounded-2xl p-6 backdrop-blur-sm hover:border-primary/30 transition-colors duration-300"
               >
-                <div className={`inline-flex p-4 rounded-2xl bg-gradient-to-br ${stat.gradient} shadow-lg`}>
-                  <Icon className="w-6 h-6 md:w-8 md:h-8 text-white" />
+                <div className={`inline-flex p-3 rounded-xl bg-gradient-to-br ${stat.gradient} shadow-lg`}>
+                  <Icon className="w-5 h-5 md:w-6 md:h-6 text-white" />
                 </div>
                 <div className="space-y-1">
                   <p className="text-3xl md:text-4xl lg:text-5xl font-display font-bold">
                     <AnimatedCounter value={stat.value} />
                     {stat.suffix}
                   </p>
-                  <p className="text-sm md:text-base text-muted-foreground">{stat.label}</p>
+                  <p className="text-xs md:text-sm text-muted-foreground">{stat.label}</p>
                 </div>
               </motion.div>
             )
