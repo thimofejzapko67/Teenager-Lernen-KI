@@ -21,15 +21,6 @@ const CATEGORY_GRADIENTS: Record<string, string> = {
   security: "from-red-500 to-accent",
 };
 
-const CATEGORY_ACCENTS: Record<string, string> = {
-  "ki-basics": "border-primary/20 hover:border-primary/50 group-hover:shadow-primary/10",
-  "web-dev": "border-blue-500/20 hover:border-blue-500/50 group-hover:shadow-blue-500/10",
-  "mobile-dev": "border-green-500/20 hover:border-green-500/50 group-hover:shadow-green-500/10",
-  "ai-agents": "border-accent/20 hover:border-accent/50 group-hover:shadow-accent/10",
-  "agi-safety": "border-amber-500/20 hover:border-amber-500/50 group-hover:shadow-amber-500/10",
-  security: "border-red-500/20 hover:border-red-500/50 group-hover:shadow-red-500/10",
-};
-
 const CATEGORY_LABELS: Record<string, string> = {
   "ki-basics": "KI-Basics",
   "web-dev": "Web-Dev",
@@ -43,24 +34,20 @@ export function LessonCard({ lesson }: LessonCardProps) {
   const categoryColor = CATEGORY_COLORS[lesson.category];
   const difficultyColor = DIFFICULTY_COLORS[lesson.difficulty];
   const gradient = CATEGORY_GRADIENTS[lesson.category] || "from-primary to-secondary";
-  const accent = CATEGORY_ACCENTS[lesson.category] || "border-border/50 hover:border-primary/50";
 
   return (
     <Link
       href={`/learn/${lesson.category}/${lesson.slug}`}
       className="group block"
     >
-      <div
-        className={cn(
-          "h-full bg-card border-2 rounded-2xl p-6 transition-all duration-300 relative overflow-hidden",
-          "hover:shadow-xl hover:-translate-y-1",
-          accent
-        )}
-      >
+      <div className="h-full bg-card border-2 border-border rounded-3xl p-8 transition-all duration-500 relative overflow-hidden hover:shadow-2xl hover:-translate-y-2">
+        {/* Gradient background on hover */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
         {/* Completion badge */}
         {lesson.completed && (
-          <div className="absolute top-4 right-4">
-            <span className="flex items-center gap-1 text-sm text-emerald-500 font-semibold bg-emerald-500/10 px-3 py-1 rounded-full">
+          <div className="absolute top-6 right-6 z-10">
+            <span className="flex items-center gap-2 text-sm font-bold bg-gradient-to-r from-primary to-secondary text-white px-4 py-2 rounded-full shadow-lg">
               <CheckCircle2 className="h-4 w-4" />
               Abgeschlossen
             </span>
@@ -68,24 +55,24 @@ export function LessonCard({ lesson }: LessonCardProps) {
         )}
 
         {/* Category badge */}
-        <div className="mb-4">
+        <div className="mb-5 relative z-10">
           <Badge
             variant="outline"
-            className={cn("text-xs font-medium", categoryColor)}
+            className={cn("text-sm font-semibold px-4 py-1.5 rounded-full border-2", categoryColor)}
           >
             {CATEGORY_LABELS[lesson.category] ?? lesson.category}
           </Badge>
         </div>
 
         {/* Title */}
-        <h3 className="font-bold text-xl leading-tight group-hover:text-primary transition-colors mb-4 pr-20">
+        <h3 className="font-bold text-2xl leading-tight mb-4 pr-24 relative z-10 group-hover:text-gradient-primary transition-all">
           {lesson.title}
         </h3>
 
         {/* Difficulty badge */}
         <Badge
           variant="outline"
-          className={cn("text-xs w-fit mb-4", difficultyColor)}
+          className={cn("text-sm font-medium px-4 py-1.5 rounded-full border-2 mb-6", difficultyColor)}
         >
           {lesson.difficulty === "beginner"
             ? "Anfänger"
@@ -96,16 +83,16 @@ export function LessonCard({ lesson }: LessonCardProps) {
 
         {/* Quiz score */}
         {lesson.quiz_score !== null && lesson.quiz_score !== undefined && lesson.completed && (
-          <div className="flex items-center gap-2 text-sm mb-4 p-3 bg-muted/50 rounded-lg">
-            <span className="text-muted-foreground">Quiz-Ergebnis:</span>
+          <div className="flex items-center gap-3 mb-6 p-4 bg-muted/50 rounded-2xl border-2 border-border relative z-10">
+            <span className="text-muted-foreground font-medium">Quiz:</span>
             <span
               className={cn(
-                "font-bold text-lg",
+                "font-bold text-2xl",
                 lesson.quiz_score >= 80
-                  ? "text-emerald-500"
+                  ? "text-gradient-primary"
                   : lesson.quiz_score >= 50
-                  ? "text-yellow-500"
-                  : "text-red-500"
+                  ? "text-accent"
+                  : "text-destructive"
               )}
             >
               {lesson.quiz_score}%
@@ -114,16 +101,16 @@ export function LessonCard({ lesson }: LessonCardProps) {
         )}
 
         {/* Footer */}
-        <div className="flex items-center justify-between text-sm pt-4 border-t border-border/50">
-          <div className="flex items-center gap-2 text-muted-foreground">
-            <Clock className="h-4 w-4" />
-            <span className="font-medium">{lesson.duration} Min</span>
+        <div className="flex items-center justify-between text-sm pt-6 border-t-2 border-border/50 relative z-10">
+          <div className="flex items-center gap-3 text-muted-foreground font-medium">
+            <Clock className="h-5 w-5" />
+            <span className="text-base">{lesson.duration} Min</span>
           </div>
-          <div className="flex items-center gap-2">
-            <div className={cn("inline-flex p-1.5 rounded-lg bg-gradient-to-br", gradient)}>
-              <Trophy className="h-4 w-4 text-white" />
+          <div className="flex items-center gap-3">
+            <div className={cn("inline-flex p-2 rounded-xl bg-gradient-to-br shadow-lg", gradient)}>
+              <Trophy className="h-5 w-5 text-white" />
             </div>
-            <span className="font-bold text-primary text-lg">+{lesson.xp_reward} XP</span>
+            <span className="font-bold text-gradient-primary text-2xl">+{lesson.xp_reward}</span>
           </div>
         </div>
       </div>
