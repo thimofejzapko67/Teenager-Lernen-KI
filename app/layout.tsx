@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Orbitron, Inter, JetBrains_Mono } from "next/font/google";
+import { Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 
-const orbitron = Orbitron({
+const geistMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
@@ -15,7 +15,7 @@ const inter = Inter({
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const geistMonoFont = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
   display: "swap",
@@ -116,7 +116,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
       </head>
       <body
-        className={`${orbitron.variable} ${inter.variable} ${jetbrainsMono.variable} font-body antialiased`}
+        className={`${geistMono.variable} ${inter.variable} ${geistMonoFont.variable} font-body antialiased`}
       >
         <Navbar />
         {children}
