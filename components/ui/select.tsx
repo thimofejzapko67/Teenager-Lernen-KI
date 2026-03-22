@@ -1,24 +1,30 @@
 "use client"
 import * as React from "react"
 
-const Select = React.forwardRef<HTMLSelectElement, React.SelectHTMLAttributes<HTMLSelectElement>>((props, ref) => (
-  <select ref={ref} className="flex h-10 w-full items-center justify-between rounded-xl border-2 border-border bg-transparent px-4 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" {...props} />
-))
+interface SelectProps {
+  children: React.ReactNode
+  value?: string
+  onValueChange?: (value: string) => void
+}
+
+const Select = ({ children, value, onValueChange }: SelectProps) => {
+  return <>{children}</>
+}
 Select.displayName = "Select"
 
-function SelectTrigger({ asChild, ...props }: React.ComponentProps<"button">) {
+function SelectTrigger({ asChild, ...props }: React.ComponentProps<"button"> & { asChild?: boolean }) {
   return <button {...props} />
 }
 
-function SelectValue({ ...props }: React.ComponentProps<"span">) {
-  return <span {...props} />
+function SelectValue({ placeholder, ...props }: React.ComponentProps<"span"> & { placeholder?: string }) {
+  return <span {...props}>{placeholder}</span>
 }
 
 function SelectContent({ children }: { children: React.ReactNode }) {
   return <div className="relative w-full">{children}</div>
 }
 
-function SelectItem({ children, ...props }: React.ComponentProps<"div">) {
+function SelectItem({ children, value, ...props }: React.ComponentProps<"div"> & { value: string }) {
   return <div {...props}>{children}</div>
 }
 

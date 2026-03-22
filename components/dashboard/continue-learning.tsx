@@ -25,6 +25,8 @@ export function ContinueLearning({ lesson, progress }: ContinueLearningProps) {
     )
   }
 
+  const isCompleted = progress?.completed_at !== null
+
   return (
     <Card>
       <CardHeader>
@@ -35,16 +37,20 @@ export function ContinueLearning({ lesson, progress }: ContinueLearningProps) {
           <div>
             <h3 className="font-semibold">{lesson.title}</h3>
             <p className="text-sm text-muted-foreground mt-1">{lesson.category}</p>
-            {progress && (
-              <div className="mt-3 h-2 w-full bg-muted rounded-full overflow-hidden">
-                <div className="h-full bg-primary" style={{ width: `${progress.progress}%` }} />
+            {isCompleted ? (
+              <div className="mt-3 inline-flex items-center gap-2 text-sm text-green-500 font-semibold">
+                ✓ Abgeschlossen
+              </div>
+            ) : progress && (
+              <div className="mt-3 inline-flex items-center gap-2 text-sm text-primary font-semibold">
+                In Bearbeitung
               </div>
             )}
           </div>
           <Link href={`/learn/lesson/${lesson.id}`}>
             <Button className="w-full">
               <Play className="w-4 h-4 mr-2" />
-              Fortsetzen
+              {isCompleted ? "Wiederholen" : "Fortsetzen"}
             </Button>
           </Link>
         </div>
