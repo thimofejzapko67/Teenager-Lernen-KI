@@ -1,92 +1,52 @@
+"use client"
+
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-interface BentoGridProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode
+interface MarqueeProps {
   className?: string
+  reverse?: boolean
+  pauseOnHover?: boolean
+  children?: React.ReactNode
+  vertical?: boolean
+  repeat?: number
+  speed?: "fast" | "normal" | "slow"
 }
 
-interface BentoGridItemProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode
-  className?: string
-  title?: string
-  description?: string
-  header?: React.ReactNode
-  icon?: React.ReactNode
-  colSpan?: number
-  rowSpan?: number
+export function Marquee({
+  className,
+  reverse,
+  pauseOnHover = false,
+  children,
+  vertical = false,
+  repeat = 4,
+  speed = "normal",
+}: MarqueeProps) {
+  const duration = speed === "fast" ? 20 : speed === "slow" ? 40 : 30
+
+  return (
+    <div
+      className={cn(
+        "group flex overflow-hidden p-2 [--gap:1rem] [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]",
+        vertical && "flex-col [--gap:1rem] [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]",
+        className
+      )}
+    >
+      {Array.from({ length: repeat }).map((_, i) => (
+        <div
+          key={i}
+          className={cn(
+            "flex shrink-0 justify-around [gap:var(--gap)]",
+            vertical ? "animate-marquee-vertical flex-col" : "animate-marquee",
+            reverse && "[animation-direction:reverse]",
+            pauseOnHover && "group-hover:[animation-play-state:paused]",
+            "[animation-duration:var(--duration)]"
+          )}
+          style={{ "--duration": `${duration}s` } as React.CSSProperties}
+        >
+          {children}
+        </div>
+      ))}
+    </div>
+  )
 }
-
-const BentoGrid = React.forwardRef<HTMLDivElement, BentoGridProps>(
-  ({ children, className, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          "grid auto-rows-[22rem] grid-cols-1 gap-4 md:grid-cols-3",
-          className
-        )}
-        {...props}
-      >
-        {children}
-      </div>
-    )
-  }
-)
-
-BentoGrid.displayName = "BentoGrid"
-
-const BentoGridItem = React.forwardRef<HTMLDivElement, BentoGridItemProps>(
-  (
-    {
-      children,
-      className,
-      title,
-      description,
-      header,
-      icon,
-      colSpan = 1,
-      rowSpan = 1,
-      ...props
-    },
-    ref
-  ) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          "group relative overflow-hidden rounded-2xl bg-background/80 backdrop-blur-xl border border-border/60 p-6 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-1",
-          colSpan === 2 && "md:col-span-2",
-          colSpan === 3 && "md:col-span-3",
-          rowSpan === 2 && "md:row-span-2",
-          rowSpan === 3 && "md:row-span-3",
-          className
-        )}
-        {...props}
-      >
-        {header && (
-          <div className="mb-4 flex items-start justify-between">
-            {icon && <div className="text-primary">{icon}</div>}
-          </div>
-        )}
-        {title && (
-          <div className="mb-2">
-            <h3 className="font-semibold text-lg">{title}</h3>
-          </div>
-        )}
-        {description && (
-          <div className="mb-4">
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              {description}
-            </p>
-          </div>
-        )}
-        {children}
-      </div>
-    )
-  }
-)
-
-BentoGridItem.displayName = "BentoGridItem"
-
-export { BentoGrid, BentoGridItem }

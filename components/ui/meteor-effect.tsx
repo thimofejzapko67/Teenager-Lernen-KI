@@ -1,92 +1,45 @@
+"use client"
+
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-interface BentoGridProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode
+interface MeteorEffectProps {
   className?: string
+  meteorCount?: number
+  meteorDelay?: number
 }
 
-interface BentoGridItemProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode
-  className?: string
-  title?: string
-  description?: string
-  header?: React.ReactNode
-  icon?: React.ReactNode
-  colSpan?: number
-  rowSpan?: number
+export const MeteorEffect = ({
+  className,
+  meteorCount = 20,
+  meteorDelay = 0,
+}: MeteorEffectProps) => {
+  const meteors = React.useMemo(() => {
+    return Array.from({ length: meteorCount }).map((_, i) => ({
+      id: i,
+      top: Math.floor(Math.random() * 100) + "%",
+      left: Math.floor(Math.random() * 100) + "%",
+      animationDelay: Math.random() * 1 + 0.2 + "s",
+      animationDuration: Math.random() * 1 + 0.5 + "s",
+    }))
+  }, [meteorCount])
+
+  return (
+    <div className={cn("absolute inset-0 overflow-hidden pointer-events-none", className)}>
+      {meteors.map((meteor) => (
+        <div
+          key={meteor.id}
+          className="absolute top-0 left-0 h-0.5 w-0.5 rotate-[45deg] animate-meteor-effect rounded-[9999px]"
+          style={{
+            top: meteor.top,
+            left: meteor.left,
+            animationDelay: meteor.animationDelay,
+            animationDuration: meteor.animationDuration,
+          }}
+        >
+          <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[1px] w-[50px] bg-gradient-to-r from-sky-500 to-transparent opacity-50" />
+        </div>
+      ))}
+    </div>
+  )
 }
-
-const BentoGrid = React.forwardRef<HTMLDivElement, BentoGridProps>(
-  ({ children, className, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          "grid auto-rows-[22rem] grid-cols-1 gap-4 md:grid-cols-3",
-          className
-        )}
-        {...props}
-      >
-        {children}
-      </div>
-    )
-  }
-)
-
-BentoGrid.displayName = "BentoGrid"
-
-const BentoGridItem = React.forwardRef<HTMLDivElement, BentoGridItemProps>(
-  (
-    {
-      children,
-      className,
-      title,
-      description,
-      header,
-      icon,
-      colSpan = 1,
-      rowSpan = 1,
-      ...props
-    },
-    ref
-  ) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          "group relative overflow-hidden rounded-2xl bg-background/80 backdrop-blur-xl border border-border/60 p-6 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-1",
-          colSpan === 2 && "md:col-span-2",
-          colSpan === 3 && "md:col-span-3",
-          rowSpan === 2 && "md:row-span-2",
-          rowSpan === 3 && "md:row-span-3",
-          className
-        )}
-        {...props}
-      >
-        {header && (
-          <div className="mb-4 flex items-start justify-between">
-            {icon && <div className="text-primary">{icon}</div>}
-          </div>
-        )}
-        {title && (
-          <div className="mb-2">
-            <h3 className="font-semibold text-lg">{title}</h3>
-          </div>
-        )}
-        {description && (
-          <div className="mb-4">
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              {description}
-            </p>
-          </div>
-        )}
-        {children}
-      </div>
-    )
-  }
-)
-
-BentoGridItem.displayName = "BentoGridItem"
-
-export { BentoGrid, BentoGridItem }

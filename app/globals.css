@@ -1,37 +1,51 @@
 @import "tailwindcss";
 
 @theme {
-  /* Modern Experimental - Bold, Glassmorphism, Colorful */
-  --color-primary: #6366F1; /* Indigo */
+  /* Modern Minimal Design Colors - Electric Blue Theme */
+  --color-primary: #0066FF;
   --color-primary-foreground: #FFFFFF;
 
-  --color-secondary: #EC4899; /* Pink */
+  --color-secondary: #64748B;
   --color-secondary-foreground: #FFFFFF;
 
-  --color-accent: #14B8A6; /* Teal */
+  --color-accent: #0EA5E9;
   --color-accent-foreground: #FFFFFF;
 
-  --color-muted: #1E293B;
-  --color-muted-foreground: #94A3B8;
+  --color-muted: #F1F5F9;
+  --color-muted-foreground: #64748B;
 
-  --color-destructive: #F43F5E;
+  --color-destructive: #EF4444;
   --color-destructive-foreground: #FFFFFF;
 
-  --color-border: rgba(255, 255, 255, 0.1);
-  --color-input: rgba(255, 255, 255, 0.1);
-  --color-ring: #6366F1;
+  --color-border: #E5E7EB;
+  --color-input: #E5E7EB;
+  --color-ring: #0066FF;
 
-  --color-background: #0F0F1A; /* Deep dark blue */
-  --color-foreground: #F8FAFC;
+  --color-background: #FFFFFF;
+  --color-foreground: #1A1A1A;
 
-  --color-card: rgba(255, 255, 255, 0.03);
-  --color-card-foreground: #F8FAFC;
+  --color-card: #FFFFFF;
+  --color-card-foreground: #1A1A1A;
 
-  --color-popover: rgba(255, 255, 255, 0.05);
-  --color-popover-foreground: #F8FAFC;
+  --color-popover: #FFFFFF;
+  --color-popover-foreground: #1A1A1A;
 
-  /* Radius - variable for experimental look */
-  --radius: 0.75rem;
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    --color-muted: #1E293B;
+    --color-muted-foreground: #94A3B8;
+    --color-border: #2A2A2A;
+    --color-input: #2A2A2A;
+    --color-background: #0A0A0A;
+    --color-foreground: #FAFAFA;
+    --color-card: #0A0A0A;
+    --color-card-foreground: #FAFAFA;
+    --color-popover: #0A0A0A;
+    --color-popover-foreground: #FAFAFA;
+  }
+
+  /* Radius - smaller for minimal look */
+  --radius: 0.25rem;
 
   /* Fonts */
   --font-display: var(--font-display);
@@ -150,6 +164,45 @@
 @keyframes shimmer {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
+}
+
+/* Magic UI Animations */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+@keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+  }
+}
+
+@keyframes meteor-effect {
+  from {
+    transform: rotate(215deg) translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: rotate(215deg) translateX(-500px);
+    opacity: 0;
+  }
 }
 
 /* Grid pattern for backgrounds */
