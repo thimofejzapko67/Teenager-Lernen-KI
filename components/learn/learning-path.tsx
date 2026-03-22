@@ -101,7 +101,7 @@ export function LearningPath() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 onClick={() => handleCardClick(topic.id)}
-                className="group relative h-48 rounded-2xl border-2 border-border/60 bg-card/40 backdrop-blur-sm hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1 overflow-hidden"
+                className="group relative h-48 rounded-2xl border border-white/10 bg-card/80 backdrop-blur-xl hover:border-primary/40 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-2 overflow-hidden"
               >
                 <div className={`absolute inset-0 bg-gradient-to-br ${topic.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
 
@@ -129,7 +129,7 @@ export function LearningPath() {
           >
             <button
               onClick={handleBack}
-              className="mb-8 flex items-center gap-2 px-4 py-2 rounded-lg border border-border/60 hover:border-primary hover:text-primary transition-colors"
+              className="mb-8 flex items-center gap-2 px-4 py-2 rounded-xl border border-white/10 bg-card/60 backdrop-blur-md hover:border-primary/40 hover:text-primary transition-all duration-300"
             >
               <ArrowLeft className="w-4 h-4" />
               Zurück
@@ -152,7 +152,7 @@ export function LearningPath() {
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                   onMouseEnter={() => setHoveredSubtopic(subtopic.title)}
                   onMouseLeave={() => setHoveredSubtopic(null)}
-                  className="group relative p-6 rounded-xl border border-border/60 bg-card/40 backdrop-blur-sm hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-0.5 cursor-pointer overflow-hidden"
+                  className="group relative p-6 rounded-xl border border-white/10 bg-card/60 backdrop-blur-md hover:border-primary/30 transition-all duration-500 hover:shadow-xl hover:shadow-primary/15 hover:-translate-y-1 cursor-pointer overflow-hidden"
                 >
                   <div className={`absolute inset-0 bg-gradient-to-r ${selectedTopic.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
 
