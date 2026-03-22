@@ -136,9 +136,6 @@ export function LearningPath() {
             </button>
 
             <div className="mb-8">
-              <div className="inline-flex p-4 rounded-2xl bg-primary/10 mb-4">
-                <span className="text-6xl">{selectedTopic?.icon}</span>
-              </div>
               <h2 className="text-4xl font-bold mb-2">{selectedTopic?.title}</h2>
               <p className="text-lg text-muted-foreground">{selectedTopic?.description}</p>
             </div>
