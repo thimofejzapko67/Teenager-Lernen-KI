@@ -1,7 +1,0 @@
-export { HeroSection } from "./hero-section"
-export { FeaturesSection } from "./features-section"
-export { StatsSection } from "./stats-section"
-export { HowItWorksSection } from "./how-it-works"
-export { FaqSection } from "./faq-section"
-export { FinalCtaSection } from "./final-cta-section"
-export { Footer } from "./footer"
