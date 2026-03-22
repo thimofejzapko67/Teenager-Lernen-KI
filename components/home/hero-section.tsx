@@ -123,12 +123,16 @@ export function HeroSection() {
               <BentoGridItem
                 title="Werde Gesponsort"
                 description="Tech-Companies sponsor die besten"
-              />
+              >
+                <></>
+              </BentoGridItem>
               <BentoGridItem
                 title="Community"
                 description="Lerne mit anderen Teenagern"
                 className="md:col-span-2"
-              />
+              >
+                <></>
+              </BentoGridItem>
             </BentoGrid>
           </motion.div>
         </div>
