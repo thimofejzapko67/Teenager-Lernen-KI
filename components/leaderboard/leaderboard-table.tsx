@@ -83,7 +83,6 @@ export function LeaderboardTable({ entries, isLoading, showTop3 = true }: Leader
   if (entries.length === 0) {
     return (
       <div className="glass-card rounded-2xl p-12 text-center">
-        <div className="text-4xl mb-4">🎮</div>
         <p className="text-muted-foreground">Noch keine Einträge vorhanden.</p>
         <p className="text-sm text-muted-foreground/60 mt-2">Sei der Erste auf der Rangliste!</p>
       </div>

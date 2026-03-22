@@ -9,8 +9,6 @@ const categories = [
     id: "free-tools",
     title: "Free Tools",
     description: "KI-Tools für effizienteres Entwickeln",
-    icon: "🛠️",
-    color: "from-blue-500 to-cyan-500",
     lessons: 4,
     xp: 275
   },
@@ -18,8 +16,6 @@ const categories = [
     id: "web-dev",
     title: "Web Development",
     description: "Websites & Web Apps bauen",
-    icon: "💻",
-    color: "from-purple-500 to-pink-500",
     lessons: 4,
     xp: 475
   },
@@ -27,8 +23,6 @@ const categories = [
     id: "app-dev",
     title: "App Development",
     description: "Mobile Apps entwickeln",
-    icon: "📱",
-    color: "from-green-500 to-emerald-500",
     lessons: 4,
     xp: 500
   },
@@ -36,8 +30,6 @@ const categories = [
     id: "security",
     title: "Security",
     description: "Sichere Anwendungen bauen",
-    icon: "🔒",
-    color: "from-orange-500 to-red-500",
     lessons: 4,
     xp: 375
   },
@@ -63,17 +55,9 @@ export function LearningGrid() {
               onClick={() => router.push(`/learn/${category.id}`)}
               className="group relative text-left"
             >
-              <div className="relative h-full p-8 rounded-3xl border-2 border-border bg-card transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 overflow-hidden">
-                {/* Gradient Background on Hover */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
-
+              <div className="relative h-full p-8 rounded-2xl border border-border bg-card transition-all duration-300 hover:shadow-lg hover:-translate-y-1 overflow-hidden">
                 {/* Content */}
                 <div className="relative z-10">
-                  {/* Icon */}
-                  <div className={`inline-flex p-4 rounded-2xl bg-gradient-to-br ${category.color} text-5xl mb-6 shadow-lg`}>
-                    {category.icon}
-                  </div>
-
                   {/* Title */}
                   <h3 className="text-2xl font-bold mb-3">{category.title}</h3>
 
@@ -93,8 +77,8 @@ export function LearningGrid() {
                   </div>
 
                   {/* Arrow */}
-                  <div className="absolute top-8 right-8 w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <ChevronRight className="w-6 h-6 text-white" />
+                  <div className="absolute top-8 right-8 w-12 h-12 rounded-lg bg-primary flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <ChevronRight className="w-6 h-6 text-primary-foreground" />
                   </div>
                 </div>
               </div>

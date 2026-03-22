@@ -135,7 +135,7 @@ export function UsersTable({ users, onBan, onUnban, onRoleChange }: UsersTablePr
                   <TableCell>{user.xp.toLocaleString()}</TableCell>
                   <TableCell>
                     <div className="flex items-center gap-1">
-                      🔥 {user.streak}
+                      {user.streak}
                     </div>
                   </TableCell>
                   <TableCell>

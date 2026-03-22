@@ -1,51 +1,51 @@
 @import "tailwindcss";
 
 /* ========================================
-   BOLD MODERN DESIGN
-   - Vibrant, confident colors
-   - Strong contrasts
-   - Energetic feel
+   CLEAN LIGHT DESIGN
+   - Simple, professional colors
+   - Clear contrasts
+   - Clean feel
    ======================================== */
 @theme {
-  /* Bold coral-red as primary */
-  --color-primary: #FF4757;
+  /* Blue as primary */
+  --color-primary: #0066CC;
   --color-primary-foreground: #FFFFFF;
 
-  /* Electric blue as secondary */
-  --color-secondary: #3742FA;
+  /* Gray as secondary */
+  --color-secondary: #475569;
   --color-secondary-foreground: #FFFFFF;
 
-  /* Bright yellow accent */
-  --color-accent: #FFA502;
-  --color-accent-foreground: #1E293B;
+  /* Teal accent */
+  --color-accent: #0D9488;
+  --color-accent-foreground: #FFFFFF;
 
   /* Neutral muted */
-  --color-muted: #F8F9FA;
-  --color-muted-foreground: #6C757D;
+  --color-muted: #F1F5F9;
+  --color-muted-foreground: #64748B;
 
   /* Strong destructive */
-  --color-destructive: #FF4757;
+  --color-destructive: #DC2626;
   --color-destructive-foreground: #FFFFFF;
 
   /* Crisp borders */
-  --color-border: #DEE2E6;
-  --color-input: #DEE2E6;
-  --color-ring: #FF4757;
+  --color-border: #E2E8F0;
+  --color-input: #E2E8F0;
+  --color-ring: #0066CC;
 
   /* Light mode */
   --color-background: #FFFFFF;
-  --color-foreground: #212529;
+  --color-foreground: #0F172A;
 
   /* Cards */
   --color-card: #FFFFFF;
-  --color-card-foreground: #212529;
+  --color-card-foreground: #0F172A;
 
   /* Popovers */
   --color-popover: #FFFFFF;
-  --color-popover-foreground: #212529;
+  --color-popover-foreground: #0F172A;
 
   /* Rounded corners */
-  --radius: 0.75rem;
+  --radius: 0.5rem;
 
   /* Fonts */
   --font-display: var(--font-display);
@@ -54,28 +54,28 @@
 }
 
 /* ========================================
-   DARK MODE - BOLD & VIBRANT
+   DARK MODE
    ======================================== */
 .dark {
-  --color-primary: #FF6B77;
-  --color-primary-foreground: #1A1D23;
-  --color-secondary: #5761E9;
+  --color-primary: #3B82F6;
+  --color-primary-foreground: #FFFFFF;
+  --color-secondary: #64748B;
   --color-secondary-foreground: #FFFFFF;
-  --color-accent: #FFB84D;
-  --color-accent-foreground: #1A1D23;
-  --color-muted: #1A1D23;
-  --color-muted-foreground: #ADB5BD;
-  --color-destructive: #FF6B77;
-  --color-destructive-foreground: #1A1D23;
-  --color-border: #343A40;
-  --color-input: #343A40;
-  --color-ring: #FF6B77;
-  --color-background: #121418;
-  --color-foreground: #F8F9FA;
-  --color-card: #1A1D23;
-  --color-card-foreground: #F8F9FA;
-  --color-popover: #1A1D23;
-  --color-popover-foreground: #F8F9FA;
+  --color-accent: #14B8A6;
+  --color-accent-foreground: #FFFFFF;
+  --color-muted: #1E293B;
+  --color-muted-foreground: #94A3B8;
+  --color-destructive: #EF4444;
+  --color-destructive-foreground: #FFFFFF;
+  --color-border: #334155;
+  --color-input: #334155;
+  --color-ring: #3B82F6;
+  --color-background: #0F172A;
+  --color-foreground: #F1F5F9;
+  --color-card: #1E293B;
+  --color-card-foreground: #F1F5F9;
+  --color-popover: #1E293B;
+  --color-popover-foreground: #F1F5F9;
 }
 
 /* ========================================
@@ -177,25 +177,12 @@
   }
 
   .xp-bar-fill {
-    background: linear-gradient(
-      90deg,
-      var(--color-primary),
-      var(--color-secondary),
-      var(--color-accent)
-    );
-    background-size: 200% 100%;
-    animation: shimmer 3s linear infinite;
+    background: var(--color-primary);
   }
 
   .gradient-text {
-    background: linear-gradient(
-      135deg,
-      var(--color-primary) 0%,
-      var(--color-secondary) 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--color-primary);
+    font-weight: 600;
   }
 
   .bold-button {
@@ -203,14 +190,12 @@
     color: var(--color-primary-foreground);
     font-weight: 600;
     padding: 0.75rem 1.5rem;
-    border-radius: 0.75rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 14px rgba(255, 71, 87, 0.3);
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
   }
 
   .bold-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
+    opacity: 0.9;
   }
 
   .section-label {
@@ -218,14 +203,13 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 1rem;
-    border-radius: 2rem;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    border-radius: 0.25rem;
+    background: var(--color-primary);
     color: var(--color-primary-foreground);
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    box-shadow: 0 2px 8px rgba(255, 71, 87, 0.3);
   }
 }
 
@@ -249,10 +233,8 @@
   }
 
   .text-gradient-primary {
-    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--color-primary);
+    font-weight: 600;
   }
 }
 

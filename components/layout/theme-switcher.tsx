@@ -5,12 +5,11 @@ import { Button } from "@/components/ui/button"
 import { Moon, Sun } from "lucide-react"
 
 export function ThemeSwitcher() {
-  const [isDark, setIsDark] = useState(true)
+  const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
     const saved = localStorage.getItem("codelift-theme")
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-    const initialTheme = saved || (prefersDark ? "dark" : "light")
+    const initialTheme = saved || "light"
     setIsDark(initialTheme === "dark")
     document.documentElement.classList.toggle("dark", initialTheme === "dark")
   }, [])

@@ -12,7 +12,6 @@ const mainTopics = [
     id: "free-tools",
     title: "Free Tools",
     description: "KI-Tools für effizienteres Entwickeln",
-    icon: "🛠️",
     route: "/learn/free-tools",
     subtopics: [
       { title: "Cursor", description: "KI-gesteuerter Code Editor", xp: 50 },
@@ -25,7 +24,6 @@ const mainTopics = [
     id: "web-dev",
     title: "Web Development",
     description: "Websites & Web Apps bauen",
-    icon: "💻",
     subtopics: [
       { title: "Frontend", description: "HTML, CSS, React, Next.js", xp: 150 },
       { title: "Backend", description: "Node.js, APIs, Databases", xp: 150 },
@@ -37,7 +35,6 @@ const mainTopics = [
     id: "app-dev",
     title: "App Development",
     description: "Mobile Apps entwickeln",
-    icon: "📱",
     subtopics: [
       { title: "iOS", description: "Swift, SwiftUI", xp: 150 },
       { title: "Android", description: "Kotlin, Jetpack Compose", xp: 150 },
@@ -49,7 +46,6 @@ const mainTopics = [
     id: "security",
     title: "Security",
     description: "Sichere Anwendungen bauen",
-    icon: "🔒",
     subtopics: [
       { title: "Authentication", description: "OAuth, JWT, Sessions", xp: 100 },
       { title: "Data Protection", description: "Verschlüsselung, Privacy", xp: 100 },
@@ -111,7 +107,6 @@ export function LearningPath() {
                 className="group relative h-48 rounded-2xl border-2 border-border/60 bg-card/40 backdrop-blur-sm hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1 overflow-hidden"
               >
                 <div className="relative p-6 flex flex-col items-center justify-center h-full text-center">
-                  <span className="text-5xl mb-3">{topic.icon}</span>
                   <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
                     {topic.title}
                   </h3>
