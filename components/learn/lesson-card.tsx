@@ -78,16 +78,9 @@ export function LessonCard({ lesson }: LessonCardProps) {
         </div>
 
         {/* Title */}
-        <h3 className="font-bold text-xl leading-tight group-hover:text-primary transition-colors mb-3 pr-20">
+        <h3 className="font-bold text-xl leading-tight group-hover:text-primary transition-colors mb-4 pr-20">
           {lesson.title}
         </h3>
-
-        {/* Description preview */}
-        {lesson.description && (
-          <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
-            {lesson.description}
-          </p>
-        )}
 
         {/* Difficulty badge */}
         <Badge
