@@ -9,6 +9,7 @@ import { QuizSection } from "@/components/lesson/quiz-section";
 import { DesktopTOC, TOC } from "@/components/lesson/toc";
 import { ScrollProgress } from "@/components/lesson/scroll-progress";
 import { completeLesson } from "@/lib/lessons";
+import type { LessonCategory } from "@/types/database";
 
 interface LessonPageProps {
   params: {
@@ -17,11 +18,18 @@ interface LessonPageProps {
   };
 }
 
+const validCategories: LessonCategory[] = ["web-dev", "app-dev", "security", "ai-data"];
+
 export async function generateMetadata({
   params,
 }: LessonPageProps): Promise<Metadata> {
+  const category = params.category as LessonCategory;
+  if (!validCategories.includes(category)) {
+    return { title: "Lektion nicht gefunden - Codelift" };
+  }
+  
   const lesson = await getLessonByCategoryAndSlug(
-    params.category,
+    category,
     params.slug
   );
 
@@ -46,7 +54,7 @@ async function LessonContentWrapper({
   category,
   slug,
 }: {
-  category: string;
+  category: LessonCategory;
   slug: string;
 }) {
   const lesson = await getLessonByCategoryAndSlug(category, slug);
@@ -152,7 +160,7 @@ export default function LessonPage({ params }: LessonPageProps) {
         {/* Back button & breadcrumb */}
         <Suspense fallback={<LessonLoadingSkeleton />}>
           <LessonContentWrapper
-            category={params.category}
+            category={params.category as LessonCategory}
             slug={params.slug}
           />
         </Suspense>

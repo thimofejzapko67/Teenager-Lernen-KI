@@ -121,7 +121,7 @@ export interface Database {
 
 export type Rank = 'novice' | 'coder' | 'developer' | 'architect' | 'master' | 'legend'
 
-export type LessonCategory = 'ki-basics' | 'web-dev' | 'mobile-dev' | 'ai-agents' | 'agi-safety' | 'security'
+export type LessonCategory = 'web-dev' | 'app-dev' | 'security' | 'ai-data'
 
 export type Difficulty = 'beginner' | 'intermediate' | 'advanced'
 

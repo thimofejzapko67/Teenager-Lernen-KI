@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect, useTransition } from "react";
-import { Search, Globe, Smartphone, Shield, Bot } from "lucide-react";
+import { Search, Globe, Smartphone, Shield, Brain } from "lucide-react";
 import type { LessonFilters, LessonSort } from "@/types/lessons";
 import { SORT_LABELS } from "@/types/lessons";
 import { Input } from "@/components/ui/input";
@@ -25,9 +25,9 @@ interface LessonFiltersClientProps {
 const MAIN_CATEGORIES = [
   { value: "all" as const, label: "Alle", icon: null },
   { value: "web-dev" as LessonCategory, label: "Web Development", icon: Globe },
-  { value: "mobile-dev" as LessonCategory, label: "App Development", icon: Smartphone },
+  { value: "app-dev" as LessonCategory, label: "App Development", icon: Smartphone },
   { value: "security" as LessonCategory, label: "Security", icon: Shield },
-  { value: "ai-agents" as LessonCategory, label: "KI & Agenten", icon: Bot },
+  { value: "ai-data" as LessonCategory, label: "AI & Data", icon: Brain },
 ] as const;
 
 export function LessonFiltersClient({

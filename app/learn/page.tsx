@@ -1,133 +1,129 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { BookOpen, Sparkles, ArrowRight } from "lucide-react";
-import { getLessons } from "@/lib/lessons";
-import { LessonFilters } from "@/components/learn/lesson-filters";
-import { LessonCard } from "@/components/learn/lesson-card";
-import { LessonGridSkeleton } from "@/components/learn/lesson-skeleton";
-import { LearnHero } from "@/components/learn/learn-hero";
-import type { LessonFilters as LessonFiltersType, LessonSort } from "@/types/lessons";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { PLATFORMS } from "@/lib/constants/platforms";
+import type { LessonCategory } from "@/types/database";
 
 export const revalidate = 300;
 
 export const metadata: Metadata = {
-  title: "Lektionen - Codelift",
+  title: "Lernen - Codelift",
   description:
-    "Entdecke KI-Kurse, Web-Entwicklung, App-Bau und mehr. Verdiene XP und level auf!",
+    "Wähle deinen Lernpfad: Web Development, App Development, Security oder AI & Data Science.",
 };
 
-interface LessonsPageProps {
-  searchParams: {
-    category?: string;
-    difficulty?: string;
-    search?: string;
-    sort?: string;
-    page?: string;
-  };
-}
-
-async function LessonsContent({
-  filters,
-  sort,
-  page,
-}: {
-  filters: LessonFiltersType;
-  sort: LessonSort;
-  page: number;
+function PlatformCard({ 
+  platformKey, 
+  platform 
+}: { 
+  platformKey: LessonCategory; 
+  platform: typeof PLATFORMS[LessonCategory];
 }) {
-  const response = await getLessons(filters, sort, page);
-
-  if (response.lessons.length === 0) {
-    return (
-      <>
-        <LessonFilters filters={filters} sort={sort} totalCount={0} />
-        <div className="text-center py-20">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
-            <BookOpen className="h-8 w-8 text-primary" />
-          </div>
-          <h3 className="text-xl font-semibold mb-2">Keine Lektionen gefunden</h3>
-          <p className="text-muted-foreground">
-            Versuche andere Filter oder Suchbegriffe.
-          </p>
-        </div>
-      </>
-    );
-  }
-
   return (
-    <>
-      <LessonFilters
-        filters={filters}
-        sort={sort}
-        totalCount={response.total}
-      />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-        {response.lessons.map((lesson) => (
-          <LessonCard key={lesson.id} lesson={lesson} />
-        ))}
-      </div>
-
-      {response.total > response.page * response.pageSize && (
-        <div className="flex justify-center mt-10">
-          <a
-            href={`?page=${page + 1}${filters.category ? `&category=${filters.category}` : ""}${filters.difficulty ? `&difficulty=${filters.difficulty}` : ""}${filters.search ? `&search=${filters.search}` : ""}&sort=${sort}`}
-            className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-primary to-violet-600 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5"
-          >
-            Mehr laden
-            <ArrowRight className="w-4 h-4" />
-          </a>
+    <Link
+      href={`/learn/${platformKey}`}
+      className="group relative overflow-hidden rounded-2xl bg-surface border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1"
+    >
+      <div className={`absolute inset-0 bg-gradient-to-br ${platform.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
+      
+      <div className="relative p-8">
+        <div className="flex items-center justify-between mb-6">
+          <span className="text-5xl">{platform.icon}</span>
+          <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
         </div>
-      )}
-    </>
+        
+        <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
+          {platform.title}
+        </h3>
+        
+        <p className="text-muted-foreground mb-6 line-clamp-2">
+          {platform.description}
+        </p>
+        
+        <div className="flex items-center gap-2 text-sm">
+          <span className="px-3 py-1 rounded-full bg-primary/10 text-primary font-medium">
+            {platform.lessonsCount} Lektionen
+          </span>
+        </div>
+      </div>
+    </Link>
   );
 }
 
-export default function LessonsPage({ searchParams }: LessonsPageProps) {
-  const filters: LessonFiltersType = {
-    category:
-      (searchParams.category as any) === "all"
-        ? undefined
-        : (searchParams.category as any) || undefined,
-    difficulty:
-      (searchParams.difficulty as any) === "all"
-        ? undefined
-        : (searchParams.difficulty as any) || undefined,
-    search: searchParams.search || undefined,
-  };
+function PlatformGridSkeleton() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {[1, 2, 3, 4].map((i) => (
+        <div key={i} className="rounded-2xl bg-surface border border-border p-8 animate-pulse">
+          <div className="h-12 w-12 rounded-full bg-border mb-6" />
+          <div className="h-8 w-48 bg-border rounded mb-4" />
+          <div className="h-4 w-full bg-border rounded mb-2" />
+          <div className="h-4 w-3/4 bg-border rounded mb-6" />
+          <div className="h-8 w-24 bg-border rounded-full" />
+        </div>
+      ))}
+    </div>
+  );
+}
 
-  const sort: LessonSort =
-    (searchParams.sort as LessonSort) || "newest";
+function PlatformGrid() {
+  const platforms = Object.entries(PLATFORMS) as [LessonCategory, typeof PLATFORMS[LessonCategory]][];
+  
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {platforms.map(([key, platform]) => (
+        <PlatformCard key={key} platformKey={key} platform={platform} />
+      ))}
+    </div>
+  );
+}
 
-  const page = parseInt(searchParams.page || "1", 10);
-
+export default function LearnPage() {
   return (
     <main className="min-h-screen">
-      {/* Hero */}
-      <LearnHero />
+      <section className="relative overflow-hidden border-b border-border">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-violet-500/5" />
+        <div className="container mx-auto px-4 py-16 md:py-24 relative z-10">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
+              Wähle deinen{" "}
+              <span className="bg-gradient-to-r from-primary via-violet-400 to-secondary bg-clip-text text-transparent">
+                Lernpfad
+              </span>
+            </h1>
+            <p className="text-xl text-muted-foreground mb-8">
+              Starte deine Reise in die Welt der Programmierung. 
+              Klicke auf eine Plattform um mit den Lektionen zu beginnen.
+            </p>
+          </div>
+        </div>
+      </section>
 
-      {/* Filters & Lessons */}
-      <section className="container mx-auto px-4 py-10 md:py-14">
-        <Suspense fallback={<LessonGridSkeleton />}>
-          <LessonsContent filters={filters} sort={sort} page={page} />
+      <section className="container mx-auto px-4 py-12 md:py-16">
+        <Suspense fallback={<PlatformGridSkeleton />}>
+          <PlatformGrid />
         </Suspense>
       </section>
 
-      {/* CTA Section */}
-      <section className="relative overflow-hidden border-t border-border/50">
+      <section className="relative overflow-hidden border-t border-border">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10" />
         <div className="container mx-auto px-4 py-16 text-center relative z-10">
           <h2 className="text-2xl md:text-3xl font-display font-bold mb-4">
-            Bereit <span className="bg-gradient-to-r from-primary via-violet-400 to-secondary bg-clip-text text-transparent">loszulegen</span>?
+            Noch unsicher?{" "}
+            <span className="bg-gradient-to-r from-primary via-violet-400 to-secondary bg-clip-text text-transparent">
+              Starte mit Web Development
+            </span>
           </h2>
           <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-            Starte mit deinem ersten Tutorial und verdiene sofort 50 XP.
+            Web Development ist der perfekte Einstieg. Du lernst die Grundlagen 
+            und siehst sofort Ergebnisse im Browser.
           </p>
           <Link
-            href="/auth"
+            href="/learn/web-dev"
             className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-violet-600 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5"
           >
-            Jetzt starten
+            Web Development starten
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

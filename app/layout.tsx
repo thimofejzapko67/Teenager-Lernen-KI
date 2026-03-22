@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Orbitron, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { Navbar } from "@/components/layout/navbar";
 
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -117,6 +118,7 @@ export default function RootLayout({
       <body
         className={`${orbitron.variable} ${inter.variable} ${jetbrainsMono.variable} font-body antialiased`}
       >
+        <Navbar />
         {children}
       </body>
     </html>

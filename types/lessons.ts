@@ -22,12 +22,10 @@ export interface LessonsResponse {
 
 export const CATEGORY_LABELS: Record<LessonCategory | "all", string> = {
   "all": "Alle Kategorien",
-  "ki-basics": "KI-Basics",
-  "web-dev": "Web-Entwicklung",
-  "mobile-dev": "App-Entwicklung",
-  "ai-agents": "KI-Agenten",
-  "agi-safety": "AGI-Sicherheit",
-  "security": "Sicherheit",
+  "web-dev": "Web Development",
+  "app-dev": "App Development",
+  "security": "Security",
+  "ai-data": "AI & Data Science",
 };
 
 export const DIFFICULTY_LABELS: Record<Difficulty | "all", string> = {
@@ -44,12 +42,10 @@ export const DIFFICULTY_COLORS: Record<Difficulty, string> = {
 };
 
 export const CATEGORY_COLORS: Record<LessonCategory, string> = {
-  "ki-basics": "bg-purple-500/20 text-purple-400 border-purple-500/50",
   "web-dev": "bg-blue-500/20 text-blue-400 border-blue-500/50",
-  "mobile-dev": "bg-cyan-500/20 text-cyan-400 border-cyan-500/50",
-  "ai-agents": "bg-pink-500/20 text-pink-400 border-pink-500/50",
-  "agi-safety": "bg-orange-500/20 text-orange-400 border-orange-500/50",
+  "app-dev": "bg-cyan-500/20 text-cyan-400 border-cyan-500/50",
   "security": "bg-red-500/20 text-red-400 border-red-500/50",
+  "ai-data": "bg-purple-500/20 text-purple-400 border-purple-500/50",
 };
 
 export const SORT_LABELS: Record<LessonSort, string> = {

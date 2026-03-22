@@ -7,7 +7,6 @@ import {
   FinalCtaSection,
   Footer,
 } from "@/components/home"
-import { Navbar } from "@/components/layout/navbar"
 import { getHomeStats } from "@/lib/home"
 import { Suspense } from "react"
 
@@ -36,8 +35,6 @@ async function CachedStatsSection() {
 export default function HomePage() {
   return (
     <main className="min-h-screen">
-      <Navbar />
-
       {/* Hero Section */}
       <HeroSection />
 
