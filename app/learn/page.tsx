@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { PLATFORMS } from "@/lib/constants/platforms";
 import type { LessonCategory } from "@/types/database";
+import { LearningPath } from "@/components/learn/learning-path";
 
 export const revalidate = 300;
 
@@ -101,6 +102,16 @@ export default function LearnPage() {
       </section>
 
       <section className="container mx-auto px-4 py-12 md:py-16">
+        <div className="mb-12">
+          <h2 className="text-2xl md:text-3xl font-display font-bold mb-4 text-center">
+            Lernpfad Übersicht
+          </h2>
+          <p className="text-muted-foreground text-center max-w-2xl mx-auto">
+            Wähle einen Bereich um mehr zu erfahren
+          </p>
+          <LearningPath onTopicSelect={(topic, subtopic) => console.log(topic, subtopic)} />
+        </div>
+        
         <Suspense fallback={<PlatformGridSkeleton />}>
           <PlatformGrid />
         </Suspense>
