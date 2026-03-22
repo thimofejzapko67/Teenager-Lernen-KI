@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ArrowDown, ArrowLeft } from "lucide-react";
 
@@ -8,32 +9,40 @@ const mainTopics = [
   {
     id: "free-tools",
     title: "Free Tools",
-    subtopics: ["Cursor", "Windsurf", "Bolt", "v0"],
+    subtopics: ["openCode", "Kilo CLI", "openRouter", "QwenCoder"],
+    route: "/learn/free-tools",
   },
   {
     id: "web-dev",
     title: "Web Development",
     subtopics: ["Frontend", "Backend", "Databases", "Deploy"],
+    route: "/learn/web-dev",
   },
   {
     id: "app-dev",
     title: "App Development",
     subtopics: ["iOS", "Android", "Cross-Platform", "Publishing"],
+    route: "/learn/app-dev",
   },
   {
     id: "security",
     title: "Security",
     subtopics: ["Authentication", "Data Protection", "Vulnerabilities", "Best Practices"],
+    route: "/learn/security",
   },
 ];
 
 export function LearningPath() {
   const [activeTopic, setActiveTopic] = useState<string | null>(null);
+  const router = useRouter();
 
   const selectedTopic = mainTopics.find((t) => t.id === activeTopic);
 
   const handleCardClick = (topicId: string) => {
-    if (activeTopic === topicId) {
+    const topic = mainTopics.find((t) => t.id === topicId);
+    if (topic?.route) {
+      router.push(topic.route);
+    } else if (activeTopic === topicId) {
       setActiveTopic(null);
     } else {
       setActiveTopic(topicId);
@@ -110,6 +119,12 @@ export function LearningPath() {
             {selectedTopic.subtopics.map((subtopic, idx) => (
               <button
                 key={subtopic}
+                onClick={() => {
+                  if (selectedTopic.id === "free-tools") {
+                    const toolId = subtopic.toLowerCase().replace(/\s+/g, "-");
+                    router.push(`/learn/free-tools/${toolId}`);
+                  }
+                }}
                 className={cn(
                   "group relative h-32 rounded-xl border-2 border-foreground/20 bg-transparent",
                   "hover:border-secondary hover:shadow-lg hover:shadow-secondary/10",
