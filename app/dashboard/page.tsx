@@ -78,25 +78,23 @@ export default async function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="relative border-b border-border/50 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/8 via-transparent to-secondary/5" />
-        <div className="absolute inset-0 bg-grid-pattern opacity-[0.04]" />
-        <div className="mx-auto max-w-7xl px-4 py-7 md:px-8 relative z-10">
+      <div className="relative border-b border-border overflow-hidden">
+        <div className="absolute inset-0 bg-dot-pattern opacity-25" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+        <div className="mx-auto max-w-7xl px-4 py-8 md:px-8 relative z-10">
           <div className="flex items-center justify-between">
-            <div className="space-y-1">
-              <p className="text-sm text-muted-foreground">Willkommen zurück,</p>
-              <h1 className="text-2xl md:text-3xl font-display font-bold">
-                <span className="text-primary">{profile.username}</span> 👋
+            <div className="space-y-1.5">
+              <span className="section-label">Dashboard</span>
+              <h1 className="text-2xl md:text-3xl font-display font-extrabold mt-2">
+                Hey, <span className="text-primary">{profile.username}</span>
               </h1>
-              <p className="text-sm text-muted-foreground">
-                Bereit, heute aufzusteigen?
-              </p>
+              <p className="text-sm text-muted-foreground">Bereit, heute aufzusteigen?</p>
             </div>
-            <div className="hidden sm:flex flex-col items-end gap-1">
-              <div className="flex items-center gap-2 bg-primary/10 border border-primary/20 px-3 py-1.5 rounded-full">
-                <span className="text-xs text-primary font-medium">Level {profile.level}</span>
+            <div className="hidden sm:flex flex-col items-end gap-1.5">
+              <div className="flex items-center gap-2 bg-primary/10 border border-primary/25 px-3 py-1.5 rounded-sm">
+                <span className="text-xs text-primary font-bold uppercase tracking-wide">Level {profile.level}</span>
               </div>
-              <span className="text-xs text-muted-foreground">{profile.xp.toLocaleString("de-DE")} XP gesamt</span>
+              <span className="text-xs text-muted-foreground font-mono">{profile.xp.toLocaleString("de-DE")} XP</span>
             </div>
           </div>
         </div>

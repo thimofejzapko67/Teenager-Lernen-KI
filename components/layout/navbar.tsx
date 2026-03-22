@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, Code2, Trophy, Home } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 const navLinks = [
@@ -20,88 +19,84 @@ export function Navbar() {
   const pathname = usePathname()
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    const handle = () => setScrolled(window.scrollY > 20)
+    window.addEventListener("scroll", handle)
+    return () => window.removeEventListener("scroll", handle)
   }, [])
 
   return (
     <motion.nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
-          ? "bg-background/85 backdrop-blur-xl border-b border-border/60 shadow-lg shadow-black/20"
+          ? "bg-background/92 backdrop-blur-xl border-b border-border"
           : "bg-transparent"
       )}
-      initial={{ y: -100 }}
+      initial={{ y: -80 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
     >
-      {/* Subtle gradient line at top when scrolled */}
+      {/* Lime top line when scrolled */}
       {scrolled && (
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
       )}
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16 md:h-18">
+
+      <div className="container mx-auto px-4 max-w-7xl">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link
-            href="/"
-            className="flex items-center gap-2.5 text-xl font-display font-bold group"
-          >
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-violet-600 flex items-center justify-center shadow-lg shadow-primary/30 group-hover:shadow-primary/50 transition-shadow duration-300">
-              <span className="text-white font-bold text-sm">C</span>
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <div className="w-7 h-7 bg-primary flex items-center justify-center rounded-sm shadow-lg shadow-primary/30">
+              <span className="text-primary-foreground font-display font-extrabold text-sm">C</span>
             </div>
-            <span className="bg-gradient-to-r from-primary via-violet-400 to-secondary bg-clip-text text-transparent">
+            <span className="text-lg font-display font-extrabold text-foreground group-hover:text-primary transition-colors duration-200">
               Codelift
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          {/* Desktop nav */}
+          <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => {
-              const Icon = link.icon
               const isActive = pathname === link.href
               return (
                 <Link
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "flex items-center gap-2 text-sm font-medium transition-colors",
+                    "flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-sm transition-colors duration-150",
                     isActive
-                      ? "text-primary"
-                      : "text-muted-foreground hover:text-primary"
+                      ? "text-primary bg-primary/8"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
                   )}
                 >
-                  <Icon className="w-4 h-4" />
                   {link.label}
                 </Link>
               )
             })}
           </div>
 
-          {/* Desktop CTA */}
-          <div className="hidden md:flex items-center gap-4">
-            <Link href="/auth">
-              <Button variant="ghost" size="sm">
-                Login
-              </Button>
+          {/* Desktop CTAs */}
+          <div className="hidden md:flex items-center gap-3">
+            <Link
+              href="/auth"
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-3 py-2"
+            >
+              Login
             </Link>
-            <Link href="/auth">
-              <Button size="sm" className="bg-gradient-to-r from-primary to-violet-600 text-white font-semibold shadow-lg shadow-primary/20">
-                Jetzt starten
-              </Button>
+            <Link
+              href="/auth"
+              className="text-sm font-bold bg-primary text-primary-foreground px-4 py-2 rounded-sm hover:bg-primary/90 transition-all duration-150 uppercase tracking-wide shadow-md shadow-primary/20"
+            >
+              Starten
             </Link>
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors"
+            className="md:hidden p-2 rounded-sm hover:bg-muted transition-colors"
             aria-label="Toggle menu"
           >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
@@ -113,12 +108,11 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden border-t border-border bg-background/95 backdrop-blur-lg"
+            transition={{ duration: 0.18 }}
+            className="md:hidden border-t border-border bg-background/98 backdrop-blur-xl"
           >
-            <div className="container mx-auto px-4 py-4 space-y-4">
+            <div className="container mx-auto px-4 py-4 space-y-1">
               {navLinks.map((link) => {
-                const Icon = link.icon
                 const isActive = pathname === link.href
                 return (
                   <Link
@@ -126,30 +120,30 @@ export function Navbar() {
                     href={link.href}
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                      "flex items-center gap-3 px-4 py-3 rounded-lg transition-colors",
+                      "flex items-center gap-3 px-4 py-3 rounded-sm text-sm font-medium transition-colors",
                       isActive
-                        ? "bg-primary/20 text-primary"
-                        : "text-muted-foreground hover:bg-muted hover:text-primary"
+                        ? "bg-primary/10 text-primary border-l-2 border-primary"
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
                     )}
                   >
-                    <Icon className="w-5 h-5" />
                     {link.label}
                   </Link>
                 )
               })}
-              <div className="pt-4 border-t border-border space-y-2">
-                <Link href="/auth" onClick={() => setIsOpen(false)}>
-                  <Button variant="ghost" size="sm" className="w-full justify-start">
-                    Login
-                  </Button>
+              <div className="pt-3 border-t border-border space-y-2 mt-2">
+                <Link
+                  href="/auth"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center justify-center w-full py-3 text-sm font-medium text-muted-foreground hover:text-foreground border border-border rounded-sm hover:border-primary/30 transition-colors"
+                >
+                  Login
                 </Link>
-                <Link href="/auth" onClick={() => setIsOpen(false)}>
-                  <Button
-                    size="sm"
-                    className="w-full bg-gradient-to-r from-primary to-violet-600 text-white font-semibold"
-                  >
-                    Jetzt starten
-                  </Button>
+                <Link
+                  href="/auth"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center justify-center w-full py-3 text-sm font-bold bg-primary text-primary-foreground rounded-sm hover:bg-primary/90 transition-colors uppercase tracking-wide"
+                >
+                  Jetzt starten
                 </Link>
               </div>
             </div>

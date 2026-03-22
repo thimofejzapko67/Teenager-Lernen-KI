@@ -16,10 +16,8 @@ export default function LeaderboardPage() {
       <div className="container mx-auto px-4 py-12 max-w-5xl relative z-10">
         {/* Header */}
         <div className="mb-10 text-center space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-xs font-medium text-amber-400 uppercase tracking-wider mb-2">
-            🏆 Wöchentlich aktualisiert
-          </div>
-          <h1 className="text-4xl md:text-6xl font-display font-bold neon-text">
+          <span className="section-label">Wöchentlich aktualisiert</span>
+          <h1 className="text-5xl md:text-7xl font-display font-extrabold neon-text mt-4">
             Rangliste
           </h1>
           <p className="text-muted-foreground text-lg max-w-md mx-auto">

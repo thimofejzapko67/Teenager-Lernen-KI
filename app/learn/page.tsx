@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { BookOpen, Sparkles } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import { getLessons } from "@/lib/lessons";
 import { LessonFilters } from "@/components/learn/lesson-filters";
 import { LessonCard } from "@/components/learn/lesson-card";
@@ -101,48 +101,26 @@ export default function LessonsPage({ searchParams }: LessonsPageProps) {
 
   return (
     <main className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden border-b border-border/50">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent" />
-        <div className="container py-12 md:py-16 relative">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 rounded-lg bg-primary/20">
-              <Sparkles className="h-6 w-6 text-primary" />
-            </div>
-            <span className="text-sm font-medium text-primary uppercase tracking-wider">
-              Codelift
-            </span>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-display font-bold mb-4 neon-text">
+      {/* Page header */}
+      <section className="relative overflow-hidden border-b border-border">
+        <div className="absolute inset-0 bg-dot-pattern opacity-30" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+        <div className="container py-12 md:py-16 relative z-10 max-w-7xl mx-auto px-4">
+          <span className="section-label mb-5 inline-flex">Lernplattform</span>
+          <h1 className="text-4xl md:text-6xl font-display font-extrabold mt-4 mb-3">
             Lektionen
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl">
-            Meistere KI-Tools, baue Apps und werde gesponsert. Jede Lektion
-            bringt dich näher zum Sponsorship.
+          <p className="text-lg text-muted-foreground max-w-xl">
+            Meistere KI-Tools, baue echte Apps und werde gesponsert. Jede Lektion bringt dich näher zum Sponsorship.
           </p>
         </div>
       </section>
 
       {/* Filters & Lessons */}
-      <section className="container py-8">
+      <section className="container py-8 max-w-7xl mx-auto px-4">
         <Suspense fallback={<LessonGridSkeleton />}>
           <LessonsContent filters={filters} sort={sort} page={page} />
         </Suspense>
-      </section>
-
-      {/* CTA Section */}
-      <section className="border-t border-border/50 bg-card/30">
-        <div className="container py-12 text-center">
-          <h2 className="text-2xl font-display font-bold mb-4">
-            Bereit loszulegen?
-          </h2>
-          <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-            Starte mit deinem ersten Tutorial und verdienne sofort 50 XP.
-          </p>
-          <button className="cyber-button px-8 py-3 bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity">
-            Jetzt starten
-          </button>
-        </div>
       </section>
     </main>
   );
