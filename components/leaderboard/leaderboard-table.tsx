@@ -4,8 +4,8 @@ import { MedalBadge } from "./medal-badge";
 import { RankBadge } from "./rank-badge";
 import { cn, formatXP } from "@/lib/utils";
 import type { LeaderboardEntry } from "@/lib/leaderboard";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 interface LeaderboardTableProps {
   entries: LeaderboardEntry[];
@@ -98,83 +98,82 @@ export function LeaderboardTable({ entries, isLoading }: LeaderboardTableProps) 
             initial={{ opacity: 0, x: -12 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: i * 0.03, duration: 0.3 }}
-            className={cn(
-              "grid grid-cols-[auto_1fr_auto_auto_auto] gap-4 px-4 py-3 border-b border-border/30 items-center transition-colors",
-              entry.is_current_user && "bg-primary/10 border-l-2 border-l-primary",
-              !entry.is_current_user && entry.rank <= 3 && "bg-primary/[0.03]",
-              !entry.is_current_user && "hover:bg-muted/20"
-            )}
           >
-            {/* Rank Column */}
-            <div className="flex items-center gap-2 w-8">
-              <MedalBadge rank={entry.rank} />
-              {(entry.rank > 3 || entry.is_current_user) && (
-                <span
-                  className={cn(
-                    "text-sm font-mono font-bold text-center",
-                    entry.rank <= 3 || entry.is_current_user ? "text-primary" : "text-muted-foreground"
-                  )}
-                >
-                  {entry.rank}
-                </span>
+            <Link
+              href={`/profile/${entry.username}`}
+              className={cn(
+                "grid grid-cols-[auto_1fr_auto_auto_auto] gap-4 px-4 py-3 border-b border-border/30 items-center transition-colors block",
+                entry.is_current_user && "bg-primary/10 border-l-2 border-l-primary",
+                !entry.is_current_user && entry.rank <= 3 && "bg-primary/[0.03]",
+                !entry.is_current_user && "hover:bg-muted/20"
               )}
-            </div>
+            >
+              {/* Rank Column */}
+              <div className="flex items-center gap-2 w-8">
+                <MedalBadge rank={entry.rank} />
+                {(entry.rank > 3 || entry.is_current_user) && (
+                  <span
+                    className={cn(
+                      "text-sm font-mono font-bold text-center",
+                      entry.rank <= 3 || entry.is_current_user ? "text-primary" : "text-muted-foreground"
+                    )}
+                  >
+                    {entry.rank}
+                  </span>
+                )}
+              </div>
 
-            {/* User Column */}
-            <div className="flex items-center gap-3">
-              <Avatar className="h-10 w-10 border border-border/50">
-                <AvatarImage src={entry.avatar_url || undefined} alt={entry.username} />
-                <AvatarFallback className="bg-gradient-to-br from-primary/20 to-violet-500/20 text-primary text-sm font-medium">
-                  {entry.username.slice(0, 2).toUpperCase()}
-                </AvatarFallback>
-              </Avatar>
-              <div className="flex flex-col min-w-0">
+              {/* User Column */}
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">{entry.avatar_url}</span>
+                <div className="flex flex-col min-w-0">
+                  <span
+                    className={cn(
+                      "font-medium truncate",
+                      entry.is_current_user && "text-primary",
+                      entry.rank <= 3 && !entry.is_current_user && "text-foreground"
+                    )}
+                  >
+                    {entry.username}
+                    {entry.is_current_user && (
+                      <span className="ml-2 text-xs text-primary/70">(Du)</span>
+                    )}
+                  </span>
+                  <RankChangeIndicator change={entry.rank_change} />
+                </div>
+              </div>
+
+              {/* XP Column */}
+              <div className="text-right font-mono text-sm">
                 <span
                   className={cn(
-                    "font-medium truncate",
-                    entry.is_current_user && "text-primary",
-                    entry.rank <= 3 && !entry.is_current_user && "text-foreground"
+                    (entry.rank <= 3 || entry.is_current_user) && "text-primary font-semibold"
                   )}
                 >
-                  {entry.username}
-                  {entry.is_current_user && (
-                    <span className="ml-2 text-xs text-primary/70">(Du)</span>
-                  )}
+                  {formatXP(entry.xp)}
                 </span>
-                <RankChangeIndicator change={entry.rank_change} />
+                <span className="text-muted-foreground ml-1 text-xs">XP</span>
               </div>
-            </div>
 
-            {/* XP Column */}
-            <div className="text-right font-mono text-sm">
-              <span
-                className={cn(
-                  (entry.rank <= 3 || entry.is_current_user) && "text-primary font-semibold"
-                )}
-              >
-                {formatXP(entry.xp)}
-              </span>
-              <span className="text-muted-foreground ml-1 text-xs">XP</span>
-            </div>
+              {/* Level Column */}
+              <div className="text-right">
+                <span
+                  className={cn(
+                    "inline-flex items-center justify-center w-10 h-6 rounded-full text-sm font-medium",
+                    (entry.rank <= 3 || entry.is_current_user)
+                      ? "bg-primary/20 text-primary"
+                      : "bg-muted/30 text-muted-foreground"
+                  )}
+                >
+                  {entry.level}
+                </span>
+              </div>
 
-            {/* Level Column */}
-            <div className="text-right">
-              <span
-                className={cn(
-                  "inline-flex items-center justify-center w-10 h-6 rounded-full text-sm font-medium",
-                  (entry.rank <= 3 || entry.is_current_user)
-                    ? "bg-primary/20 text-primary"
-                    : "bg-muted/30 text-muted-foreground"
-                )}
-              >
-                {entry.level}
-              </span>
-            </div>
-
-            {/* Rank Badge Column */}
-            <div className="text-right">
-              <RankBadge rank={entry.rank_tier} />
-            </div>
+              {/* Rank Badge Column */}
+              <div className="text-right">
+                <RankBadge rank={entry.rank_tier} />
+              </div>
+            </Link>
           </motion.div>
         ))}
       </div>
