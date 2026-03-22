@@ -109,7 +109,7 @@ export default function LearnPage() {
           <p className="text-muted-foreground text-center max-w-2xl mx-auto">
             Wähle einen Bereich um mehr zu erfahren
           </p>
-          <LearningPath onTopicSelect={(topic, subtopic) => console.log(topic, subtopic)} />
+          <LearningPath />
         </div>
         
         <Suspense fallback={<PlatformGridSkeleton />}>

@@ -4,10 +4,6 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { ArrowDown, ArrowLeft } from "lucide-react";
 
-interface LearningPathProps {
-  onTopicSelect?: (topic: string, subtopic: string) => void;
-}
-
 const mainTopics = [
   {
     id: "free-tools",
@@ -31,7 +27,7 @@ const mainTopics = [
   },
 ];
 
-export function LearningPath({ onTopicSelect }: LearningPathProps) {
+export function LearningPath() {
   const [activeTopic, setActiveTopic] = useState<string | null>(null);
 
   const selectedTopic = mainTopics.find((t) => t.id === activeTopic);
@@ -46,10 +42,6 @@ export function LearningPath({ onTopicSelect }: LearningPathProps) {
 
   const handleBack = () => {
     setActiveTopic(null);
-  };
-
-  const handleSubtopicClick = (topic: string, subtopic: string) => {
-    onTopicSelect?.(topic, subtopic);
   };
 
   return (
@@ -118,7 +110,6 @@ export function LearningPath({ onTopicSelect }: LearningPathProps) {
             {selectedTopic.subtopics.map((subtopic, idx) => (
               <button
                 key={subtopic}
-                onClick={() => handleSubtopicClick(selectedTopic.id, subtopic)}
                 className={cn(
                   "group relative h-32 rounded-xl border-2 border-foreground/20 bg-transparent",
                   "hover:border-secondary hover:shadow-lg hover:shadow-secondary/10",
