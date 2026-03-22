@@ -7,7 +7,7 @@ interface BentoGridProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 interface BentoGridItemProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode
+  children?: React.ReactNode
   className?: string
   title?: string
   description?: string
