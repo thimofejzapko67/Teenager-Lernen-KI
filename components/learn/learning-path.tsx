@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ArrowDown, ArrowLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -12,6 +13,7 @@ const mainTopics = [
     description: "KI-Tools für effizienteres Entwickeln",
     icon: "🛠️",
     gradient: "from-blue-500 to-cyan-500",
+    route: "/learn/free-tools",
     subtopics: [
       { title: "Cursor", description: "KI-gesteuerter Code Editor", xp: 50 },
       { title: "Windsurf", description: "Intelligente IDE", xp: 50 },
@@ -63,11 +65,15 @@ const mainTopics = [
 export function LearningPath() {
   const [activeTopic, setActiveTopic] = useState<string | null>(null);
   const [hoveredSubtopic, setHoveredSubtopic] = useState<string | null>(null);
+  const router = useRouter();
 
   const selectedTopic = mainTopics.find((t) => t.id === activeTopic);
 
   const handleCardClick = (topicId: string) => {
-    if (activeTopic === topicId) {
+    const topic = mainTopics.find((t) => t.id === topicId);
+    if (topic?.route) {
+      router.push(topic.route);
+    } else if (activeTopic === topicId) {
       setActiveTopic(null);
     } else {
       setActiveTopic(topicId);
