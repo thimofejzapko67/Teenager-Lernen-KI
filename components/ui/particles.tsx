@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useEffect } from "react"
 import { cn } from "@/lib/utils"
 
 interface ParticlesProps {
@@ -49,7 +50,7 @@ export const Particles = ({
 
   useEffect(() => {
     onMouseMove()
-  }, [mouse.x, mouse.y])
+  }, [mouse.current.x, mouse.current.y])
 
   useEffect(() => {
     initCanvas()
@@ -61,10 +62,10 @@ export const Particles = ({
   }
 
   const onMouseMove = () => {
-    if (circlesRef.current.length > 0) {
-      circlesRef.current.forEach((circle: Circle) => {
-        circle.mouse.x = mouse.x
-        circle.mouse.y = mouse.y
+    if (circles.current.length > 0) {
+      circles.current.forEach((circle: Circle) => {
+        circle.mouse.x = mouse.current.x
+        circle.mouse.y = mouse.current.y
       })
     }
   }
@@ -200,8 +201,8 @@ export const Particles = ({
         (circle.mouse.y / (staticity / circle.magnetism) - circle.translateY) /
         ease
 
-      circle.mouse.x += (mouse.x - circle.mouse.x) / ease
-      circle.mouse.y += (mouse.y - circle.mouse.y) / ease
+      circle.mouse.x += (mouse.current.x - circle.mouse.x) / ease
+      circle.mouse.y += (mouse.current.y - circle.mouse.y) / ease
 
       drawCircle(circle, true)
     })
@@ -214,6 +215,3 @@ export const Particles = ({
     </div>
   )
 }
-
-// Import useEffect and useState
-import { useEffect, useState } from "react"
