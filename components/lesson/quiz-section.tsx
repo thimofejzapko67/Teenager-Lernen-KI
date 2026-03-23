@@ -1,16 +1,17 @@
 "use client"
 
 import { useState } from "react"
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { CheckCircle2, XCircle } from "lucide-react"
-import type { LessonQuiz, QuizOption } from "@/lib/lessons"
+import { CheckCircle2, XCircle, Star, ChevronRight, RotateCcw } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
+import type { LessonQuiz } from "@/lib/lessons"
 
 interface QuizSectionProps {
   quiz: LessonQuiz
   lessonId: string
   onComplete?: (score: number) => void
 }
+
+const ALPHABET = ["A", "B", "C", "D", "E"]
 
 export function QuizSection({ quiz, onComplete }: QuizSectionProps) {
   const [currentQuestion, setCurrentQuestion] = useState(0)
@@ -20,118 +21,263 @@ export function QuizSection({ quiz, onComplete }: QuizSectionProps) {
   const [quizCompleted, setQuizCompleted] = useState(false)
 
   const question = quiz.questions[currentQuestion]
+  const totalQuestions = quiz.questions.length
+  const progressPct = Math.round((currentQuestion / totalQuestions) * 100)
+
+  const isCorrect = (() => {
+    if (!selectedAnswer || !showResult) return null
+    return question.options?.find((o) => o.id === selectedAnswer)?.correct ?? false
+  })()
 
   const handleAnswer = (optionId: string) => {
     if (showResult) return
     setSelectedAnswer(optionId)
     setShowResult(true)
-
-    const selectedOption = question.options?.find((opt) => opt.id === optionId)
-    if (selectedOption?.correct) {
-      setScore(score + 1)
-    }
+    const opt = question.options?.find((o) => o.id === optionId)
+    if (opt?.correct) setScore((s) => s + 1)
   }
 
   const handleNext = () => {
-    if (currentQuestion < quiz.questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1)
+    if (currentQuestion < totalQuestions - 1) {
+      setCurrentQuestion((q) => q + 1)
       setSelectedAnswer(null)
       setShowResult(false)
     } else {
       setQuizCompleted(true)
-      const selectedOption = question.options?.find((opt) => opt.id === selectedAnswer)
-      const finalScore = score + (selectedOption?.correct ? 1 : 0)
-      onComplete?.(finalScore)
+      const selectedOpt = question.options?.find((o) => o.id === selectedAnswer)
+      onComplete?.(score + (selectedOpt?.correct ? 1 : 0))
     }
   }
 
+  const handleRestart = () => {
+    setCurrentQuestion(0)
+    setSelectedAnswer(null)
+    setShowResult(false)
+    setScore(0)
+    setQuizCompleted(false)
+  }
+
+  // ── Completed ─────────────────────────────────────────────────────────────
   if (quizCompleted) {
-    const percentage = Math.round((score / quiz.questions.length) * 100)
-    const passed = percentage >= quiz.passThreshold
+    const pct = Math.round((score / totalQuestions) * 100)
+    const passed = pct >= quiz.passThreshold
 
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle>Quiz abgeschlossen!</CardTitle>
-        </CardHeader>
-        <CardContent className="text-center">
-          <div className="text-6xl font-black mb-4">
-            {passed ? (
-              <span className="text-green-500">{percentage}%</span>
-            ) : (
-              <span className="text-red-500">{percentage}%</span>
-            )}
-          </div>
-          <div className="text-2xl font-semibold mb-2">
-            {score}/{quiz.questions.length} Richtige
-          </div>
-          <p className="text-muted-foreground">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.92 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.35, type: "spring", bounce: 0.35 }}
+        className="rounded-2xl border-[2.5px] bg-card overflow-hidden"
+        style={{
+          borderColor: passed ? "#58CC02" : "#FF4B4B",
+          boxShadow: passed ? "0 5px 0 #46A302" : "0 5px 0 #EA2929",
+        }}
+      >
+        <div
+          className="px-6 py-8 text-center"
+          style={{ background: passed ? "#EDFAE0" : "#FFEAEA" }}
+        >
+          <div className="text-5xl mb-3">{passed ? "🎉" : "💪"}</div>
+          <h3
+            className="text-2xl font-display font-900 mb-1"
+            style={{ color: passed ? "#46A302" : "#EA2929" }}
+          >
+            {passed ? "Gut gemacht!" : "Nicht aufgeben!"}
+          </h3>
+          <p className="text-sm font-body text-muted-foreground">
             {passed
-              ? "Perfekt! Du hast das Quiz bestanden."
-              : `Du brauchst ${quiz.passThreshold}% um zu bestehen. Versuch es nochmal!`}
+              ? "Du hast das Quiz bestanden."
+              : `Du brauchst ${quiz.passThreshold}% zum Bestehen.`}
           </p>
-          {showResult && question.explanation && (
-            <div className="mt-4 p-4 bg-muted rounded-lg text-left">
-              <p className="text-sm">{question.explanation}</p>
+        </div>
+
+        <div className="px-6 py-6 grid grid-cols-2 gap-4">
+          <div className="text-center p-4 rounded-xl border-2 border-border bg-muted/30">
+            <div
+              className="text-3xl font-display font-900 mb-1"
+              style={{ color: passed ? "#46A302" : "#EA2929" }}
+            >
+              {pct}%
             </div>
-          )}
-        </CardContent>
-      </Card>
+            <div className="text-xs text-muted-foreground font-display font-700 uppercase tracking-wide">Ergebnis</div>
+          </div>
+          <div className="text-center p-4 rounded-xl border-2 border-border bg-muted/30">
+            <div className="text-3xl font-display font-900 mb-1" style={{ color: "#58CC02" }}>
+              {score}/{totalQuestions}
+            </div>
+            <div className="text-xs text-muted-foreground font-display font-700 uppercase tracking-wide">Richtig</div>
+          </div>
+        </div>
+
+        {passed && (
+          <div
+            className="mx-6 mb-4 flex items-center justify-center gap-2 px-4 py-3 rounded-xl border-2"
+            style={{ background: "#FFF3E0", borderColor: "#FF9600", color: "#E08800" }}
+          >
+            <Star className="w-5 h-5" />
+            <span className="font-display font-800">+{Math.round((score / totalQuestions) * 50)} XP verdient!</span>
+          </div>
+        )}
+
+        <div className="px-6 pb-6">
+          <button
+            onClick={handleRestart}
+            className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl border-2 border-border bg-card font-display font-800 text-sm transition-all hover:-translate-y-0.5"
+            style={{ boxShadow: "0 3px 0 var(--color-border)" }}
+          >
+            <RotateCcw className="w-4 h-4" />
+            Nochmal versuchen
+          </button>
+        </div>
+      </motion.div>
     )
   }
 
+  // ── Question ──────────────────────────────────────────────────────────────
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>
-          Frage {currentQuestion + 1} von {quiz.questions.length}
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-4">
-          <h3 className="text-xl font-semibold">{question.question}</h3>
+    <div className="space-y-5">
+      {/* Progress bar + counter */}
+      <div className="flex items-center gap-3">
+        <div className="flex-1 duo-progress-track">
+          <motion.div
+            className="duo-progress-fill"
+            initial={{ width: "0%" }}
+            animate={{ width: `${progressPct}%` }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          />
+        </div>
+        <span className="text-sm font-display font-800 text-muted-foreground whitespace-nowrap">
+          {currentQuestion + 1} / {totalQuestions}
+        </span>
+      </div>
+
+      {/* Question + options */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentQuestion}
+          initial={{ opacity: 0, x: 24 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -24 }}
+          transition={{ duration: 0.22 }}
+          className="space-y-4"
+        >
+          {/* Question */}
+          <div
+            className="p-6 rounded-2xl border-[2.5px] border-border bg-card"
+            style={{ boxShadow: "0 4px 0 var(--color-border)" }}
+          >
+            <div
+              className="text-xs font-display font-800 uppercase tracking-widest mb-3"
+              style={{ color: "#1CB0F6" }}
+            >
+              Frage {currentQuestion + 1}
+            </div>
+            <h3 className="text-xl font-display font-800 leading-snug">
+              {question.question}
+            </h3>
+          </div>
+
+          {/* Options */}
           {question.options && question.options.length > 0 && (
             <div className="space-y-3">
-              {question.options.map((option) => (
-                <button
-                  key={option.id}
-                  onClick={() => handleAnswer(option.id)}
-                  disabled={showResult}
-                  className={`w-full p-4 text-left rounded-xl border-2 transition-all ${
-                    showResult
-                      ? option.correct
-                        ? "border-green-500 bg-green-500/10"
-                        : selectedAnswer === option.id
-                        ? "border-red-500 bg-red-500/10"
-                        : "border-border"
-                      : "border-border hover:border-primary hover:bg-primary/5"
-                  } ${selectedAnswer === option.id && !showResult ? "border-primary bg-primary/5" : ""}`}
-                >
-                  <div className="flex items-center justify-between">
-                    <span>{option.text}</span>
+              {question.options.map((option, i) => {
+                const isSelected = selectedAnswer === option.id
+
+                let cls = "duo-option"
+                if (showResult) {
+                  if (option.correct)               cls += " correct"
+                  else if (isSelected && !option.correct) cls += " incorrect"
+                } else if (isSelected) {
+                  cls += " selected"
+                }
+
+                return (
+                  <motion.button
+                    key={option.id}
+                    whileTap={!showResult ? { scale: 0.98, y: 2 } : {}}
+                    onClick={() => handleAnswer(option.id)}
+                    disabled={showResult}
+                    className={cls}
+                  >
+                    <span
+                      className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-sm font-display font-900"
+                      style={{
+                        background: showResult
+                          ? option.correct
+                            ? "#58CC02"
+                            : isSelected ? "#FF4B4B" : "#F0F0F0"
+                          : isSelected ? "#1CB0F6" : "#F0F0F0",
+                        color:
+                          (showResult && (option.correct || isSelected)) || (!showResult && isSelected)
+                            ? "#FFFFFF"
+                            : "#777777",
+                      }}
+                    >
+                      {ALPHABET[i]}
+                    </span>
+                    <span className="flex-1 font-display font-700 text-sm leading-snug">
+                      {option.text}
+                    </span>
                     {showResult && option.correct && (
-                      <CheckCircle2 className="w-5 h-5 text-green-500" />
+                      <CheckCircle2 className="w-5 h-5 flex-shrink-0" style={{ color: "#58CC02" }} />
                     )}
-                    {showResult && selectedAnswer === option.id && !option.correct && (
-                      <XCircle className="w-5 h-5 text-red-500" />
+                    {showResult && isSelected && !option.correct && (
+                      <XCircle className="w-5 h-5 flex-shrink-0" style={{ color: "#FF4B4B" }} />
                     )}
+                  </motion.button>
+                )
+              })}
+            </div>
+          )}
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Feedback + next */}
+      <AnimatePresence>
+        {showResult && (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 16 }}
+            transition={{ duration: 0.25 }}
+            className="space-y-3"
+          >
+            {/* Explanation banner */}
+            {question.explanation && (
+              <div className={isCorrect ? "duo-result-correct" : "duo-result-incorrect"}>
+                <div className="flex items-start gap-3">
+                  <span className="text-xl mt-0.5">{isCorrect ? "✅" : "❌"}</span>
+                  <div>
+                    <div className="font-display font-900 text-sm mb-0.5">
+                      {isCorrect ? "Richtig!" : "Falsch!"}
+                    </div>
+                    <p className="text-sm font-body leading-relaxed opacity-90">
+                      {question.explanation}
+                    </p>
                   </div>
-                </button>
-              ))}
-            </div>
-          )}
-          {showResult && question.explanation && (
-            <div className="p-4 bg-muted rounded-lg">
-              <p className="text-sm">{question.explanation}</p>
-            </div>
-          )}
-          {showResult && (
-            <Button onClick={handleNext} className="w-full">
-              {currentQuestion < quiz.questions.length - 1 ? "Nächste Frage" : "Quiz beenden"}
-            </Button>
-          )}
-        </div>
-      </CardContent>
-    </Card>
+                </div>
+              </div>
+            )}
+
+            {/* Next button */}
+            <motion.button
+              whileTap={{ y: 3 }}
+              onClick={handleNext}
+              className="w-full py-4 rounded-xl font-display font-900 text-white text-base uppercase tracking-wide transition-all hover:-translate-y-0.5"
+              style={
+                isCorrect
+                  ? { background: "#58CC02", boxShadow: "0 4px 0 #46A302" }
+                  : { background: "#1CB0F6", boxShadow: "0 4px 0 #0E9BD8" }
+              }
+            >
+              <span className="flex items-center justify-center gap-2">
+                {currentQuestion < totalQuestions - 1 ? "Weiter" : "Quiz beenden"}
+                <ChevronRight className="w-5 h-5" />
+              </span>
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   )
 }

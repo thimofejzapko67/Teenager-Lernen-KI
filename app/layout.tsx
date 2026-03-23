@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Nunito, DM_Sans } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const nunito = Nunito({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+  weight: ["400", "600", "700", "800", "900"],
+});
+
+const dmSans = DM_Sans({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
@@ -24,7 +32,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
       </head>
-      <body className={`${inter.variable} font-body antialiased`}>
+      <body className={`${nunito.variable} ${dmSans.variable} font-body antialiased`}>
         {children}
       </body>
     </html>

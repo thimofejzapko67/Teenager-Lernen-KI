@@ -2,10 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { ArrowLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 
 const mainTopics = [
   {
@@ -13,6 +11,10 @@ const mainTopics = [
     title: "Free Tools",
     description: "KI-Tools für effizienteres Entwickeln",
     route: "/learn/free-tools",
+    emoji: "🛠️",
+    color: "#FF9600",
+    shadow: "#E08800",
+    bg: "#FFF3E0",
     subtopics: [
       { title: "Cursor", description: "KI-gesteuerter Code Editor", xp: 50 },
       { title: "Windsurf", description: "Intelligente IDE", xp: 50 },
@@ -24,6 +26,10 @@ const mainTopics = [
     id: "web-dev",
     title: "Web Development",
     description: "Websites & Web Apps bauen",
+    emoji: "🌐",
+    color: "#1CB0F6",
+    shadow: "#0E9BD8",
+    bg: "#EBF8FE",
     subtopics: [
       { title: "Frontend", description: "HTML, CSS, React, Next.js", xp: 150 },
       { title: "Backend", description: "Node.js, APIs, Databases", xp: 150 },
@@ -35,6 +41,10 @@ const mainTopics = [
     id: "app-dev",
     title: "App Development",
     description: "Mobile Apps entwickeln",
+    emoji: "📱",
+    color: "#CE82FF",
+    shadow: "#A854F7",
+    bg: "#F5EEFF",
     subtopics: [
       { title: "iOS", description: "Swift, SwiftUI", xp: 150 },
       { title: "Android", description: "Kotlin, Jetpack Compose", xp: 150 },
@@ -46,6 +56,10 @@ const mainTopics = [
     id: "security",
     title: "Security",
     description: "Sichere Anwendungen bauen",
+    emoji: "🔐",
+    color: "#FF4B4B",
+    shadow: "#EA2929",
+    bg: "#FFEAEA",
     subtopics: [
       { title: "Authentication", description: "OAuth, JWT, Sessions", xp: 100 },
       { title: "Data Protection", description: "Verschlüsselung, Privacy", xp: 100 },
@@ -65,55 +79,62 @@ export function LearningPath() {
     const topic = mainTopics.find((t) => t.id === topicId);
     if (topic?.route) {
       router.push(topic.route);
-    } else if (activeTopic === topicId) {
-      setActiveTopic(null);
     } else {
       setActiveTopic(topicId);
     }
   };
 
   const handleSubtopicClick = (topicId: string, subtopicTitle: string) => {
-    // Convert title to URL-friendly slug
     const slug = subtopicTitle.toLowerCase().replace(/[^a-z0-9]+/g, "-");
     router.push(`/learn/${topicId}/${slug}`);
   };
 
-  const handleBack = () => {
-    setActiveTopic(null);
-  };
-
   return (
-    <div className="relative min-h-[600px] flex flex-col items-center justify-center py-12 px-4">
+    <div className="relative py-4 px-4">
       <AnimatePresence mode="wait">
         {!activeTopic ? (
           <motion.div
             key="grid"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-            className="grid gap-6 w-full max-w-6xl"
-            style={{
-              gridTemplateColumns: "repeat(2, 1fr)",
-            }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.25 }}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-3xl mx-auto"
           >
             {mainTopics.map((topic, index) => (
               <motion.button
                 key={topic.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
+                transition={{ duration: 0.3, delay: index * 0.07 }}
                 onClick={() => handleCardClick(topic.id)}
-                className="group relative h-48 rounded-2xl border-2 border-border/60 bg-card/40 backdrop-blur-sm hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1 overflow-hidden"
+                className="group relative text-left"
               >
-                <div className="relative p-6 flex flex-col items-center justify-center h-full text-center">
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
-                    {topic.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground line-clamp-2">
-                    {topic.description}
-                  </p>
-                  <ChevronRight className="w-5 h-5 mt-auto text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                <div
+                  className="relative flex items-center gap-4 p-5 rounded-2xl border-[2.5px] bg-card transition-all duration-150 hover:-translate-y-1"
+                  style={{
+                    borderColor: topic.color,
+                    boxShadow: `0 5px 0 ${topic.shadow}`,
+                  }}
+                >
+                  <div
+                    className="w-14 h-14 rounded-2xl flex-shrink-0 flex items-center justify-center text-2xl"
+                    style={{ background: topic.bg }}
+                  >
+                    {topic.emoji}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-display font-800 text-base leading-tight mb-0.5">
+                      {topic.title}
+                    </h3>
+                    <p className="text-xs text-muted-foreground font-body line-clamp-2">
+                      {topic.description}
+                    </p>
+                  </div>
+                  <ChevronRight
+                    className="w-4 h-4 flex-shrink-0 transition-transform duration-150 group-hover:translate-x-1"
+                    style={{ color: topic.color }}
+                  />
                 </div>
               </motion.button>
             ))}
@@ -121,48 +142,71 @@ export function LearningPath() {
         ) : (
           <motion.div
             key="detail"
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -50 }}
-            transition={{ duration: 0.4 }}
-            className="w-full max-w-4xl mx-auto"
+            exit={{ opacity: 0, x: -40 }}
+            transition={{ duration: 0.25 }}
+            className="max-w-2xl mx-auto"
           >
             <button
-              onClick={handleBack}
-              className="mb-8 flex items-center gap-2 px-4 py-2 rounded-lg border border-border/60 hover:border-primary hover:text-primary transition-colors"
+              onClick={() => setActiveTopic(null)}
+              className="mb-6 flex items-center gap-2 text-sm font-display font-700 px-4 py-2 rounded-xl border-2 border-border bg-card hover:border-primary transition-colors"
+              style={{ boxShadow: "0 3px 0 var(--color-border)" }}
             >
-              <ArrowLeft className="w-4 h-4" />
+              <ChevronLeft className="w-4 h-4" />
               Zurück
             </button>
 
-            <div className="mb-8">
-              <h2 className="text-4xl font-bold mb-2">{selectedTopic?.title}</h2>
-              <p className="text-lg text-muted-foreground">{selectedTopic?.description}</p>
+            <div
+              className="flex items-center gap-4 p-5 rounded-2xl border-[2.5px] mb-5"
+              style={{
+                borderColor: selectedTopic?.color,
+                background: selectedTopic?.bg,
+                boxShadow: `0 4px 0 ${selectedTopic?.shadow}`,
+              }}
+            >
+              <span className="text-4xl">{selectedTopic?.emoji}</span>
+              <div>
+                <h2 className="text-xl font-display font-900" style={{ color: selectedTopic?.shadow }}>
+                  {selectedTopic?.title}
+                </h2>
+                <p className="text-sm font-body text-muted-foreground">{selectedTopic?.description}</p>
+              </div>
             </div>
 
-            <div className="grid gap-4">
+            <div className="space-y-3">
               {selectedTopic?.subtopics.map((subtopic, index) => (
                 <motion.button
                   key={subtopic.title}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  transition={{ duration: 0.25, delay: index * 0.07 }}
                   onClick={() => handleSubtopicClick(selectedTopic.id, subtopic.title)}
-                  className="group relative p-6 rounded-xl border border-border/60 bg-card/40 backdrop-blur-sm hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-0.5 cursor-pointer overflow-hidden text-left"
+                  className="w-full group text-left"
                 >
-                  <div className="relative flex items-center justify-between">
-                    <div className="flex-1">
-                      <h4 className="text-lg font-semibold mb-1 group-hover:text-primary transition-colors">
-                        {subtopic.title}
-                      </h4>
-                      <p className="text-sm text-muted-foreground">{subtopic.description}</p>
+                  <div
+                    className="flex items-center gap-4 p-5 rounded-2xl border-[2.5px] bg-card transition-all duration-150 hover:-translate-y-0.5"
+                    style={{
+                      borderColor: selectedTopic.color,
+                      boxShadow: `0 4px 0 ${selectedTopic.shadow}`,
+                    }}
+                  >
+                    <div
+                      className="w-9 h-9 rounded-xl flex-shrink-0 flex items-center justify-center font-display font-900 text-sm text-white"
+                      style={{ background: selectedTopic.color, boxShadow: `0 3px 0 ${selectedTopic.shadow}` }}
+                    >
+                      {index + 1}
                     </div>
-                    <div className="flex items-center gap-3">
-                      <div className="text-right">
-                        <p className="text-2xl font-bold text-primary">+{subtopic.xp}</p>
-                        <p className="text-xs text-muted-foreground">XP</p>
-                      </div>
-                      <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                    <div className="flex-1">
+                      <h4 className="font-display font-800 text-sm">{subtopic.title}</h4>
+                      <p className="text-xs text-muted-foreground font-body">{subtopic.description}</p>
+                    </div>
+                    <div
+                      className="flex items-center gap-1 px-3 py-1 rounded-full text-sm font-display font-800 border-2"
+                      style={{ background: selectedTopic.bg, color: selectedTopic.shadow, borderColor: selectedTopic.color }}
+                    >
+                      <Star className="w-3.5 h-3.5" />
+                      +{subtopic.xp}
                     </div>
                   </div>
                 </motion.button>

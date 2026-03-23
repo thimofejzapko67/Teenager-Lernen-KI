@@ -1,51 +1,60 @@
 @import "tailwindcss";
 
 /* ========================================
-   CLEAN LIGHT DESIGN
-   - Simple, professional colors
-   - Clear contrasts
-   - Clean feel
+   DUOLINGO-STYLE DESIGN SYSTEM
+   Playful, bold, gamified learning
    ======================================== */
 @theme {
-  /* Blue as primary */
-  --color-primary: #0066CC;
+  /* Green — primary action color */
+  --color-primary: #58CC02;
   --color-primary-foreground: #FFFFFF;
+  --color-primary-dark: #46A302;
 
-  /* Gray as secondary */
-  --color-secondary: #475569;
+  /* Blue — secondary / info */
+  --color-secondary: #1CB0F6;
   --color-secondary-foreground: #FFFFFF;
+  --color-secondary-dark: #0E9BD8;
 
-  /* Teal accent */
-  --color-accent: #0D9488;
+  /* Orange — XP / streak */
+  --color-accent: #FF9600;
   --color-accent-foreground: #FFFFFF;
 
-  /* Neutral muted */
-  --color-muted: #F1F5F9;
-  --color-muted-foreground: #64748B;
+  /* Purple — advanced / special */
+  --color-purple: #CE82FF;
+  --color-purple-dark: #A854F7;
 
-  /* Strong destructive */
-  --color-destructive: #DC2626;
+  /* Yellow — achievement */
+  --color-yellow: #FFD900;
+  --color-yellow-dark: #E5C200;
+
+  /* Red — wrong / hearts */
+  --color-destructive: #FF4B4B;
   --color-destructive-foreground: #FFFFFF;
+  --color-destructive-dark: #EA2929;
 
-  /* Crisp borders */
-  --color-border: #E2E8F0;
-  --color-input: #E2E8F0;
-  --color-ring: #0066CC;
+  /* Neutral */
+  --color-muted: #F0F0F0;
+  --color-muted-foreground: #777777;
 
-  /* Light mode */
-  --color-background: #FFFFFF;
-  --color-foreground: #0F172A;
+  /* Borders */
+  --color-border: #E5E5E5;
+  --color-input: #E5E5E5;
+  --color-ring: #58CC02;
+
+  /* Background */
+  --color-background: #F7F7F7;
+  --color-foreground: #1C1C1C;
 
   /* Cards */
   --color-card: #FFFFFF;
-  --color-card-foreground: #0F172A;
+  --color-card-foreground: #1C1C1C;
 
   /* Popovers */
   --color-popover: #FFFFFF;
-  --color-popover-foreground: #0F172A;
+  --color-popover-foreground: #1C1C1C;
 
-  /* Rounded corners */
-  --radius: 0.5rem;
+  /* Radius — extra rounded like Duolingo */
+  --radius: 0.875rem;
 
   /* Fonts */
   --font-display: var(--font-display);
@@ -57,72 +66,82 @@
    DARK MODE
    ======================================== */
 .dark {
-  --color-primary: #3B82F6;
+  --color-primary: #58CC02;
   --color-primary-foreground: #FFFFFF;
-  --color-secondary: #64748B;
+  --color-secondary: #1CB0F6;
   --color-secondary-foreground: #FFFFFF;
-  --color-accent: #14B8A6;
+  --color-accent: #FF9600;
   --color-accent-foreground: #FFFFFF;
-  --color-muted: #1E293B;
-  --color-muted-foreground: #94A3B8;
-  --color-destructive: #EF4444;
+  --color-muted: #2B2B2B;
+  --color-muted-foreground: #9A9A9A;
+  --color-destructive: #FF4B4B;
   --color-destructive-foreground: #FFFFFF;
-  --color-border: #334155;
-  --color-input: #334155;
-  --color-ring: #3B82F6;
-  --color-background: #0F172A;
-  --color-foreground: #F1F5F9;
-  --color-card: #1E293B;
-  --color-card-foreground: #F1F5F9;
-  --color-popover: #1E293B;
-  --color-popover-foreground: #F1F5F9;
+  --color-border: #333333;
+  --color-input: #333333;
+  --color-ring: #58CC02;
+  --color-background: #1A1A1A;
+  --color-foreground: #F0F0F0;
+  --color-card: #242424;
+  --color-card-foreground: #F0F0F0;
+  --color-popover: #242424;
+  --color-popover-foreground: #F0F0F0;
 }
 
 /* ========================================
-   Custom Animations
+   CUSTOM ANIMATIONS
    ======================================== */
 @keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes bounce-in {
+  0% { opacity: 0; transform: scale(0.5); }
+  70% { transform: scale(1.1); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
 }
 
 @keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(255, 71, 87, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 40px rgba(255, 71, 87, 0.6);
-  }
+@keyframes confetti-fall {
+  0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(60px) rotate(360deg); opacity: 0; }
+}
+
+@keyframes progress-fill {
+  from { width: 0%; }
+  to { width: var(--target-width); }
+}
+
+@keyframes heart-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+@keyframes xp-bounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-8px) scale(1.05); }
 }
 
 /* ========================================
-   Base Styles
+   BASE STYLES
    ======================================== */
 @layer base {
   * {
@@ -132,19 +151,24 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-body), system-ui, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
-    font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-weight: 800;
+  }
+
   ::selection {
     background-color: var(--color-primary);
-    color: var(--color-primary-foreground);
+    color: #FFFFFF;
   }
 
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
   }
 
   ::-webkit-scrollbar-track {
@@ -153,169 +177,353 @@
 
   ::-webkit-scrollbar-thumb {
     background: var(--color-border);
-    border-radius: 4px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-muted-foreground);
+    border-radius: 3px;
   }
 }
 
 /* ========================================
-   Custom Components
+   DUOLINGO COMPONENT SYSTEM
    ======================================== */
 @layer components {
+
+  /* ---- 3D Chunky Button (Duolingo signature) ---- */
+  .duo-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.75rem;
+    border-radius: 0.875rem;
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    position: relative;
+    user-select: none;
+  }
+
+  .duo-btn:active {
+    transform: translateY(2px);
+  }
+
+  .duo-btn-green {
+    background: var(--color-primary);
+    color: #FFFFFF;
+    box-shadow: 0 4px 0 var(--color-primary-dark);
+  }
+
+  .duo-btn-green:hover {
+    background: #62DC03;
+    box-shadow: 0 4px 0 var(--color-primary-dark);
+  }
+
+  .duo-btn-green:active {
+    box-shadow: 0 1px 0 var(--color-primary-dark);
+  }
+
+  .duo-btn-blue {
+    background: var(--color-secondary);
+    color: #FFFFFF;
+    box-shadow: 0 4px 0 var(--color-secondary-dark);
+  }
+
+  .duo-btn-blue:active {
+    box-shadow: 0 1px 0 var(--color-secondary-dark);
+  }
+
+  .duo-btn-outline {
+    background: #FFFFFF;
+    color: var(--color-primary);
+    border: 2.5px solid var(--color-primary);
+    box-shadow: 0 4px 0 var(--color-primary);
+  }
+
+  .duo-btn-outline:active {
+    box-shadow: 0 1px 0 var(--color-primary);
+  }
+
+  /* ---- Answer Option (quiz buttons) ---- */
+  .duo-option {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    border-radius: 0.875rem;
+    border: 2.5px solid var(--color-border);
+    background: #FFFFFF;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    box-shadow: 0 3px 0 var(--color-border);
+    color: var(--color-foreground);
+  }
+
+  .duo-option:hover:not(:disabled) {
+    border-color: var(--color-secondary);
+    background: #EBF8FE;
+    box-shadow: 0 3px 0 var(--color-secondary);
+    transform: translateY(-1px);
+  }
+
+  .duo-option.selected {
+    border-color: var(--color-secondary);
+    background: #EBF8FE;
+    box-shadow: 0 3px 0 var(--color-secondary);
+  }
+
+  .duo-option.correct {
+    border-color: var(--color-primary);
+    background: #EDFAE0;
+    box-shadow: 0 3px 0 var(--color-primary-dark);
+    color: var(--color-primary-dark);
+  }
+
+  .duo-option.incorrect {
+    border-color: var(--color-destructive);
+    background: #FFEAEA;
+    box-shadow: 0 3px 0 var(--color-destructive-dark);
+    color: var(--color-destructive);
+    animation: shake 0.4s ease-out;
+  }
+
+  /* ---- Progress Bar (Duolingo thick rounded) ---- */
+  .duo-progress-track {
+    width: 100%;
+    height: 16px;
+    background: var(--color-muted);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid var(--color-border);
+  }
+
+  .duo-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-primary) 0%, #80F030 100%);
+    border-radius: 8px;
+    transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+  }
+
+  .duo-progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 8px;
+    right: 8px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 2px;
+  }
+
+  /* ---- Result Banner ---- */
+  .duo-result-correct {
+    background: #EDFAE0;
+    border: 2px solid var(--color-primary);
+    border-radius: 1rem;
+    padding: 1.25rem 1.5rem;
+    color: var(--color-primary-dark);
+  }
+
+  .duo-result-incorrect {
+    background: #FFEAEA;
+    border: 2px solid var(--color-destructive);
+    border-radius: 1rem;
+    padding: 1.25rem 1.5rem;
+    color: var(--color-destructive-dark);
+  }
+
+  /* ---- Path Node ---- */
+  .duo-node {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    border: none;
+    font-size: 1.75rem;
+  }
+
+  .duo-node:hover {
+    transform: scale(1.08) translateY(-2px);
+  }
+
+  .duo-node-active {
+    background: var(--color-primary);
+    box-shadow: 0 6px 0 var(--color-primary-dark), 0 0 0 5px rgba(88, 204, 2, 0.2);
+    animation: xp-bounce 2s ease-in-out infinite;
+  }
+
+  .duo-node-locked {
+    background: var(--color-muted);
+    box-shadow: 0 5px 0 #C8C8C8;
+    cursor: not-allowed;
+    filter: grayscale(0.4);
+  }
+
+  .duo-node-complete {
+    background: var(--color-primary);
+    box-shadow: 0 5px 0 var(--color-primary-dark);
+  }
+
+  /* ---- XP / Streak Badge ---- */
+  .duo-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.4rem 0.875rem;
+    border-radius: 999px;
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 0.875rem;
+  }
+
+  .duo-badge-green {
+    background: #EDFAE0;
+    color: var(--color-primary-dark);
+    border: 2px solid var(--color-primary);
+  }
+
+  .duo-badge-orange {
+    background: #FFF3E0;
+    color: #E08800;
+    border: 2px solid var(--color-accent);
+  }
+
+  .duo-badge-blue {
+    background: #EBF8FE;
+    color: var(--color-secondary-dark);
+    border: 2px solid var(--color-secondary);
+  }
+
+  .duo-badge-red {
+    background: #FFEAEA;
+    color: var(--color-destructive-dark);
+    border: 2px solid var(--color-destructive);
+  }
+
+  /* ---- Card ---- */
+  .duo-card {
+    background: var(--color-card);
+    border: 2.5px solid var(--color-border);
+    border-radius: 1.25rem;
+    box-shadow: 0 4px 0 var(--color-border);
+    overflow: hidden;
+  }
+
+  /* ---- Section connector (path line) ---- */
+  .duo-path-line {
+    width: 4px;
+    background: var(--color-border);
+    border-radius: 2px;
+    margin: 0 auto;
+  }
+
+  .duo-path-line-active {
+    background: var(--color-primary);
+  }
+
+  /* ---- Lesson Header Bar ---- */
+  .duo-lesson-bar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--color-card);
+    border-bottom: 2px solid var(--color-border);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* ---- Glass card for dark contexts ---- */
   .glass-card {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(12px);
-    border: 1px solid var(--color-border);
+    border: 2px solid var(--color-border);
   }
 
   .dark .glass-card {
-    background: rgba(26, 29, 35, 0.8);
-    backdrop-filter: blur(12px);
+    background: rgba(36, 36, 36, 0.85);
   }
 
-  .xp-bar-fill {
-    background: var(--color-primary);
-  }
-
+  /* ---- Gradient text ---- */
   .gradient-text {
-    color: var(--color-primary);
-    font-weight: 600;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
-  .bold-button {
-    background: var(--color-primary);
-    color: var(--color-primary-foreground);
-    font-weight: 600;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    transition: all 0.2s ease;
-  }
-
-  .bold-button:hover {
-    opacity: 0.9;
-  }
-
+  /* ---- Section label ---- */
   .section-label {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
+    padding: 0.375rem 0.875rem;
+    border-radius: 999px;
     background: var(--color-primary);
-    color: var(--color-primary-foreground);
+    color: #FFFFFF;
+    font-family: var(--font-display), system-ui, sans-serif;
     font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
+    font-weight: 800;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
   }
 }
 
 /* ========================================
-   Utilities
+   UTILITIES
    ======================================== */
 @layer utilities {
-  .animate-slide-up {
-    animation: slide-up 0.6s ease-out;
-  }
+  .animate-slide-up { animation: slide-up 0.5s ease-out; }
+  .animate-scale-in { animation: scale-in 0.3s ease-out; }
+  .animate-bounce-in { animation: bounce-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  .animate-shake { animation: shake 0.4s ease-out; }
+  .animate-xp-bounce { animation: xp-bounce 2s ease-in-out infinite; }
 
-  .animate-scale-in {
-    animation: scale-in 0.4s ease-out;
-  }
+  .font-display { font-family: var(--font-display), system-ui, sans-serif; }
+  .font-body { font-family: var(--font-body), system-ui, sans-serif; }
 
   .bg-grid-pattern {
     background-image:
       linear-gradient(to right, var(--color-border) 1px, transparent 1px),
       linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
-    background-size: 32px 32px;
-  }
-
-  .text-gradient-primary {
-    color: var(--color-primary);
-    font-weight: 600;
+    background-size: 28px 28px;
   }
 }
 
 /* ========================================
-   Code Blocks
+   CODE BLOCKS
    ======================================== */
 .hljs {
-  background: var(--color-muted);
-  color: var(--color-foreground);
-  padding: 1rem;
-  border-radius: var(--radius);
-  border: 1px solid var(--color-border);
+  background: #1C1C1C;
+  color: #F0F0F0;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  border: 2px solid var(--color-border);
+  font-size: 0.9rem;
 }
 
-.hljs-comment,
-.hljs-quote {
-  color: var(--color-muted-foreground);
-  font-style: italic;
-}
-
-.hljs-keyword,
-.hljs-selector-tag,
-.hljs-subst {
-  color: var(--color-primary);
-}
-
-.hljs-string,
-.hljs-doctag {
-  color: var(--color-accent);
-}
-
-.hljs-title,
-.hljs-section {
-  color: var(--color-secondary);
-  font-weight: bold;
-}
-
-.hljs-type,
-.hljs-class .hljs-title {
-  color: var(--color-accent);
-}
-
-.hljs-tag,
-.hljs-name,
-.hljs-attribute {
-  color: var(--color-primary);
-}
-
-.hljs-regexp,
-.hljs-link {
-  color: var(--color-secondary);
-}
-
-.hljs-symbol,
-.hljs-bullet {
-  color: var(--color-accent);
-}
-
-.hljs-built_in,
-.hljs-builtin-name {
-  color: var(--color-primary);
-}
-
-.hljs-meta {
-  color: var(--color-muted-foreground);
-}
-
-.hljs-deletion {
-  background: var(--color-destructive);
-  opacity: 0.2;
-}
-
-.hljs-addition {
-  background: var(--color-secondary);
-  opacity: 0.2;
-}
-
-.hljs-emphasis {
-  font-style: italic;
-}
-
-.hljs-strong {
-  font-weight: bold;
-}
+.hljs-comment, .hljs-quote { color: #777777; font-style: italic; }
+.hljs-keyword, .hljs-selector-tag, .hljs-subst { color: var(--color-primary); }
+.hljs-string, .hljs-doctag { color: var(--color-accent); }
+.hljs-title, .hljs-section { color: var(--color-secondary); font-weight: bold; }
+.hljs-type, .hljs-class .hljs-title { color: var(--color-purple); }
+.hljs-tag, .hljs-name, .hljs-attribute { color: var(--color-secondary); }
+.hljs-built_in, .hljs-builtin-name { color: var(--color-primary); }
+.hljs-meta { color: #9A9A9A; }
+.hljs-emphasis { font-style: italic; }
+.hljs-strong { font-weight: bold; }
